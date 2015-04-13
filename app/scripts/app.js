@@ -19,8 +19,11 @@ angular.module('phoneApp', [
   'ngTouch',
   'MainDirective',
   'MainController'
-]).run(function($rootScope,$window,$http,$location,AuthFactory,trace){
-  if(AuthFactory.isAuthenticated()){
+]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,trace){
+
+  if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){
+    trace('all is well');
+  } else if(AuthFactory.isAuthenticated()){
     var data = JSON.parse($window.localStorage.getItem('cmi-user'));
     $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
   } else {
@@ -28,11 +31,13 @@ angular.module('phoneApp', [
   }
 
   $rootScope.$on('$routeChangeStart',function(event,next){
-    if(!AuthFactory.isAuthenticated()){
-      $location.path('/login');
+    if($location.path() === '/confirm' && !AuthFactory.isAuthenticated()){
+      trace('all is well');
+    } else if(AuthFactory.isAuthenticated()) {
+      var data = JSON.parse($window.localStorage.getItem('cmi-user'));
+      $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
     } else {
-      trace('all set to get all the things',event,next);
-      // get all of the things
+      $location.path('/login');
     }
   });
 });

@@ -86,6 +86,11 @@
   @include box-shadow(0,0,10px,0,#000);
 }
 
+@mixin input($borderwidth, $borderstyle, $bordercolor, $radius){
+  border: $borderwidth $borderstyle $bordercolor;
+  border-radius: $radius;
+}
+
 @mixin button($bgcolor, $font-color, $border-radius) {
   background-color: $bgcolor;
   color: $font-color;

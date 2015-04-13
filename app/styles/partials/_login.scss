@@ -1,0 +1,18 @@
+section.login-main {
+  @extend .container;
+  div {
+
+    &.left-column {
+      @extend .grid_6;
+      text-align: center;
+      img {
+        max-width: 100%;
+        height: auto;
+        max-height: 450px;
+      }
+    }
+    &.right-column {
+      @extend .grid_10;
+    }
+  }
+}

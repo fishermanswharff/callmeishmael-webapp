@@ -1,0 +1,30 @@
+div.form-group {
+  margin: 10px auto;
+}
+label {
+  display: block;
+}
+input, select, textarea, button{font-family:$header-font;}
+input {
+  @include transition(all, 0.25s, ease, 0);
+}
+input[type="email"],
+input[type="text"],
+input[type="password"]
+{
+  display: block;
+  height: 30px;
+  width: 100%;
+  @include input(2px, solid, $black, 4px);
+}
+
+input[type="submit"] {
+  &.btn {
+    border: none;
+    @include button($black, $white, 4px);
+  }
+  &[disabled="disabled"] {
+    cursor: not-allowed;
+    opacity: 0.2;
+  }
+}

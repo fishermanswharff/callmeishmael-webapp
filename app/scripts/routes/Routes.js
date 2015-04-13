@@ -16,8 +16,13 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       controller: 'LoginController',
       controllerAs: 'loginController'
     })
-    .when('/dashboard',{
+    .when('/dashboard', {
       templateUrl: 'views/dashboard.html'
+    })
+    .when('/confirm', {
+      templateUrl: 'views/confirm.html',
+      controller: 'LoginController',
+      controllerAs: 'loginController'
     })
     .otherwise({
       redirectTo: '/'

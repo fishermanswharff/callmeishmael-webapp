@@ -3,11 +3,27 @@ nav {
     height: 110px;
     border-bottom: 40px solid $black;
     list-style: none;
+    padding-right: 30px;
     li {
       display: inline-block;
+      &.right {
+        float: right;
+        border-right: 2px solid $black;
+        padding: 0 20px;
+        margin: 30px 0;
+        span.loginAs {
+          position: absolute;
+          top: 30px;
+          font-family: $body-font;
+          font-size: 10px;
+        }
+      }
       a {
         display: block;
         position: relative;
+        text-decoration: none;
+        color: $black;
+
         &.brand {
           &:after {
             content: '';
@@ -20,6 +36,14 @@ nav {
             background: url(../images/cmi-logo-small.jpg) no-repeat;
           }
         }
+        span {
+          display: block;
+          font-family: $body-font;
+          &.userEmail {
+            font-weight: bold;
+          }
+        }
+
       }
     }
   }

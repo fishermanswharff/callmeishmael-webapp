@@ -2,6 +2,8 @@
 function navbarController(trace,$location,AuthFactory){
   var vm = this;
 
+  AuthFactory.currentUser();
+
   vm.isLoggedIn = function(){
     return AuthFactory.isAuthenticated();
   }

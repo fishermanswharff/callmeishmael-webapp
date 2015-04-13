@@ -1,6 +1,10 @@
 <section class="login-main">
-  <div class="left-column"></div>
+  <div class="left-column">
+    <img src="images/cmi-phone.png"/>
+  </div>
   <div class="right-column">
+    <h1>Login to curate your CMI Phone.</h1>
+    <p>Don’t have a CMI Phone Account? <a href="javascript:void(0)">Contact Ishmael.</a></p>
     <form class="login-form" name="loginForm" ng-submit="loginController.login(loginController.credentials)" novalidate>
       <div class="form-group">
         <label id="email-label" for="email">Email</label>
@@ -11,7 +15,7 @@
         <input id="password" type="password" name="password" ng-model="loginController.credentials.password" required>
       </div>
       <div class="form-group">
-        <input class="btn btn-default" type="submit" ng-disabled="loginForm.$invalid" value="Login">
+        <input class="btn btn-default" type="submit" ng-disabled="loginForm.$invalid" value="Login"> <span><a ng-click="" href="javascript:void(0)">Did you forget your password?</a></span>
       </div>
     </form>
   </div>
