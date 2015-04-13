@@ -1,0 +1,26 @@
+nav {
+  ul.nav {
+    height: 110px;
+    border-bottom: 40px solid $black;
+    list-style: none;
+    li {
+      display: inline-block;
+      a {
+        display: block;
+        position: relative;
+        &.brand {
+          &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 96px;
+            background: url(../images/cmi-logo-small.jpg) no-repeat;
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,34 +2,37 @@
 
 /**
  * @ngdoc overview
- * @name phoneAppApp
+ * @name phoneApp
  * @description
- * # phoneAppApp
+ * # phoneApp
  *
  * Main module of the application.
  */
-angular
-  .module('phoneAppApp', [
-    'ngAnimate',
-    'ngAria',
-    'ngCookies',
-    'ngMessages',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+angular.module('phoneApp', [
+  'ngAnimate',
+  'ngAria',
+  'ngCookies',
+  'ngMessages',
+  'ngResource',
+  'ngRoute',
+  'ngSanitize',
+  'ngTouch',
+  'MainDirective',
+  'MainController'
+]).run(function($rootScope,$window,$http,$location,AuthFactory,trace){
+  if(AuthFactory.isAuthenticated()){
+    var data = JSON.parse($window.localStorage.getItem('cmi-user'));
+    $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
+  } else {
+    $location.path('/login');
+  }
+
+  $rootScope.$on('$routeChangeStart',function(event,next){
+    if(!AuthFactory.isAuthenticated()){
+      $location.path('/login');
+    } else {
+      trace('all set to get all the things',event,next);
+      // get all of the things
+    }
   });
+});
