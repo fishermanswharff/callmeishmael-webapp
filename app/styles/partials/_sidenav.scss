@@ -1,0 +1,21 @@
+nav#side-nav {
+  ul.side {
+    @include defaults;
+    li {
+      display: block;
+      list-style: none;
+      text-align: right;
+      padding: 5px;
+      &.active {
+        background: $black-10;
+        a {
+          color: $black-90;
+        }
+      }
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+    }
+  }
+}
