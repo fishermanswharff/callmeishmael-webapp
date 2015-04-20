@@ -1,5 +1,6 @@
 'use strict';
 angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$http','$window','$q','ServerUrl','trace',function($location,$rootScope,$http,$window,$q,ServerUrl,trace){
+
   var login = function(credentials){
     return $http.post(ServerUrl + '/login',credentials).success(function(response){
       _storeSession(response);
@@ -41,13 +42,25 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     });
   };
 
+  var currentUser = function(){
+    $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
+  };
+
+  var sendPasswordLink = function(credentials){
+    return $http.get(ServerUrl + '/resetpassword?email=' + credentials.email);
+  };
+
+  var submitNewPassword = function(user){
+    return $http.patch(ServerUrl + '/admin/users/'+user.id, {user: user}).success(function(response){
+      trace(response);
+    }).error(function(data,status,headers,config){
+      trace(data,status,headers,config);
+    });
+  };
+
   var _storeSession = function(data){
     $window.localStorage.setItem('cmi-user', JSON.stringify(data));
     $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
-  };
-
-  var currentUser = function(){
-    $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
   };
 
   return {
@@ -56,6 +69,9 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     isAuthenticated: isAuthenticated,
     postNewUser: postNewUser,
     updateUser: updateUser,
-    currentUser: currentUser
+    currentUser: currentUser,
+    sendPasswordLink: sendPasswordLink,
+    submitNewPassword: submitNewPassword
+
   };
 }]);

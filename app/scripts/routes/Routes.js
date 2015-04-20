@@ -24,6 +24,11 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       controller: 'LoginController',
       controllerAs: 'loginController'
     })
+    .when('/passwordreset', {
+      templateUrl: 'views/resetpassword.html',
+      controller: 'LoginController',
+      controllerAs: 'loginController'
+    })
     .otherwise({
       redirectTo: '/'
     });

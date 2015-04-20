@@ -23,6 +23,8 @@ angular.module('phoneApp', [
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){
     trace('all is well');
+  } else if(!AuthFactory.isAuthenticated() && $location.path() === '/passwordreset'){
+    trace('location is /passwordreset and there is no currentUser');
   } else if(AuthFactory.isAuthenticated()){
     var data = JSON.parse($window.localStorage.getItem('cmi-user'));
     $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
@@ -33,6 +35,8 @@ angular.module('phoneApp', [
   $rootScope.$on('$routeChangeStart',function(event,next){
     if($location.path() === '/confirm' && !AuthFactory.isAuthenticated()){
       trace('all is well');
+    } else if(!AuthFactory.isAuthenticated() && $location.path() === '/passwordreset'){
+      trace('location is /passwordreset and there is no currentUser');
     } else if(AuthFactory.isAuthenticated()) {
       var data = JSON.parse($window.localStorage.getItem('cmi-user'));
       $http.defaults.headers.common.Authorization = 'Token token=' + data.token;

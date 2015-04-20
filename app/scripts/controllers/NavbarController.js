@@ -6,7 +6,7 @@ function navbarController(trace,$location,AuthFactory){
 
   vm.isLoggedIn = function(){
     return AuthFactory.isAuthenticated();
-  }
+  };
 
   vm.logout = function(){
     AuthFactory.logout().then(function(response){
