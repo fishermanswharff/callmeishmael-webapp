@@ -19,7 +19,9 @@ angular.module('phoneApp', [
   'ngTouch',
   'MainDirective',
   'MainController'
-]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,trace){
+]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,trace){
+
+  VenueFactory.fetch();
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){
     trace('all is well');

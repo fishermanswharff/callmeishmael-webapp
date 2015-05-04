@@ -20,14 +20,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
     <navbar></navbar>
     <div class="alert" ng-if="alert"><p>{{alert}}</p></div>
-    <ng-view></ng-view>
+    <section class="main">
+      <ng-view></ng-view>
+    </section>
 
     <footer class="footer">
       <div class="container">
-        <p><span></span></p>
       </div>
     </footer>
 
@@ -68,6 +68,9 @@
     <!-- factories and services -->
     <script src="scripts/services/TraceService.js"></script>
     <script src="scripts/factories/AuthFactory.js"></script>
+    <script src="scripts/factories/PhoneFactory.js"></script>
+    <script src="scripts/factories/VenueFactory.js"></script>
+    <script src="scripts/factories/StoryFactory.js"></script>
     <!-- directives -->
     <script src="scripts/directives/NavbarDirective.js"></script>
     <script src="scripts/directives/SidenavDirective.js"></script>

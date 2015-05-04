@@ -1,20 +1,30 @@
-nav#side-nav {
-  ul.side {
-    @include defaults;
-    li {
-      display: block;
-      list-style: none;
-      text-align: right;
-      padding: 5px;
-      &.active {
-        background: $black-10;
-        a {
-          color: $black-90;
+aside.aside-nav {
+  @extend .grid_4;
+
+  nav#side-nav {
+    margin-top: 30px;
+
+    ul.side {
+      @include defaults;
+
+      li {
+        display: block;
+        list-style: none;
+        text-align: right;
+        padding: 5px;
+
+        &.active {
+
+          a {
+            color: $black-90;
+            font-weight: bold;
+          }
         }
-      }
-      a {
-        text-decoration: none;
-        color: $black;
+
+        a {
+          text-decoration: none;
+          color: $black;
+        }
       }
     }
   }

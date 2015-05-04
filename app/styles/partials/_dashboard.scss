@@ -1,11 +1,10 @@
-.dashboard {
-  @extend .container;
-  @extend .clearfix;
-
-  .sidebar {
-    @extend .grid_4;
-  }
-
+.dashboard,
+.venue,
+.phone,
+.story,
+.post-roll,
+.fixed,
+.add-new {
   .main-content {
     @extend .grid_12;
     padding-left: 20px;
