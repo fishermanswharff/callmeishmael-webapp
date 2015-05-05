@@ -1,0 +1,47 @@
+<section class="main-content">
+  <h1>Dashboard</h1>
+  <p>An aggregated view of the performance metrics for the CMI Phone Network.</p>
+  <div class='data-container'>
+    <h2>Venues</h2>
+    <p><strong>Total Venues:</strong> {{dashboardController.venues.length}}</p>
+    <p><strong>Active Venues:</strong> {{dashboardController.activeVenues()}}</p>
+    <p><strong>Paused Venues:</strong> {{dashboardController.pausedVenues()}}</p>
+  </div>
+  <div class='data-container'>
+    <h2>Phones</h2>
+    <p><strong>Total Fabricated Phones:</strong> {{dashboardController.phones.length}}</p>
+    <!-- <p><strong>Total Active Phones:</strong> {{}}</p>
+    <p><strong>Total Functional but Inactive Phones:</strong> {{}}</p>
+    <p><strong>Total Fixable Phones:</strong> {{}}</p>
+    <p><strong>Total Retired Phones:</strong> {{}}</p> -->
+  </div>
+  <div class='data-container'>
+    <h2>Stories</h2>
+    <p><strong>Total Stories on Network:</strong> {{dashboardController.stories.length}}</p>
+    <!-- <p><strong>Total Stories/Ishmael’s Library:</strong> {{dashboardController.stories.length}}</p>
+    <p><strong>Total Stories/Venue Libraries:</strong> {{}}</p>
+    <p><strong>Average listen time per story:</strong> {{}}</p>
+    <p><strong>Total story listens/Ishmael’s library:</strong> {{}}</p>
+    <p><strong>Avg. listen time/Ishmael’s stories:</strong> {{}}</p>
+    <p><strong>Total # of story listens across all Venue libraries:</strong> {{}}</p>
+    <p><strong>Avg. listen time/Venue Stories:</strong> {{}}</p>
+    <p><strong></strong> {{}}</p>
+    <p><strong></strong> {{}}</p>
+    <p><strong></strong> {{}}</p>
+    <p><strong></strong> {{}}</p> -->
+  </div>
+  <div class='data-container'>
+  </div>
+</section>
+
+
+<!-- <ul class="venues">
+  <li ng-repeat="venue in dashboardController.venues">
+    <h3>{{venue.name}}</h3>
+    <p>Status: {{venue.status}}</p>
+    <p># Phones: {{venue.number_phones}}, # Total Stories: {{venue.total_stories}}</p>
+  </li>
+</ul> -->
+<!-- <ul class="phones">
+  <li ng-repeat="phone in dashboardController.phones">{{phone.id}}</li>
+</ul> -->

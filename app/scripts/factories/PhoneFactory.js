@@ -1,18 +1,17 @@
 'use strict';
-angular.module('phoneApp').factory('PhoneFactory', ['trace','$http','ServerUrl',function(trace,$http,ServerUrl){
-
-  var phones = [];
+angular.module('phoneApp').factory('PhoneFactory', ['trace','$http','$q','ServerUrl',function(trace,$http,$q,ServerUrl){
 
   var fetch = function(venueId){
-    $http.get(ServerUrl + '/venues/' + venueId + '/phones').success(function(response){
-      angular.copy(response,phones);
-    }).error(function(data, status, headers, config) {
-      trace(data,status,headers,config);
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/venues/' + venueId + '/phones').success(function(response){
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        trace(data, status, headers, config, 'phone request failed.');
+      });
     });
   };
 
   return {
     fetch: fetch,
-    phones: phones
   };
 }]);

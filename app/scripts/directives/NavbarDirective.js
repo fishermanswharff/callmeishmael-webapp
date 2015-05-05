@@ -7,7 +7,7 @@ angular.module('MainDirective').directive('navbar',['trace',function(trace){
     controllerAs: 'navbarController',
     bindToController: true,
     link: function($scope,element,attrs){
-      trace($scope,element,attrs);
+      // trace($scope,element,attrs);
     }
   };
 }]);

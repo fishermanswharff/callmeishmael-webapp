@@ -7,7 +7,7 @@ angular.module('MainDirective').directive('sidenav', ['trace',function(trace){
     controllerAs: 'sidenavController',
     bindToController: true,
     link: function($scope,element,attrs){
-      trace('from sidenav directive: ', $scope,element,attrs);
+      // trace('from sidenav directive: ', $scope,element,attrs);
     }
   };
 }]);

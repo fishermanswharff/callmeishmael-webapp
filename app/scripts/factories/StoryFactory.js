@@ -1,13 +1,16 @@
 'use strict';
-angular.module('phoneApp').factory('StoryFactory', ['trace','ServerUrl','$http',function(trace,ServerUrl,$http){
+angular.module('phoneApp').factory('StoryFactory', ['trace','ServerUrl','$q','$http',function(trace,ServerUrl,$q,$http){
 
   var stories = [];
 
   var fetch = function(){
-    $http.get(ServerUrl + '/stories').success(function(response){
-      angular.copy(response, stories);
-    }).error(function(data,status,headers,config){
-      trace(data,status,headers,config);
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/stories').success(function(response){
+        angular.copy(response, stories);
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        trace(data,status,headers,config);
+      });
     });
   };
 
