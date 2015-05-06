@@ -1,7 +1,23 @@
 <section class="main-content">
-  <header><h1>Venues</h1></header>
-  <p>Browse the performance stats of every venue that has ever rented a CMI phone. You can use the search, sort and filter tools to identify successful (and unsuccessful) venues. Use the “admin” table to update the status of any venue.</p>
+  <header>
+    <h1>Venues</h1>
+    <p>Browse the performance stats of every venue that has ever rented a CMI phone. You can use the search, sort and filter tools to identify successful (and unsuccessful) venues. Use the “admin” table to update the status of any venue. </p>
+  </header>
   <div class="data-container">
+    <p>Total number of venues: {{dashboardController.venues.length}}</p>
+    <div class="form-group">
+      <label>Search by name</label>
+      <input type='text' ng-model="search.name" placeholder="Search by venue name">
+    </div>
+    <div class="form-group">
+      <label>
+        <input type="checkbox" ng-model="search.status" ng-true-value="'active'" ng-false-value="''">Active Venues
+      </label>
+      <label>
+        <input type="checkbox" ng-model="search.status" ng-true-value="'paused'" ng-false-value="''">
+        Paused Venues
+      </label>
+    </div>
     <table class="venues">
       <thead>
         <tr>
@@ -14,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="venue in dashboardController.venues">
+        <tr ng-repeat="venue in dashboardController.venues | filter:search.status | filter:search.name">
           <td>{{venue.unique_identifier}}</td>
           <td>{{venue.number_phones}}</td>
           <td>{{venue.name}}</td>
