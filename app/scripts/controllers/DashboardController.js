@@ -16,6 +16,7 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
         });
       });
     }, vm);
+    trace(vm.venues);
   });
 
   StoryFactory.fetch().then(function(response){

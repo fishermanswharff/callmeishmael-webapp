@@ -11,3 +11,21 @@
     border-left: 1px solid $black;
   }
 }
+
+table.venues {
+  font-size: .8em;
+  font-family: $body-font;
+  border-spacing: 0.5rem;
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    font-family: $body-font;
+  }
+
+  td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: left;
+  }
+}

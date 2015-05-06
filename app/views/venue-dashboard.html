@@ -1,0 +1,28 @@
+<section class="main-content">
+  <header><h1>Venues</h1></header>
+  <p>Browse the performance stats of every venue that has ever rented a CMI phone. You can use the search, sort and filter tools to identify successful (and unsuccessful) venues. Use the “admin” table to update the status of any venue.</p>
+  <div class="data-container">
+    <table class="venues">
+      <thead>
+        <tr>
+          <th>UID:</th>
+          <th># Phones:</th>
+          <th>Name:</th>
+          <th>Added on:</th>
+          <th>Status:</th>
+          <th>Total Listens:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="venue in dashboardController.venues">
+          <td>{{venue.unique_identifier}}</td>
+          <td>{{venue.number_phones}}</td>
+          <td>{{venue.name}}</td>
+          <td>{{venue.created_at}}</td>
+          <td>{{venue.status}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
