@@ -5,6 +5,7 @@ dashboardController.$inject = ['trace','VenueFactory','PhoneFactory','StoryFacto
 function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
   var vm = this;
   vm.venues = [];
+  vm.phones = [];
 
   VenueFactory.fetch().then(function(response){
     vm.venues = response;
@@ -21,6 +22,11 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
 
   StoryFactory.fetch().then(function(response){
     vm.stories = response;
+  });
+
+  PhoneFactory.get().then(function(response){
+    angular.copy(vm.phones,response);
+    trace(vm.phones);
   });
 
   vm.activeVenues = function(){

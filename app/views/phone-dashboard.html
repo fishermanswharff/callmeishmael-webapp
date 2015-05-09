@@ -1,4 +1,45 @@
 <section class="main-content">
   <header><h1>Phone Stats</h1></header>
   <p>Evaluate the lifespan of any phone ever fabricated by CMI. Use the search, sort and filter tools below to navigate to a specific phone. Use the admin table to change the status of any phone.</p>
+  <div class="data-container">
+    <div class="form-group">
+      <label>Search by Venue</label>
+      <input type='text' ng-model="search.venue.name" placeholder="Search by venue name">
+    </div>
+    <div class="form-group">
+      <label>
+        <input type="checkbox" ng-model="search.status" ng-true-value="'active'" ng-false-value="''">Active Phoness
+      </label>
+      <label>
+        <input type="checkbox" ng-model="search.status" ng-true-value="'inactive'" ng-false-value="''">
+        Inactive Venues
+      </label>
+      <label>
+        <input type="checkbox" ng-model="search.status" ng-true-value="'fixable'" ng-false-value="''">
+        Fixable Venues
+      </label>
+      <label>
+        <input type="checkbox" ng-model="search.status" ng-true-value="'retired'" ng-false-value="''">
+        Retired Venues
+      </label>
+    </div>
+    <table>
+      <thead>
+        <th>Phone ID</th>
+        <th>Phone Status</th>
+        <th>Current Value</th>
+        <th>Date Created</th>
+        <th># Days Active</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="phone in dashboardController.phones | filter:search">
+          <td>{{phone.unique_identifier}}</td>
+          <td>{{phone.status}}</td>
+          <td>{{phone.venue.name}}</td>
+          <td>{{phone.created_at}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>

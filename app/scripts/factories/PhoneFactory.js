@@ -11,7 +11,20 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$http','$q','Server
     });
   };
 
+  var get = function(){
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/phones')
+      .success(function(response){
+        resolve(response);
+      })
+      .error(function(data,status,headers,config){
+        reject(data);
+      });
+    });
+  };
+
   return {
     fetch: fetch,
+    get: get
   };
 }]);
