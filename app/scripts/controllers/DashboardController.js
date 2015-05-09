@@ -22,6 +22,7 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
 
   StoryFactory.fetch().then(function(response){
     vm.stories = response;
+    trace(vm.stories);
   });
 
   PhoneFactory.get().then(function(response){
