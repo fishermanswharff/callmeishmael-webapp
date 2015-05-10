@@ -2,6 +2,6 @@
   <aside class="aside-nav">
     <sidenav></sidenav>
   </aside>
-  <cmi-phone-dashboard></cmi-phone-dashboard>
+  <cmi-phone-dashboard ng-if="currentUser.role === 'admin'"></cmi-phone-dashboard>
 </div>
 

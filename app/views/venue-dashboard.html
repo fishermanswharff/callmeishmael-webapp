@@ -26,6 +26,7 @@
           <th>Name:</th>
           <th>Added on:</th>
           <th>Status:</th>
+          <th># Users Associated:</th>
           <th>Total Listens:</th>
         </tr>
       </thead>
@@ -36,6 +37,7 @@
           <td>{{venue.name}}</td>
           <td>{{venue.created_at}}</td>
           <td>{{venue.status}}</td>
+          <td>{{venue.users.length}}</td>
           <td></td>
         </tr>
       </tbody>

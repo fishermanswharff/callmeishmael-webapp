@@ -72,6 +72,5 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     currentUser: currentUser,
     sendPasswordLink: sendPasswordLink,
     submitNewPassword: submitNewPassword
-
   };
 }]);
