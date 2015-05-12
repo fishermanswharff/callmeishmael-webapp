@@ -89,7 +89,7 @@
           margin: 0px 0px;
           height: 360px;
           background-image: url(../images/whale.png);
-          animation: whale 7s 0.1s infinite ease;
+          animation: whale 7s 0.1s infinite ease-in-out;
         }
 
         &.plain {
