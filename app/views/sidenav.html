@@ -8,6 +8,7 @@
     <li ng-class="{ active: sidenavController.isActive('/fixed') }"><a href="#/fixed">Fixed Stories</a></li>
     <li ng-class="{ active: sidenavController.isActive('/add-new') }"><a href="#/add-new">+ Add New</a></li>
   </ul>
+  <hr ng-if="currentUser.role === 'admin'"/>
   <ul class="side venue-links">
     <li>Venue View (viewable by venue admins and admins)</li>
   </ul>

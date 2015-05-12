@@ -1,0 +1,141 @@
+.parallax-container {
+  position: absolute;
+  overflow: hidden;
+  display: table;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+
+  ul {
+    list-style: none;
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-image: url(../images/A1Sauce.jpg);
+    background-color: $black;
+    background-size: 100%;
+    min-height: 900px;
+
+    li {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+
+      div {
+        width: auto;
+
+        &.wave {
+          background-repeat: repeat-x;
+          position: absolute;
+          width: 300%;
+          left: -100%;
+          margin: 0px 0px;
+          height: 360px;
+
+
+          &.depth-20 {
+            -webkit-animation: wave 8s 0.1s infinite linear;
+            -moz-animation: wave 8s 0.1s infinite linear;
+            animation: wave 8s 0.1s infinite linear;
+            bottom: -100px;
+          }
+
+          &.depth-40 {
+            -webkit-animation: wave 6s 0.1s infinite linear;
+            -moz-animation: wave 6s 0.1s infinite linear;
+            animation: wave 6s 0.1s infinite linear;
+            bottom: -140px;
+          }
+
+          &.depth-60 {
+            -webkit-animation: wave 4s 0.1s infinite linear;
+            -moz-animation: wave 4s 0.1s infinite linear;
+            animation: wave 4s 0.1s infinite linear;
+            bottom: -160px;
+          }
+
+          &.depth-80 {
+            -webkit-animation: wave 3s 0.1s infinite linear;
+            -moz-animation: wave 3s 0.1s infinite linear;
+            animation: wave 3s 0.1s infinite linear;
+            bottom: -180px;
+          }
+
+          &.depth-100 {
+            -webkit-animation: wave 2s 0.1s infinite linear;
+            -moz-animation: wave 2s 0.1s infinite linear;
+            animation: wave 2s 0.1s infinite linear;
+            bottom: -200px;
+          }
+        }
+
+        &.plain {
+          background-image: url(../images/cmi-wave-bg.png);
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@-moz-keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@-ms-keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@keyframes wave {
+  0% {
+    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}

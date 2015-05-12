@@ -2,7 +2,9 @@
 angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'views/main.html',
+      templateUrl: 'views/home.html',
+      controller: 'HomeController',
+      controllerAs: 'homeController'
     })
     .when('/about', {
       templateUrl: 'views/about.html',
