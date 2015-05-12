@@ -80,6 +80,18 @@
           }
         }
 
+        &.whale {
+          @include transform(scaleX(-1) rotate(20deg));
+          position: absolute;
+          width: 100%;
+          background-repeat: no-repeat;
+          bottom: 0;
+          margin: 0px 0px;
+          height: 360px;
+          background-image: url(../images/whale.png);
+          animation: whale 7s 0.1s infinite ease;
+        }
+
         &.plain {
           background-image: url(../images/cmi-wave-bg.png);
         }
@@ -141,5 +153,19 @@
     -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
     -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
     transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
+  }
+}
+
+@keyframes whale {
+  0% {
+    transform: rotateZ(30deg) translate3d(300px,100%,0) rotateZ(10deg);
+  }
+
+  50% {
+    transform: rotateZ(10deg) translate3d(0,50%,0) rotateZ(10deg);
+  }
+
+  100% {
+    transform: rotateZ(-10deg) translate3d(-300px,0,0) rotateZ(-10deg);
   }
 }
