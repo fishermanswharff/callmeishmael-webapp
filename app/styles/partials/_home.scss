@@ -39,40 +39,44 @@
           margin: 0px 0px;
           height: 360px;
 
-
           &.depth-20 {
-            -webkit-animation: wave 8s 0.1s infinite linear;
-            -moz-animation: wave 8s 0.1s infinite linear;
-            animation: wave 8s 0.1s infinite linear;
+            -webkit-animation: wave 7s 0.1s infinite linear;
+            -moz-animation: wave 7s 0.1s infinite linear;
+            animation: wave 7s 0.1s infinite linear;
             bottom: -100px;
+            background-size: 600px 180px;
           }
 
           &.depth-40 {
             -webkit-animation: wave 6s 0.1s infinite linear;
             -moz-animation: wave 6s 0.1s infinite linear;
             animation: wave 6s 0.1s infinite linear;
-            bottom: -140px;
+            bottom: -100px;
+            background-size: 600px 180px;
           }
 
           &.depth-60 {
             -webkit-animation: wave 4s 0.1s infinite linear;
             -moz-animation: wave 4s 0.1s infinite linear;
             animation: wave 4s 0.1s infinite linear;
-            bottom: -160px;
+            bottom: -110px;
+            background-size: 800px 240px;
           }
 
           &.depth-80 {
-            -webkit-animation: wave 3s 0.1s infinite linear;
-            -moz-animation: wave 3s 0.1s infinite linear;
-            animation: wave 3s 0.1s infinite linear;
-            bottom: -180px;
+            -webkit-animation: wave 4s 0.1s infinite linear;
+            -moz-animation: wave 4s 0.1s infinite linear;
+            animation: wave 4s 0.1s infinite linear;
+            bottom: -120px;
+            background-size: 1000px 300px;
           }
 
           &.depth-100 {
-            -webkit-animation: wave 2s 0.1s infinite linear;
-            -moz-animation: wave 2s 0.1s infinite linear;
-            animation: wave 2s 0.1s infinite linear;
+            -webkit-animation: wave 3s 0.1s infinite linear;
+            -moz-animation: wave 3s 0.1s infinite linear;
+            animation: wave 3s 0.1s infinite linear;
             bottom: -200px;
+            background-size: 1200px 360px;
           }
         }
 
