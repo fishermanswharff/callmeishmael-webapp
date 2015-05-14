@@ -1,8 +1,20 @@
 <div class="parallax-container">
   <ul id="scene" class="scene" data-scalar-y="15" data-scalar-x="25" data-friction-y="0.1" data-friction-x="0.1">
     <li class="layer" data-depth="0.00"></li>
+    <li class="layer" data-depth="0.10">
+      <img class="clouds bg" src="images/cmi-cloud-bg.png">
+    </li>
+    <li class="layer" data-depth="0.50">
+      <img class="clouds double" src="images/cmi-cloud-double.png">
+    </li>
+    <li class="layer" data-depth="0.50">
+      <img class="clouds single" src="images/cmi-cloud-single.png">
+    </li>
     <li class="layer" data-depth="0.20">
       <div class="wave plain depth-20"></div>
+    </li>
+    <li class="layer title" data-depth="0.30">
+      <img class="logo" src="images/cmi-logo-isolated-large.png">
     </li>
     <li class="layer" data-depth="0.40">
       <div class="wave plain depth-40"></div>
@@ -20,4 +32,7 @@
       <div class="wave plain depth-100"></div>
     </li>
   </ul>
+
+  <a ng-if="!currentUser" ng-href="#/login" class="btn call-to-action">Login</a>
+  <a ng-if="currentUser" ng-href="#/dashboard" class="btn call-to-action">Dashboard</a>
 </div>

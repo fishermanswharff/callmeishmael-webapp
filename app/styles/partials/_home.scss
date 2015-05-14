@@ -6,6 +6,7 @@
   width: 100%;
   left: 0;
   top: 0;
+  background: linear-gradient(to top, $black-90 100%, $black-70 75%);
 
   ul {
     list-style: none;
@@ -15,10 +16,11 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    background-image: url(../images/A1Sauce.jpg);
-    background-color: $black;
+    background-color: $black-20;
     background-size: 100%;
-    min-height: 900px;
+    min-height: 400px;
+    height: 100vh;
+
 
     li {
       position: absolute;
@@ -81,7 +83,7 @@
         }
 
         &.whale {
-          @include transform(scaleX(-1) rotate(20deg));
+          @include transform(scaleX(-1) rotate(60deg));
           position: absolute;
           width: 100%;
           background-repeat: no-repeat;
@@ -89,83 +91,58 @@
           margin: 0px 0px;
           height: 360px;
           background-image: url(../images/whale.png);
-          animation: whale 7s 0.1s infinite linear;
+          animation: whale 10s 0s infinite linear;
         }
 
         &.plain {
           background-image: url(../images/cmi-wave-bg.png);
         }
       }
+
+      .clouds {
+        display: block;
+        position: absolute;
+        left: 0;
+
+        &.bg {
+          top: 45%;
+        }
+
+        &.single {
+          top: 30%;
+          left: 80%;
+        }
+      }
+
+      .logo {
+        max-width: 400px;
+        position: absolute;
+        top: 30%;
+        left: 35%;
+        margin: 0 auto;
+      }
     }
   }
-}
 
-@-webkit-keyframes wave {
-  0% {
-    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-  }
+  a.call-to-action {
+    @include transition(all,.25s,ease,0);
+    background-color: $black-80;
+    border: 0;
+    border-radius: 4px;
+    bottom: 12%;
+    box-shadow: 0 0 5px 0 $black;
+    color: $black-20;
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    left: 45%;
+    padding: 20px;
+    position: absolute;
+    text-decoration: none;
 
-  100% {
-    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-  }
-}
-
-@-moz-keyframes wave {
-  0% {
-    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-  }
-}
-
-@-ms-keyframes wave {
-  0% {
-    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-  }
-}
-
-@keyframes wave {
-  0% {
-    -webkit-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    -moz-transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-    transform: rotateZ(0deg) translate3d(0,10%,0) rotateZ(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    -moz-transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-    transform: rotateZ(360deg) translate3d(0,10%,0) rotateZ(-360deg);
-  }
-}
-
-@keyframes whale {
-  0% {
-    transform: rotateZ(20deg) translate3d(500px,100%,0) rotateZ(20deg);
-  }
-
-  50% {
-    transform: rotateZ(10deg) translate3d(250,70%,0) rotateZ(10deg);
-  }
-
-  100% {
-    transform: rotateZ(-10deg) translate3d(0,-40%,0) rotateZ(-10deg);
+    &:hover {
+      background-color: $black-50;
+      color: $black-90;
+    }
   }
 }
