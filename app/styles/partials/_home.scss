@@ -6,7 +6,69 @@
   width: 100%;
   left: 0;
   top: 0;
-  background: linear-gradient(to top, $black-90 100%, $black-70 75%);
+  // background-image: url(../images/cmi-bg.jpg);
+  // background-size: contain;
+  // background: linear-gradient(to top, $black-90 100%, $black-70 75%);
+
+  a.call-to-action {
+    @include transition(all,.25s,ease,0);
+    background-color: $black-80;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 $black;
+    color: $black-20;
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    left: 45%;
+    padding: 20px;
+    position: absolute;
+    text-decoration: none;
+    top: 10%;
+    z-index: $z-parallax-login;
+
+    &:hover {
+      background-color: $black-50;
+      color: $black-90;
+    }
+
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+      left: 30%;
+    }
+  }
+
+  .login-form-container {
+    z-index: $z-parallax-login;
+    position: absolute;
+    width: 100%;
+  }
+
+  .login-form {
+    @include flexbox();
+    @include flex-flow();
+    @include flex-justify(center);
+    @include flex-align-items(baseline);
+    @include flex-align-content(flex-start);
+
+    width: 25%;
+    margin: 0 auto;
+
+    .form-group {
+      width: 100%;
+
+      label {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      input,
+      input[type="submit"].btn {
+        @include transition(all,.25s,ease,0);
+        width: 100%;
+      }
+    }
+  }
 
   ul {
     list-style: none;
@@ -16,10 +78,11 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: $black-20;
+    // background-color: $black-20;
     background-size: 100%;
     min-height: 400px;
     height: 100vh;
+    z-index: $z-parallax-scene;
 
     li {
       position: absolute;
@@ -41,41 +104,31 @@
           height: 360px;
 
           &.depth-20 {
-            -webkit-animation: wave 7s 0.1s infinite linear;
-            -moz-animation: wave 7s 0.1s infinite linear;
-            animation: wave 7s 0.1s infinite linear;
+            @include animation(wave,7s,0.1s,infinite,linear);
             bottom: -160px;
             background-size: 600px 180px;
           }
 
           &.depth-40 {
-            -webkit-animation: wave 6s 0.1s infinite linear;
-            -moz-animation: wave 6s 0.1s infinite linear;
-            animation: wave 6s 0.1s infinite linear;
+            @include animation(wave,6s,0.1s,infinite,linear);
             bottom: -180px;
             background-size: 600px 180px;
           }
 
           &.depth-60 {
-            -webkit-animation: wave 4s 0.1s infinite linear;
-            -moz-animation: wave 4s 0.1s infinite linear;
-            animation: wave 4s 0.1s infinite linear;
+            @include animation(wave,4s,0.1s,infinite,linear);
             bottom: -200px;
             background-size: 800px 240px;
           }
 
           &.depth-80 {
-            -webkit-animation: wave 4s 0.1s infinite linear;
-            -moz-animation: wave 4s 0.1s infinite linear;
-            animation: wave 4s 0.1s infinite linear;
+            @include animation(wave,4s,0.1s,infinite,linear);
             bottom: -210px;
             background-size: 1000px 300px;
           }
 
           &.depth-100 {
-            -webkit-animation: wave 3s 0.1s infinite linear;
-            -moz-animation: wave 3s 0.1s infinite linear;
-            animation: wave 3s 0.1s infinite linear;
+            @include animation(wave,3s,0.1s,infinite,linear);
             bottom: -220px;
             background-size: 1200px 360px;
           }
@@ -113,6 +166,18 @@
         }
       }
 
+      .phone {
+        max-width: 300px;
+      }
+
+      .bg {
+        display: block;
+        left: -10%;
+        height: auto;
+        position: absolute;
+        width: 120%;
+      }
+
       .logo {
         max-width: 400px;
         position: absolute;
@@ -136,31 +201,8 @@
     width: 100%;
     height: 100%;
     box-shadow: 0px 0px 100px #000 inset;
+    z-index: $z-parallax-shadow;
   }
 
-  a.call-to-action {
-    @include transition(all,.25s,ease,0);
-    background-color: $black-80;
-    border: 0;
-    border-radius: 4px;
-    bottom: 12%;
-    box-shadow: 0 0 5px 0 $black;
-    color: $black-20;
-    cursor: pointer;
-    display: block;
-    font-weight: bold;
-    left: 45%;
-    padding: 20px;
-    position: absolute;
-    text-decoration: none;
 
-    &:hover {
-      background-color: $black-50;
-      color: $black-90;
-    }
-
-    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-      left: 30%;
-    }
-  }
 }

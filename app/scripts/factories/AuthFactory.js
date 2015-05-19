@@ -16,6 +16,7 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     return $http.get(ServerUrl + '/logout').success(function(response){
       trace(response);
       $window.localStorage.removeItem('cmi-user');
+      $rootScope.currentUser = null;
       $rootScope.alert = 'You have successfully logged out';
     });
   };

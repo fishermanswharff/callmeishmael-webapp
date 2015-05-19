@@ -29,7 +29,7 @@ angular.module('phoneApp', [
     var data = JSON.parse($window.localStorage.getItem('cmi-user'));
     $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
   } else {
-    $location.path('/login');
+    $location.path('/');
   }
 
   $rootScope.$on('$routeChangeStart',function(event,next){
@@ -41,7 +41,7 @@ angular.module('phoneApp', [
       var data = JSON.parse($window.localStorage.getItem('cmi-user'));
       $http.defaults.headers.common.Authorization = 'Token token=' + data.token;
     } else {
-      $location.path('/login');
+      $location.path('/');
     }
   });
 });

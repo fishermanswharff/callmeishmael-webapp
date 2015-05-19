@@ -1,7 +1,28 @@
 <div class="parallax-container">
+  <a ng-if="currentUser" ng-href="#/dashboard" class="btn call-to-action">Dashboard</a>
+  <div class="login-form-container" ng-if="!currentUser">
+    <form class='login-form' id='loginForm' name='loginForm' ng-submit='homeController.login(homeController.credentials)' novalidate>
+      <div class="form-group">
+        <label for='email-credentials' id='email-label'>Email
+          <input id='email-credentials' name='email-credentials' type='email' ng-model='homeController.credentials.email' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='password-credentials'>Password
+          <input id='password-credentials' name='password-credentials' type='password' ng-model='homeController.credentials.password' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <input class='btn' type='submit' ng-disabled='loginForm.$invalid' value='Login'>
+      </div>
+    </form>
+  </div>
   <ul id="scene" class="scene" data-scalar-y="15" data-scalar-x="25" data-friction-y="0.1" data-friction-x="0.1">
     <li class="layer" data-depth="0.00"></li>
     <li class="layer" data-depth="0.10">
+      <img class="bg" src="images/cmi-bg.jpg">
+    </li>
+    <li class="layer" data-depth="0.20">
       <img class="clouds bg" src="images/cmi-cloud-bg.png">
     </li>
     <li class="layer" data-depth="0.50">
@@ -19,6 +40,9 @@
     <li class="layer" data-depth="0.40">
       <div class="wave plain depth-40"></div>
     </li>
+    <li class="layer" data-depth="0.40">
+      <!-- <img class="phone" src="images/cmi-phone-parallax.png"> -->
+    </li>
     <li class="layer" data-depth="0.50">
       <div class="whale"></div>
     </li>
@@ -33,6 +57,4 @@
     </li>
   </ul>
   <div class="shadow"></div>
-  <a ng-if="!currentUser" ng-href="#/login" class="btn call-to-action">Login</a>
-  <a ng-if="currentUser" ng-href="#/dashboard" class="btn call-to-action">Dashboard</a>
 </div>

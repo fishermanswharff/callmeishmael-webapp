@@ -108,6 +108,7 @@
 }
 
 @mixin flexbox() {
+  // create a flexbox layout context
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -115,12 +116,55 @@
   display: flex;
 }
 
-@mixin flex($values) {
-  -webkit-box-flex: $values;
-  -moz-box-flex:  $values;
-  -webkit-flex:  $values;
-  -ms-flex:  $values;
-  flex:  $values;
+@mixin flex-flow($direction: row, $wrap: wrap){
+  // shorthand for flex-direction and flex-wrap
+  // direction args: row, row-reverse, column, column-reverse
+  // wrap args: nowrap, wrap, wrap-reverse
+  -webkit-flex-flow: $direction $wrap;
+  -ms-flex-flow: $direction $wrap;
+  flex-flow: $direction $wrap;
+}
+
+@mixin flex-justify($args){
+  // spaces items along the main axis
+  // acceptable args: flex-start, flex-end,center,space-between,space-around
+  -webkit-justify-content: $args;
+  -ms-flex-pack: $args;
+  justify-content: $args;
+}
+
+@mixin flex-align-items($args){
+  // how items align along the cross axis of the current line
+  // acceptable arguments: flex-start, flex-end, center, baseline, stretch
+  -webkit-align-items: $args;
+  -ms-align-items: $args;
+  align-items: $args;
+}
+
+@mixin flex-align-content($args){
+  // acceptable args: flex-start, flex-end,center,space-between,space-around
+  -webkit-align-content: $args;
+  -ms-flex-line-pack: $args;
+  -ms-align-content: $args;
+  -moz-align-content: $args;
+  -o-align-content: $args;
+  align-content: $args;
+}
+
+@mixin flex($args) {
+  // shorthand for flex-grow, flex-shrink, flex-basis. default is 0 1 auto
+  -webkit-box-flex: $args;
+  -moz-box-flex:  $args;
+  -webkit-flex:  $args;
+  -ms-flex:  $args;
+  flex:  $args;
+}
+
+@mixin align-self($args){
+  -webkit-align-self: $args;
+  -ms-flex-item-align: $args;
+  -moz-align-self: $args;
+  align-self: $args;
 }
 
 @mixin order($val) {
@@ -193,10 +237,21 @@
   }
 
   50% {
-    transform: translate3d(500px,110%,0) rotateZ(45deg);
+    transform: translate3d(500px,125%,0) rotateZ(45deg);
   }
 
   100% {
     transform: translate3d(500px,200%,0) rotateZ(60deg);
   }
 }
+
+@mixin animation($name,$time: 1s,$delay: .1s,$repeat: infinite, $ease: linear){
+  -webkit-animation: $name $time $delay $repeat $ease;
+  -moz-animation: $name $time $delay $repeat $ease;
+  animation: $name $time $delay $repeat $ease;
+}
+
+
+
+
+

@@ -33,9 +33,18 @@ input[type="password"]
 }
 
 input[type="submit"] {
+  @include transition(all,.25s,ease,0);
+
   &.btn {
     border: none;
-    @include button($black, $white, 4px);
+    @include button(mix($black,$black-80,15%), $white, 4px);
+
+    &:valid {
+      &:hover {
+        @include button(mix($black-20,$black-10,85%), $black, 4px);
+        font-weight: bold;
+      }
+    }
   }
   &[disabled="disabled"] {
     cursor: not-allowed;
