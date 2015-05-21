@@ -9,5 +9,5 @@ angular.module('MainDirective').directive('cmiFormsDashboard',['trace',function(
     link: function($scope, elements, attrs){
 
     }
-  }
+  };
 }]);

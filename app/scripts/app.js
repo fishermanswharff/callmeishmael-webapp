@@ -22,7 +22,7 @@ angular.module('phoneApp', [
 ]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,StoryFactory,trace){
 
   VenueFactory.fetch();
-  PhoneFactory.fetch();
+  PhoneFactory.get();
   StoryFactory.fetch();
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){
