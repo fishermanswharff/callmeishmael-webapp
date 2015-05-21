@@ -7,6 +7,7 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
   vm.story_types = ['Fixed','Venue','Surprise'];
   vm.venues = VenueFactory.venues;
   vm.phones = PhoneFactory.phones;
+  vm.stories = StoryFactory.stories;
 
   vm.submit = function(object){
     trace(object);
