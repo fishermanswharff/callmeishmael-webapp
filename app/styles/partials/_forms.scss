@@ -2,7 +2,10 @@ div.form-group {
   margin: 10px auto;
 }
 
-input, select, textarea, button{font-family:$header-font;}
+input, select, textarea, button {
+  font-family:$header-font;
+}
+
 input {
   @include transition(all, 0.25s, ease, 0);
 }
@@ -11,25 +14,31 @@ label {
   display: inline-block;
   font-family: $body-font;
   margin: 0 10px 0 3px;
+  width: 100%;
+  max-width: 350px;
 }
 
 input + label {
   font-family: $body-font;
 }
 
-input, select, textarea, button{font-family:$header-font;}
+input, select, textarea, button {
+  font-family: $header-font;
+}
+
 input {
   @include transition(all, 0.25s, ease, 0);
 }
 
 input[type="email"],
 input[type="text"],
-input[type="password"]
-{
+input[type="password"],
+input[type="url"] {
   display: block;
   height: 30px;
+  padding: 5px 8px 6px;
   width: 100%;
-  @include input(2px, solid, $black, 4px);
+  @include input(2px, solid, $black-50, 4px);
 }
 
 input[type="submit"] {

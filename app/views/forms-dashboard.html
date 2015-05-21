@@ -1,0 +1,50 @@
+<section class="main-content">
+  <header><h1>Add a All of the Things To Ishmael’s Library</h1></header>
+  <p>Use this area to add various assets to the CMI Phone network.</p>
+  <div class="data-container story-form">
+    <h3>Add a New Story to Ishmael’s Library:</h3>
+    <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit(formsController.story)">
+      <div class="form-group">
+        <label for='storyTitle'>Title
+          <input type='text' id='storyTitle' name='storyUrl' ng-model='formsController.story.title' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='storyUrl'>Story Url
+          <input type='url' id='storyUrl' name='storyUrl' ng-model='formsController.story.url' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='storyAuthorFirst'>Author’s First Name
+          <input type='text' id='storyAuthorFirst' name='storyAuthorFirst' ng-model='formsController.story.author_first' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='storyAuthorLast'>Author's Last Name
+          <input type='text' name='storyAuthorLast' id='storyAuthorLast' ng-model='formsController.story.author_last' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <input class='btn' type='submit' value='Add Story' ng-disabled='storyForm.$invalid'>
+      </div>
+    </form>
+  </div>
+  <div class="data-container venue-story-form">
+    <h3>Add a New Story to a Venue Library</h3>
+    <form>
+      <label>Choose Venue
+        <select id='venueForStoryList' class='venue-story-list' ng-model='formController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues'>
+        </select>
+      </label>
+    </form>
+  </div>
+</section>
+
+
+<!--
+<div class="form-group">
+  <label for=''>
+    <input type='' name='' id='' ng-model=''>
+  </label>
+</div>
+-->
