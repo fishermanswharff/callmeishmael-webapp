@@ -7,6 +7,7 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
   vm.story_types = ['Fixed','Venue','Surprise'];
   vm.venues = [];
   vm.phones = [];
+  vm.stories = [];
 
   VenueFactory.fetch().then(function(response){
     for(var i = 0; i < response.length; i++){
@@ -14,11 +15,13 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
     }
   });
 
-  vm.phones = PhoneFactory.get().then(function(response){
+  PhoneFactory.get().then(function(response){
     angular.copy(response,vm.phones);
   });
 
-  vm.stories = StoryFactory.stories;
+  StoryFactory.fetch().then(function(response){
+    angular.copy(response,vm.stories);
+  });
 
   vm.submit = function(object){
     trace(object);

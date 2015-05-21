@@ -34,7 +34,7 @@
         <tr ng-repeat="venue in dashboardController.venues | filter:search.status | filter:search.name">
           <td>{{venue.unique_identifier}}</td>
           <td>{{venue.number_phones}}</td>
-          <td>{{venue.name}}</td>
+          <td><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a></td>
           <td>{{venue.created_at}}</td>
           <td>{{venue.status}}</td>
           <td>{{venue.users.length}}</td>
