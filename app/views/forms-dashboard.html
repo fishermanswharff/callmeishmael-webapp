@@ -3,7 +3,7 @@
   <p>Use this area to add various assets to the CMI Phone network.</p>
   <div class="data-container story-form">
     <h3>Add a New Story to Ishmael’s Library:</h3>
-    <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit(formsController.story)">
+    <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit({story: formsController.story})" novalidate>
       <div class="form-group">
         <label for='storyTitle'>Title
           <input type='text' id='storyTitle' name='storyUrl' ng-model='formsController.story.title' required>
@@ -31,10 +31,10 @@
   </div>
   <div class="data-container venue-story-form">
     <h3>Add a New Story to a Venue Library</h3>
-    <form>
+    <form name='venueStoryForm' id='venueStoryForm' ng-submit="formsController.submit({venueStory: formsController.venueStory})" novalidate>
       <div class="form-group">
         <label>Choose Venue
-          <select id='venueForStoryList' class='venue-story-list' ng-model='formController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues'>
+          <select id='venueForStoryList' class='select venue-story-list' ng-model='formController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues'>
             <option value="">-- choose venue --</option>
           </select>
         </label>
@@ -60,7 +60,40 @@
         </label>
       </div>
       <div class="form-group">
-        <input class='btn' type='submit' value='Add Story' ng-disabled='storyForm.$invalid'>
+        <input class='btn' type='submit' value='Add Story' ng-disabled='venueStoryForm.$invalid'>
+      </div>
+    </form>
+  </div>
+  <div class="data-container phone-form">
+    <h3>Add a New Phone</h3>
+    <form name='phoneForm' id='phoneForm' ng-submit='formsController.submit({phone: formsController.phone})' novalidate>
+      <div class="form-group">
+        <label for='phoneWifiSSID'>Wifi SSID
+          <input type='text' name='phoneWifiSSID' id='phoneWifiSSID' ng-model='formsController.phone.wifiSSID' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='phoneWifiPassword'>Wifi Password
+          <input type='text' name='phoneWifiPassword' id='phoneWifiPassword' ng-model='formsController.phone.wifiPassword' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Phone Status:
+          <select id='phoneStatusSelect' class='select phone-status-list' ng-model='formsController.phone.status' required>
+            <option value=''>-- choose status --</option>
+            <option ng-repeat='status in formsController.phoneStatus' ng-model='formsController.phone.status'>{{status}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Choose Venue
+          <select id='venueForPhoneList' class='select venue-phone-list' ng-model='formController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues' required>
+            <option value="">-- choose venue --</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <input class='btn' type='submit' value='Add Phone' ng-disabled='phoneForm.$invalid'>
       </div>
     </form>
   </div>

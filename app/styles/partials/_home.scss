@@ -7,8 +7,9 @@
   left: 0;
   top: 0;
   // background-image: url(../images/cmi-bg.jpg);
-  // background-size: contain;
-  // background: linear-gradient(to top, $black-90 100%, $black-70 75%);
+  background-size: contain;
+  // background-image: linear-gradient(to top, $black-70, $black-10 50%);
+  background-image: radial-gradient(circle farthest-corner,$black-10, $black-70);
 
   a.call-to-action {
     @include transition(all,.25s,ease,0);

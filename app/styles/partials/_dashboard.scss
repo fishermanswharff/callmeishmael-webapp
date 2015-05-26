@@ -8,6 +8,7 @@
   .main-content {
     @extend .grid_12;
     padding-left: 20px;
+    padding-bottom: 5em;
     border-left: 1px solid $black;
 
     header {
