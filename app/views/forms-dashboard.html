@@ -34,7 +34,7 @@
     <form name='venueStoryForm' id='venueStoryForm' ng-submit="formsController.submit({venueStory: formsController.venueStory})" novalidate>
       <div class="form-group">
         <label>Choose Venue
-          <select id='venueForStoryList' class='select venue-story-list' ng-model='formController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues'>
+          <select id='venueForStoryList' class='select venue-story-list' ng-model='formsController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues'>
             <option value="">-- choose venue --</option>
           </select>
         </label>
@@ -94,6 +94,25 @@
       </div>
       <div class="form-group">
         <input class='btn' type='submit' value='Add Phone' ng-disabled='phoneForm.$invalid'>
+      </div>
+    </form>
+  </div>
+  <div class="data-container venue-form">
+    <h3>Add a New Venue</h3>
+    <form name='venueForm' id='venueForm' ng-submit='formsController.submit({venue: formsController.venue})' novalidate>
+      <div class="form-group">
+        <label for='venueName'>Venue Name:
+          <input type='text' name='venueName' id='venueName' ng-model='formsController.venue.name' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <h4>Assign Venue Users</h4>
+        <label ng-repeat='user in formsController.users track by $index'>
+          <input type='checkbox' ng-model='formsController.venue.users[$index].checked'>{{user.firstname}}
+        </label>
+      </div>
+      <div class="form-gruop">
+        <input type='submit' class='btn' value='Add Venue' ng-disabled='venueForm.$invalid'
       </div>
     </form>
   </div>

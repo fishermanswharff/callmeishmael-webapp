@@ -1,6 +1,20 @@
 'use strict';
 angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$http','$window','$q','ServerUrl','trace',function($location,$rootScope,$http,$window,$q,ServerUrl,trace){
 
+  var users = [];
+
+  var fetchUsers = function(){
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/admin/users').success(function(response){
+        angular.copy(response,users);
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        reject(data);
+        $rootScope.alert = 'Unsuccessful attempt to retreive all users because:' + data + "\n" + status;
+      });
+    });
+  };
+
   var login = function(credentials){
     return $http.post(ServerUrl + '/login',credentials).success(function(response){
       _storeSession(response);
@@ -65,6 +79,8 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
   };
 
   return {
+    users: users,
+    fetchUsers: fetchUsers,
     login: login,
     logout: logout,
     isAuthenticated: isAuthenticated,

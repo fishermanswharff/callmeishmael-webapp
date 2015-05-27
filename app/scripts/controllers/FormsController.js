@@ -9,11 +9,18 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
   vm.venues = [];
   vm.phones = [];
   vm.stories = [];
+  vm.users = [];
+
+  vm.story = {}, vm.venueStory = {}, vm.phone = {}, vm.venue = {};
 
   VenueFactory.fetch().then(function(response){
     for(var i = 0; i < response.length; i++){
       if(response[i].status == 'active') vm.venues.push(response[i]);
     }
+  });
+
+  AuthFactory.fetchUsers().then(function(response){
+    angular.copy(response,vm.users);
   });
 
   PhoneFactory.get().then(function(response){
@@ -26,5 +33,12 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
 
   vm.submit = function(object){
     trace(object);
+    for(var item in object){
+      // do something with the data
+    }
+  };
+
+  vm.hasUser = function(user){
+
   };
 }
