@@ -1,5 +1,5 @@
 'use strict';
-angular.module('phoneApp').factory('StoryFactory', ['trace','$rootScope','ServerUrl','$q','$http',function(trace,$rootScope,ServerUrl,$q,$http){
+angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScope','ServerUrl','$q','$http',function(trace,$window,$rootScope,ServerUrl,$q,$http){
 
   var stories = [];
 
@@ -27,6 +27,17 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$rootScope','Server
     });
   };
 
+  var destroy = function(object){
+    return $q(function(resolve,reject){
+      $http.delete(ServerUrl + '/stories/'+object.story.id).success(function(response){
+        $rootScope.alert = 'Your venue was successfully deleted';
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        reject({data: data, status: status, headers: headers, config: config});
+      });
+    });
+  };
+
   var _normalize = function(data){
     return data.toLowerCase().replace(/[-\s]/, '');
   };
@@ -34,6 +45,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$rootScope','Server
   return {
     fetch: fetch,
     stories: stories,
-    post: post
+    post: post,
+    destroy: destroy
   };
 }]);

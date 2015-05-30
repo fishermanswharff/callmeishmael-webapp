@@ -7,28 +7,34 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
   vm.venues = [];
   vm.phones = [];
 
-  VenueFactory.fetch().then(function(response){
-    vm.venues = response;
-    angular.forEach(vm.venues, function(obj,i,array){
-      vm.phones = [];
-      PhoneFactory.fetch(obj.id).then(function(response){
-        response.forEach(function(obj,i){
-          vm.phones.push(obj);
+  var fetchVenues = function(){
+    VenueFactory.fetch().then(function(response){
+      vm.venues = response;
+      angular.forEach(vm.venues, function(obj,i,array){
+        vm.phones = [];
+        PhoneFactory.fetch(obj.id).then(function(response){
+          response.forEach(function(obj,i){
+            vm.phones.push(obj);
+          });
         });
-      });
-    }, vm);
-    trace(vm.venues);
-  });
+      }, vm);
+      // trace(vm.venues);
+    });
+  };
 
-  StoryFactory.fetch().then(function(response){
-    vm.stories = response;
-    trace(vm.stories);
-  });
+  var fetchStories = function(){
+    StoryFactory.fetch().then(function(response){
+      vm.stories = response;
+      // trace(vm.stories);
+    });
+  };
 
-  PhoneFactory.get().then(function(response){
-    angular.copy(vm.phones,response);
-    trace(vm.phones);
-  });
+  var fetchPhones = function(){
+    PhoneFactory.get().then(function(response){
+      angular.copy(vm.phones,response);
+      // trace(vm.phones);
+    });
+  };
 
   vm.activeVenues = function(){
     var active = [];
@@ -45,4 +51,23 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
     });
     return paused.length;
   };
+
+  vm.deleteObject = function(object){
+    trace(object);
+    for(var item in object){
+      switch(item){
+        case 'story':
+          StoryFactory.destroy(object).then(function(response){
+            fetchStories();
+          });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  fetchVenues();
+  fetchStories();
+  fetchPhones();
 }

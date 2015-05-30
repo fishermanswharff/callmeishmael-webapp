@@ -6,6 +6,7 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(
     controller: 'DashboardController',
     controllerAs: 'dashboardController',
     bindToController: true,
+    scope: '=',
     link: function($scope,element,attrs){}
   };
 }]);

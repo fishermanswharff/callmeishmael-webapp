@@ -1,5 +1,5 @@
 'use strict';
-angular.module('phoneApp').factory('VenueFactory', ['trace','$rootScope','ServerUrl','$q','$http',function(trace,$rootScope,ServerUrl,$q,$http){
+angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScope','ServerUrl','$q','$http',function(trace,$window,$rootScope,ServerUrl,$q,$http){
 
   var venues = [];
 
@@ -40,6 +40,6 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$rootScope','Server
   return {
     fetch: fetch,
     venues: venues,
-    post: post
+    post: post,
   };
 }]);

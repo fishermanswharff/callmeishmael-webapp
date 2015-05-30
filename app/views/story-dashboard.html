@@ -25,6 +25,7 @@
         <th># Placements</th>
         <th># Listens</th>
         <th>Avg. % Listened</th>
+        <th></th>
       </thead>
       <tbody>
         <tr ng-repeat='story in dashboardController.stories | filter:search'>
@@ -34,6 +35,7 @@
           <td>{{story.placements || 0}}</td>
           <td>{{story.listens || 0}}</td>
           <td></td>
+          <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({story: story})" ng-confirm-click='Are you sure you want to delete this story: {{story.title}}'>Delete</a></td>
         </tr>
       </tbody>
     </table>
