@@ -9,7 +9,18 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
         angular.copy(response, venues);
         resolve(response);
       }).error(function(data,status,headers,config){
-        trace(data,status,headers,config);
+        reject(data,status,headers,config);
+        // trace(data,status,headers,config);
+      });
+    });
+  };
+
+  var fetchOne = function(venueId){
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/venues/' + venueId).success(function(response){
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        reject(data,status,headers,config);
       });
     });
   };
@@ -51,6 +62,7 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
 
   return {
     fetch: fetch,
+    fetchOne: fetchOne,
     venues: venues,
     post: post,
     destroy: destroy
