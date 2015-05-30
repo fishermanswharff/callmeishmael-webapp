@@ -24,7 +24,6 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
     trace(vm.users);
   });
 
-
   PhoneFactory.get().then(function(response){
     angular.copy(response,vm.phones);
   });
@@ -42,10 +41,6 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
           });
           vm.story = {};
           break;
-        /*case 'venueStory':
-          StoryFactory.postStory(object);
-          trace('venueStory is the object');
-          break;*/
         case 'phone':
           PhoneFactory.post(object).then(function(response){
             trace(response);
@@ -63,11 +58,8 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
         default:
           break;
       }
-      // do something with the data
     }
   };
 
-  vm.hasUser = function(user){
-
-  };
+  vm.hasUser = function(user){};
 }

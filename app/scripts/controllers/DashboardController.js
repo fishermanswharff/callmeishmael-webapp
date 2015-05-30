@@ -6,34 +6,19 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
   var vm = this;
   vm.venues = [];
   vm.phones = [];
+  vm.stories = [];
 
   var fetchVenues = function(){
-    VenueFactory.fetch().then(function(response){
-      vm.venues = response;
-      angular.forEach(vm.venues, function(obj,i,array){
-        vm.phones = [];
-        PhoneFactory.fetch(obj.id).then(function(response){
-          response.forEach(function(obj,i){
-            vm.phones.push(obj);
-          });
-        });
-      }, vm);
-      // trace(vm.venues);
-    });
+    VenueFactory.fetch().then(function(response){ angular.copy(response,vm.venues); });
   };
 
   var fetchStories = function(){
-    StoryFactory.fetch().then(function(response){
-      vm.stories = response;
-      // trace(vm.stories);
-    });
+    StoryFactory.fetch().then(function(response){ angular.copy(response,vm.stories); trace(vm.stories); });
+
   };
 
   var fetchPhones = function(){
-    PhoneFactory.get().then(function(response){
-      angular.copy(vm.phones,response);
-      // trace(vm.phones);
-    });
+    PhoneFactory.get().then(function(response){ angular.copy(response,vm.phones); });
   };
 
   vm.activeVenues = function(){
@@ -57,9 +42,14 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
     for(var item in object){
       switch(item){
         case 'story':
-          StoryFactory.destroy(object).then(function(response){
-            fetchStories();
-          });
+          StoryFactory.destroy(object).then(function(response){ fetchStories(); });
+          break;
+        case 'venue':
+          VenueFactory.destroy(object).then(function(response){ fetchVenues(); });
+          break;
+        case 'phone':
+          debugger;
+          PhoneFactory.destroy(object).then(function(response){ fetchPhones(); });
           break;
         default:
           break;

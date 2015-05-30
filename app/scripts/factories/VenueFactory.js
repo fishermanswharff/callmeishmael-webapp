@@ -27,6 +27,18 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     });
   };
 
+  var destroy = function(object){
+    return $q(function(resolve,reject){
+      $http.delete(ServerUrl+'/venues/'+object.venue.id).success(function(response){
+        $rootScope.alert = 'Your venue was successfully deleted';
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;
+        reject(data);
+      });
+    });
+  }
+
   var _convertToArray = function(object){
     var array = [];
     for(var key in object){
@@ -41,5 +53,6 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     fetch: fetch,
     venues: venues,
     post: post,
+    destroy: destroy
   };
 }]);

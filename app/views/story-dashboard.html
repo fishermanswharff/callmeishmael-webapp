@@ -28,7 +28,7 @@
         <th></th>
       </thead>
       <tbody>
-        <tr ng-repeat='story in dashboardController.stories | filter:search'>
+        <tr ng-repeat="story in dashboardController.stories | filter:search | orderBy: '-id':reverse=true" >
           <td>{{story.id}}</td>
           <td>{{story.title}}</td>
           <td>{{story.author_last}}</td>

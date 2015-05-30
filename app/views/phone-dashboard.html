@@ -27,17 +27,21 @@
       <thead>
         <th>Phone ID</th>
         <th>Phone Status</th>
-        <th>Current Value</th>
+        <th>Name</th>
+        <th># Stories</th>
         <th>Date Created</th>
         <th># Days Active</th>
+        <th></th>
       </thead>
       <tbody>
         <tr ng-repeat="phone in dashboardController.phones | filter:search">
           <td>{{phone.unique_identifier}}</td>
           <td>{{phone.status}}</td>
           <td>{{phone.venue.name}}</td>
+          <td>{{phone.stories.length}}</td>
           <td>{{phone.created_at}}</td>
           <td></td>
+          <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({phone: phone})" ng-confirm-click='Are you sure you want to delete this phone: {{phone}}'>Delete</a></td>
         </tr>
       </tbody>
     </table>

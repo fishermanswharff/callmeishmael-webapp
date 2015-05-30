@@ -38,10 +38,24 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
     });
   };
 
+  var destroy = function(object){
+    debugger;
+    return $q(function(resolve,reject){
+      $http.delete(ServerUrl+'/venues/' + object.phone.venue.id + '/phones/' + object.phone.id).success(function(response){
+        $rootScope.alert = 'Your phone was successfully deleted';
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;
+        reject(data,status,headers,config);
+      });
+    });
+  };
+
   return {
     fetch: fetch,
     phones: phones,
     get: get,
-    post: post
+    post: post,
+    destroy: destroy
   };
 }]);
