@@ -1,5 +1,5 @@
 'use strict';
-angular.module('phoneApp').factory('VenueFactory', ['trace','ServerUrl','$q','$http',function(trace,ServerUrl,$q,$http){
+angular.module('phoneApp').factory('VenueFactory', ['trace','$rootScope','ServerUrl','$q','$http',function(trace,$rootScope,ServerUrl,$q,$http){
 
   var venues = [];
 
@@ -14,8 +14,32 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','ServerUrl','$q','$h
     });
   };
 
+  var post = function(object){
+    object.venue.user_ids = _convertToArray(object.venue.user_ids);
+    return $q(function(resolve,reject){
+      $http.post(ServerUrl + '/venues', object).success(function(response){
+        $rootScope.alert = 'Your venue was successfully created';
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;
+        reject(data);
+      });
+    });
+  };
+
+  var _convertToArray = function(object){
+    var array = [];
+    for(var key in object){
+      if(object[key].checked){
+        array.push(key);
+      }
+    }
+    return array;
+  };
+
   return {
     fetch: fetch,
-    venues: venues
+    venues: venues,
+    post: post
   };
 }]);

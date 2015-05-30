@@ -1,5 +1,5 @@
 'use strict';
-angular.module('phoneApp').factory('PhoneFactory', ['trace','$http','$q','ServerUrl',function(trace,$http,$q,ServerUrl){
+angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http','$q','ServerUrl',function(trace,$rootScope,$http,$q,ServerUrl){
 
   var phones = [];
 
@@ -26,9 +26,22 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$http','$q','Server
     });
   };
 
+  var post = function(object){
+    return $q(function(resolve, reject){
+      $http.post(ServerUrl + '/venues/' + object.phone.venueId + '/phones',object).success(function(response){
+        $rootScope.alert = 'Your phone was successfully created';
+        resolve(response);
+      }).error(function(data,status,headers,config){
+        $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;
+        reject(data,status,headers,config);
+      });
+    });
+  };
+
   return {
     fetch: fetch,
     phones: phones,
-    get: get
+    get: get,
+    post: post
   };
 }]);

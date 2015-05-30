@@ -25,11 +25,19 @@
         </label>
       </div>
       <div class="form-group">
+        <label>Phone Status:
+          <select id='storyStatusSelect' class='select story-status-list' ng-model='formsController.story.story_type' required>
+            <option value=''>-- choose status --</option>
+            <option ng-repeat='status in formsController.storyTypes'>{{status}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
         <input class='btn' type='submit' value='Add Story' ng-disabled='storyForm.$invalid'>
       </div>
     </form>
   </div>
-  <div class="data-container venue-story-form">
+  <!-- <div class="data-container venue-story-form">
     <h3>Add a New Story to a Venue Library</h3>
     <form name='venueStoryForm' id='venueStoryForm' ng-submit="formsController.submit({venueStory: formsController.venueStory})" novalidate>
       <div class="form-group">
@@ -63,7 +71,7 @@
         <input class='btn' type='submit' value='Add Story' ng-disabled='venueStoryForm.$invalid'>
       </div>
     </form>
-  </div>
+  </div> -->
   <div class="data-container phone-form">
     <h3>Add a New Phone</h3>
     <form name='phoneForm' id='phoneForm' ng-submit='formsController.submit({phone: formsController.phone})' novalidate>
@@ -87,7 +95,7 @@
       </div>
       <div class="form-group">
         <label>Choose Venue
-          <select id='venueForPhoneList' class='select venue-phone-list' ng-model='formController.venueStory.venueId' ng-options='venue.id as venue.name for venue in formsController.venues' required>
+          <select id='venueForPhoneList' class='select venue-phone-list' ng-model='formController.phone.venueId' ng-options='venue.id as venue.name for venue in formsController.venues' required>
             <option value="">-- choose venue --</option>
           </select>
         </label>
@@ -107,8 +115,8 @@
       </div>
       <div class="form-group">
         <h4>Assign Venue Users</h4>
-        <label ng-repeat='user in formsController.users track by $index'>
-          <input type='checkbox' ng-model='formsController.venue.users[$index].checked'>{{user.firstname}}
+        <label ng-repeat='user in formsController.users'>
+          <input type='checkbox' ng-model='formsController.venue.user_ids[user.id].checked'>{{user.firstname}}
         </label>
       </div>
       <div class="form-gruop">

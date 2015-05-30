@@ -21,9 +21,9 @@ angular.module('phoneApp', [
   'MainController'
 ]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,StoryFactory,trace){
 
-  VenueFactory.fetch();
-  PhoneFactory.get();
-  StoryFactory.fetch();
+  // VenueFactory.fetch();
+  // PhoneFactory.get();
+  // StoryFactory.fetch();
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){
     trace('all is well');

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('phoneApp').factory('StoryFactory', ['trace','ServerUrl','$q','$http',function(trace,ServerUrl,$q,$http){
+angular.module('phoneApp').factory('StoryFactory', ['trace','$rootScope','ServerUrl','$q','$http',function(trace,$rootScope,ServerUrl,$q,$http){
 
   var stories = [];
 
@@ -14,8 +14,26 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','ServerUrl','$q','$h
     });
   };
 
+  var post = function(object){
+    object.story.story_type = _normalize(object.story.story_type);
+    return $q(function(resolve,reject){
+      $http.post(ServerUrl + '/stories', object).success(function(response){
+        $rootScope.alert = 'Your story was successfully created';
+        resolve(response);
+      }).error(function(data, status, headers, config){
+        trace(data,status,headers,config);
+        reject(data, status, headers, config);
+      });
+    });
+  };
+
+  var _normalize = function(data){
+    return data.toLowerCase().replace(/[-\s]/, '');
+  };
+
   return {
     fetch: fetch,
-    stories: stories
+    stories: stories,
+    post: post
   };
 }]);

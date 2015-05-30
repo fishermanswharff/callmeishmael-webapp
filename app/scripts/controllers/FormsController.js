@@ -21,7 +21,9 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
 
   AuthFactory.fetchUsers().then(function(response){
     angular.copy(response,vm.users);
+    trace(vm.users);
   });
+
 
   PhoneFactory.get().then(function(response){
     angular.copy(response,vm.phones);
@@ -32,8 +34,35 @@ function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactor
   });
 
   vm.submit = function(object){
-    trace(object);
     for(var item in object){
+      switch(item) {
+        case 'story':
+          StoryFactory.post(object).then(function(response){
+            trace(response);
+          });
+          vm.story = {};
+          break;
+        /*case 'venueStory':
+          StoryFactory.postStory(object);
+          trace('venueStory is the object');
+          break;*/
+        case 'phone':
+          PhoneFactory.post(object).then(function(response){
+            trace(response);
+          });
+          vm.phone = {};
+          trace('phone is the object');
+          break;
+        case 'venue':
+          VenueFactory.post(object).then(function(response){
+            trace(response);
+          });
+          vm.venue = {};
+          trace('venue is the object');
+          break;
+        default:
+          break;
+      }
       // do something with the data
     }
   };
