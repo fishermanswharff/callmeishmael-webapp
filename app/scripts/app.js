@@ -43,5 +43,15 @@ angular.module('phoneApp', [
     } else {
       $location.path('/');
     }
+    if(AuthFactory.isAuthenticated() && AuthFactory.currentUser().role == 'venue_admin' && $location.path() === '/dashboard'){
+      $location.path('/venues')
+    }
   });
+
+  if(AuthFactory.isAuthenticated() && AuthFactory.currentUser().role == 'venue_admin'){
+    $location.path('/venues')
+    if($location.path() === '/dashboard'){
+      $location.path('/venues');
+    }
+  }
 });

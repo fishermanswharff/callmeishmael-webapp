@@ -10,6 +10,6 @@
   </ul>
   <hr ng-if="currentUser.role === 'admin'"/>
   <ul class="side venue-links">
-    <li>Venue View (viewable by venue admins and admins)</li>
+    <li ng-class="{ active: sideNaveController.isActive('/venues')}"><a href="#/venues">Your Venues</a></li>
   </ul>
 </nav>

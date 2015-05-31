@@ -58,7 +58,7 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
   };
 
   var currentUser = function(){
-    $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
+    return $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
   };
 
   var sendPasswordLink = function(credentials){

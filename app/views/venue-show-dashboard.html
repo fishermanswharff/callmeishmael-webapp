@@ -2,14 +2,13 @@
 
   <div class="data-container">
     <ul>
-      <li ng-repeat='venue in venueController.userVenues'>
-
+      <li ng-repeat='venue in venueController.userVenues'><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
       </li>
     </ul>
   </div>
 
   <!-- container for single venue view -->
-  <div class="data-container">
+  <div class="data-container" ng-if="venueController.venue.id">
     <h2>{{venueController.venue.name}} Venue Stats:</h2>
     <ul>
       <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
@@ -60,7 +59,7 @@
           <td>{{value.id}}</td>
           <td>{{key}}</td>
           <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
-          <td>{{value.author_last}}</td>
+          <td>{{value.created_at}}</td>
           <td>{{story.placements || 0}}</td>
           <td>{{story.listens || 0}}</td>
           <td></td>

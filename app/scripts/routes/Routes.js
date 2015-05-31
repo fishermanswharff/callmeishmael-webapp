@@ -39,6 +39,9 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
     .when('/add-new',{
       templateUrl: 'views/add-new.html'
     })
+    .when('/venues',{
+      templateUrl: 'views/venue-show.html',
+    })
     .when('/venues/:venueId',{
       templateUrl: 'views/venue-show.html',
     })
