@@ -1,8 +1,9 @@
 <section class="main-content">
 
   <div class="data-container">
+    <h2>Venues that you belong to:</h2>
     <ul>
-      <li ng-repeat='venue in venueController.userVenues'><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
+      <li ng-repeat='venue in venueController.userVenues' ng-class="{ active: venueController.isActive('/') }" ><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
       </li>
     </ul>
   </div>
@@ -49,7 +50,6 @@
         <th>Button</th>
         <th>Title</th>
         <th>Added to phone</th>
-        <th># Placements</th>
         <th># Listens</th>
         <th>Avg. % Listened</th>
         <!-- <th></th> -->
@@ -60,10 +60,8 @@
           <td>{{key}}</td>
           <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
           <td>{{value.created_at}}</td>
-          <td>{{story.placements || 0}}</td>
           <td>{{story.listens || 0}}</td>
           <td></td>
-          <!-- <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({story: story})" ng-confirm-click='Are you sure you want to delete this story: {{story.title}}'>Delete</a></td> -->
         </tr>
       </tbody>
     </table>

@@ -1,15 +1,12 @@
 'use strict';
 angular.module('MainController').controller('VenueController',venueController);
-venueController.$inject = ['trace','$rootScope','$routeParams','AuthFactory','VenueFactory','PhoneFactory'];
-function venueController(trace,$rootScope,$routeParams,AuthFactory,VenueFactory,PhoneFactory){
+venueController.$inject = ['trace','$rootScope','$routeParams','AuthFactory','VenueFactory','PhoneFactory','StoryFactory'];
+function venueController(trace,$rootScope,$routeParams,AuthFactory,VenueFactory,PhoneFactory,StoryFactory){
   var vm = this;
   vm.venue = {};
   vm.userVenues = AuthFactory.currentUser().venues;
   vm.venuePhones = [];
-
-  var getUserVenues = function(){
-    AuthFactory.currentUser();
-  };
+  vm.stories = [];
 
   var getVenue = function(venueId){
     VenueFactory.fetchOne(venueId).then(function(response){
@@ -26,9 +23,16 @@ function venueController(trace,$rootScope,$routeParams,AuthFactory,VenueFactory,
     });
   };
 
+  var getStories = function(){
+    StoryFactory.fetch().then(function(response){
+      angular.copy(response,vm.stories);
+    });
+  };
+
   if($routeParams.venueId){
     getVenue($routeParams.venueId);
   } else {
-    getUserVenues();
+    getVenue(vm.userVenues[0].id)
+    // $location.path('/venues/'+)
   }
 };
