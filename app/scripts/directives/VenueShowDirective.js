@@ -8,10 +8,6 @@ angular.module('MainDirective').directive('cmiVenueShowDashboard',['trace',funct
     controllerAs: 'venueController',
     bindToController: true,
     link: function($scope,element,attrs){
-      var buttonStoryInput = element.find('input');
-      buttonStoryInput.on('focus',function(){
-        trace('focusing on input');
-      });
     }
   };
 }]);

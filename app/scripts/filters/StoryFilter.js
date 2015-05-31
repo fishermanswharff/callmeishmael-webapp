@@ -1,13 +1,13 @@
+'use strict';
 angular.module('phoneApp').filter('storyFilter',['trace','StoryFactory',function(trace,StoryFactory){
-  return function(input,stories){
-    trace(input, stories);
+  return function(stories,input){
     var filterResult = [];
+    var stringToSearch = input || '^$';
+    var regex = new RegExp("("+stringToSearch+")",'ig');
     angular.forEach(stories,function(value,index){
-      if(input === value.title){
-        filterResult.push(value)
-      }
+      var search = value.title.search(regex);
+      if(search !== -1) filterResult.push(value);
     });
-    // trace(filterResult);
     return filterResult;
   }
 }]);

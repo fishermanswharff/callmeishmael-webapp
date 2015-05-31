@@ -74,16 +74,15 @@
       <p>Total # of stories: {{venueController.stories.length}}</p>
       <form name="newButtonAssign" id='newButtonAssign' ng-submit="venueController.submit({button: { assignment: venueController.button.assignment, phone_id: phone.id, story_id: venueController.button.story_id }})" novalidate>
         <div class="form-group">
-          <input id="homeFilter" type="text" ng-model="search" value="search"/>
+          <input id="" type="text" ng-model="search" value="search"/>
         </div>
-        <div class="form-group" ng-repeat="story in venueController.stories | storyFilter:search:venueController.stories">
+        <div class="form-group" ng-repeat="story in venueController.stories | storyFilter:search:venueController.stories | limitTo:12">
           <label>
-            <input type='checkbox'>
-            {{story}}
+            <input type='checkbox' ng-true-value="{{story.id}}" ng-false-value="''" ng-model="venueController.button.story_id">
+            {{story.title}}
           </label>
-          
         </div>
-        <p ng-repeat='story in venueController.stories | storyFilter:search:venueController.stories'></p>
+        <p ng-show="(venueController.stories | storyFilter:search:venueController.stories).length == 0">No story selected.</p>
         <div class="form-group">
           <select ng-model="venueController.button.assignment" required>
             <option value=''>-- choose --</option>
