@@ -86,12 +86,6 @@
         </div>
         <p ng-show="(venueController.stories | storyFilter:search:venueController.stories).length == 0">No story selected.</p>
         <p>You're changing button {{ venueController.buttonToEdit.assignment }} on the phone.</p>
-        <!-- <div class="form-group">
-          <select ng-model="venueController.button.assignment" required>
-            <option value=''>-- choose --</option>
-            <option ng-repeat="assignment in venueController.buttonAssignments" value="{{assignment}}">{{assignment}}</option>
-          </select>
-        </div> -->
         <div class="form-group">
           <input class="btn" type="submit" value="Assign button to phone" ng-disabled="newButtonAssign.$invalid">
         </div>
