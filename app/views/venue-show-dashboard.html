@@ -1,0 +1,73 @@
+<section class="main-content">
+
+  <div class="data-container">
+    <ul>
+      <li ng-repeat='venue in venueController.userVenues'>
+
+      </li>
+    </ul>
+  </div>
+
+  <!-- container for single venue view -->
+  <div class="data-container">
+    <h2>{{venueController.venue.name}} Venue Stats:</h2>
+    <ul>
+      <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
+    </ul>
+    <h3>Venue users:</h3>
+    <ul ng-repeat="user in venueController.venue.users">
+      <li><strong>{{user.firstname}} {{user.lastname}}</strong> | <strong>role:</strong> {{user.role}}</li>
+    </ul>
+  </div>
+  <!-- container for single venue phones -->
+  <div class="data-container" ng-repeat="phone in venueController.venuePhones track by $index">
+    <h2>Phone {{$index + 1}} at {{venueController.venue.name}}</h2>
+    <table>
+      <thead>
+        <th>Phone ID</th>
+        <th>Phone Status</th>
+        <th>Name</th>
+        <th># Stories</th>
+        <th>Date Created</th>
+        <th># Days Active</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{phone.unique_identifier}}</td>
+          <td>{{phone.status}}</td>
+          <td>{{phone.venue.name}}</td>
+          <td>{{phone.stories.length}}</td>
+          <td>{{phone.created_at}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Your Phone is currently hosting these stories:</h3>
+    <table>
+      <thead>
+        <th>Id</th>
+        <th>Button</th>
+        <th>Title</th>
+        <th>Added to phone</th>
+        <th># Placements</th>
+        <th># Listens</th>
+        <th>Avg. % Listened</th>
+        <!-- <th></th> -->
+      </thead>
+      <tbody>
+        <tr ng-repeat="(key,value) in phone.buttons | orderBy: '-id':reverse=true" >
+          <td>{{value.id}}</td>
+          <td>{{key}}</td>
+          <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
+          <td>{{value.author_last}}</td>
+          <td>{{story.placements || 0}}</td>
+          <td>{{story.listens || 0}}</td>
+          <td></td>
+          <!-- <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({story: story})" ng-confirm-click='Are you sure you want to delete this story: {{story.title}}'>Delete</a></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+

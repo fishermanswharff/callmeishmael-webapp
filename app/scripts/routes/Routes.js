@@ -41,8 +41,6 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
     })
     .when('/venues/:venueId',{
       templateUrl: 'views/venue-show.html',
-      controller: 'VenueController',
-      controllerAs: 'venueController'
     })
     .when('/confirm', {
       templateUrl: 'views/confirm.html',

@@ -1,12 +1,13 @@
 'use strict';
 angular.module('MainController').controller('DashboardController',dashboardController);
-dashboardController.$inject = ['trace','VenueFactory','PhoneFactory','StoryFactory'];
+dashboardController.$inject = ['trace','VenueFactory','PhoneFactory','StoryFactory','storyTypes'];
 
-function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory){
+function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyTypes){
   var vm = this;
   vm.venues = [];
   vm.phones = [];
   vm.stories = [];
+  vm.storyTypes = storyTypes();
 
   var fetchVenues = function(){
     VenueFactory.fetch().then(function(response){ angular.copy(response,vm.venues); });

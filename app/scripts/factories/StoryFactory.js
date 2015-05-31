@@ -39,7 +39,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   };
 
   var _normalize = function(data){
-    return data.toLowerCase().replace(/[-\s]/, '');
+    return data.toLowerCase().replace(/[-\s\—\–\”’“‘\',;]/, '');
   };
 
   return {
