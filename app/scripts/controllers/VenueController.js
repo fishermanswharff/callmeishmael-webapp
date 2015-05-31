@@ -9,20 +9,21 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
   vm.stories = [];
   vm.buttonAssignments = ['1','2','3','4','5','6','7','8','9'];
 
-  var getVenue = function(venueId){
+  vm.getVenue = function(venueId){
     VenueFactory.fetchOne(venueId).then(function(response){
       angular.copy(response,vm.venue);
-      getPhones(vm.venue.id);
+      vm.getPhones(vm.venue.id);
     });
   };
 
-  var getPhones = function(id){
+  vm.getPhones = function(id){
     PhoneFactory.fetch(id).then(function(response){
       angular.copy(response,vm.venuePhones);
+      // trace(vm.venuePhones);
     });
   };
 
-  var getStories = function(){
+  vm.getStories = function(){
     StoryFactory.fetch().then(function(response){
       angular.copy(response,vm.stories);
     });
@@ -36,7 +37,10 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
     for(var item in object){
       switch(item){
         case 'button':
-          trace(object);
+          PhoneFactory.assignButton(object).then(function(response){
+            vm.buttonToEdit = null;
+            vm.getPhones(vm.venue.id);
+          });
           break;
         default:
           break;
@@ -44,12 +48,18 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
     }
   };
 
-  if($routeParams.venueId){
-    getVenue($routeParams.venueId);
-  } else {
-    getVenue(vm.userVenues[0].id)
+  vm.editButton = function(key,value,phoneId){
+    vm.buttonToEdit = value;
+    vm.buttonToEdit.assignment = key;
+    vm.buttonToEdit.phone_id = phoneId;
   };
 
-  getStories();
+  if($routeParams.venueId){
+    vm.getVenue($routeParams.venueId);
+  } else {
+    vm.getVenue(vm.userVenues[0].id)
+  };
+
+  vm.getStories();
 
 };

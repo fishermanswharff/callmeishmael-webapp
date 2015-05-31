@@ -5,8 +5,9 @@ angular.module('phoneApp').filter('storyFilter',['trace','StoryFactory',function
     var stringToSearch = input || '^$';
     var regex = new RegExp("("+stringToSearch+")",'ig');
     angular.forEach(stories,function(value,index){
-      var search = value.title.search(regex);
-      if(search !== -1) filterResult.push(value);
+      var searchTitle = value.title.search(regex);
+      var searchAuthor = value.author_last.search(regex);
+      if(searchTitle !== -1 || searchAuthor !== -1) filterResult.push(value);
     });
     return filterResult;
   }

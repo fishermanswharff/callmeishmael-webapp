@@ -58,37 +58,40 @@
         </thead>
         <tbody>
           <tr ng-repeat="(key,value) in phone.buttons | orderBy: '-id':reverse=true" >
-            <td>{{value.id}}</td>
+            <td>{{value.story_id}}</td>
             <td>{{key}}</td>
             <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
             <td>{{value.created_at}}</td>
             <td>{{story.listens || 0}}</td>
-            <td></td>
+            <td><a ng-hide="key === '*' || key === '#' || key === '0'" href="javascript:void(0)" ng-click="venueController.editButton(key,value,phone.id)">Edit</a></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="phone-button-assignment">
+    <div class="phone-button-assignment" ng-show="venueController.buttonToEdit">
       <h3>Assign a new story to this phone:</h3>
       <p>The current story at the button assignment you choose will be replaced by this story. This action is not undoable.</p>
       <p>Total # of stories: {{venueController.stories.length}}</p>
-      <form name="newButtonAssign" id='newButtonAssign' ng-submit="venueController.submit({button: { assignment: venueController.button.assignment, phone_id: phone.id, story_id: venueController.button.story_id }})" novalidate>
+      <form name="newButtonAssign" id='newButtonAssign' ng-submit="venueController.submit({button: venueController.buttonToEdit})" novalidate>
         <div class="form-group">
-          <input id="" type="text" ng-model="search" value="search"/>
+          <label>Search stories by title or author last name
+          <input name="storyTitleSearch" id="storyTitleSearch" type="text" ng-model="search" value="search"/>
+          </label>
         </div>
         <div class="form-group" ng-repeat="story in venueController.stories | storyFilter:search:venueController.stories | limitTo:12">
           <label>
-            <input type='checkbox' ng-true-value="{{story.id}}" ng-false-value="''" ng-model="venueController.button.story_id">
-            {{story.title}}
+            <input type='checkbox' ng-true-value="{{story.id}}" ng-false-value="''" ng-model="venueController.buttonToEdit.story_id">
+            {{story.title}} by {{story.author_last}}
           </label>
         </div>
         <p ng-show="(venueController.stories | storyFilter:search:venueController.stories).length == 0">No story selected.</p>
-        <div class="form-group">
+        <p>You're changing button {{ venueController.buttonToEdit.assignment }} on the phone.</p>
+        <!-- <div class="form-group">
           <select ng-model="venueController.button.assignment" required>
             <option value=''>-- choose --</option>
             <option ng-repeat="assignment in venueController.buttonAssignments" value="{{assignment}}">{{assignment}}</option>
           </select>
-        </div>
+        </div> -->
         <div class="form-group">
           <input class="btn" type="submit" value="Assign button to phone" ng-disabled="newButtonAssign.$invalid">
         </div>
