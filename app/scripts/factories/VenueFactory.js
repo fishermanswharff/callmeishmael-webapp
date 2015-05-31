@@ -10,7 +10,6 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
         resolve(response);
       }).error(function(data,status,headers,config){
         reject(data,status,headers,config);
-        // trace(data,status,headers,config);
       });
     });
   };

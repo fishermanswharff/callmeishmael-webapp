@@ -1,9 +1,10 @@
 <section class="main-content">
 
+  <!-- list of all the venues a user belongs to -->
   <div class="data-container">
     <h2>Venues that you belong to:</h2>
     <ul>
-      <li ng-repeat='venue in venueController.userVenues' ng-class="{ active: venueController.isActive('/') }" ><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
+      <li ng-repeat='venue in venueController.userVenues'><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
       </li>
     </ul>
   </div>
@@ -21,50 +22,79 @@
   </div>
   <!-- container for single venue phones -->
   <div class="data-container" ng-repeat="phone in venueController.venuePhones track by $index">
-    <h2>Phone {{$index + 1}} at {{venueController.venue.name}}</h2>
-    <table>
-      <thead>
-        <th>Phone ID</th>
-        <th>Phone Status</th>
-        <th>Name</th>
-        <th># Stories</th>
-        <th>Date Created</th>
-        <th># Days Active</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{phone.unique_identifier}}</td>
-          <td>{{phone.status}}</td>
-          <td>{{phone.venue.name}}</td>
-          <td>{{phone.stories.length}}</td>
-          <td>{{phone.created_at}}</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Your Phone is currently hosting these stories:</h3>
-    <table>
-      <thead>
-        <th>Id</th>
-        <th>Button</th>
-        <th>Title</th>
-        <th>Added to phone</th>
-        <th># Listens</th>
-        <th>Avg. % Listened</th>
-        <!-- <th></th> -->
-      </thead>
-      <tbody>
-        <tr ng-repeat="(key,value) in phone.buttons | orderBy: '-id':reverse=true" >
-          <td>{{value.id}}</td>
-          <td>{{key}}</td>
-          <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
-          <td>{{value.created_at}}</td>
-          <td>{{story.listens || 0}}</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="phone-view">
+      <h2>Phone {{$index + 1}} at {{venueController.venue.name}}</h2>
+      <table>
+        <thead>
+          <th>Phone ID</th>
+          <th>Phone Status</th>
+          <th>Name</th>
+          <th># Stories</th>
+          <th>Date Created</th>
+          <th># Days Active</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{phone.unique_identifier}}</td>
+            <td>{{phone.status}}</td>
+            <td>{{phone.venue.name}}</td>
+            <td>{{phone.stories.length}}</td>
+            <td>{{phone.created_at}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="phone-story-view">
+      <h3>Your Phone is currently hosting these stories:</h3>
+      <table>
+        <thead>
+          <th>Id</th>
+          <th>Button</th>
+          <th>Title</th>
+          <th>Added to phone</th>
+          <th># Listens</th>
+          <th>Avg. % Listened</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(key,value) in phone.buttons | orderBy: '-id':reverse=true" >
+            <td>{{value.id}}</td>
+            <td>{{key}}</td>
+            <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
+            <td>{{value.created_at}}</td>
+            <td>{{story.listens || 0}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="phone-button-assignment">
+      <h3>Assign a new story to this phone:</h3>
+      <p>The current story at the button assignment you choose will be replaced by this story. This action is not undoable.</p>
+      <p>Total # of stories: {{venueController.stories.length}}</p>
+      <form name="newButtonAssign" id='newButtonAssign' ng-submit="venueController.submit({button: { assignment: venueController.button.assignment, phone_id: phone.id, story_id: venueController.button.story_id }})" novalidate>
+        <div class="form-group">
+          <input id="homeFilter" type="text" ng-model="search" value="search"/>
+        </div>
+        <div class="form-group" ng-repeat="story in venueController.stories | storyFilter:search:venueController.stories">
+          <label>
+            <input type='checkbox'>
+            {{story}}
+          </label>
+          
+        </div>
+        <p ng-repeat='story in venueController.stories | storyFilter:search:venueController.stories'></p>
+        <div class="form-group">
+          <select ng-model="venueController.button.assignment" required>
+            <option value=''>-- choose --</option>
+            <option ng-repeat="assignment in venueController.buttonAssignments" value="{{assignment}}">{{assignment}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input class="btn" type="submit" value="Assign button to phone" ng-disabled="newButtonAssign.$invalid">
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 
