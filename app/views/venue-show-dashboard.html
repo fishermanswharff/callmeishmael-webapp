@@ -15,10 +15,12 @@
     <ul>
       <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
     </ul>
+    <!--
     <h3>Venue users:</h3>
     <ul ng-repeat="user in venueController.venue.users">
       <li><strong>{{user.firstname}} {{user.lastname}}</strong> | <strong>role:</strong> {{user.role}}</li>
     </ul>
+    -->
   </div>
   <!-- container for single venue phones -->
   <div class="data-container" ng-repeat="phone in venueController.venuePhones track by $index">
