@@ -63,7 +63,7 @@
             <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a></td>
             <td>{{value.created_at}}</td>
             <td>{{story.listens || 0}}</td>
-            <td><a ng-hide="key === '*' || key === '#' || key === '0'" href="javascript:void(0)" ng-click="venueController.editButton(key,value,phone.id)">Edit</a></td>
+            <td><a ng-hide="key === '*' || key === '#' || key === '0' || key === 'PR'" href="javascript:void(0)" ng-click="venueController.editButton(key,value,phone.id)">Edit</a></td>
           </tr>
         </tbody>
       </table>

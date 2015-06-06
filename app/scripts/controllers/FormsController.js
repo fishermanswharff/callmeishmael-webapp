@@ -4,7 +4,7 @@ formsController.$inject = ['trace','AuthFactory','PhoneFactory','StoryFactory','
 function formsController(trace,AuthFactory,PhoneFactory,StoryFactory,VenueFactory){
 
   var vm = this;
-  vm.storyTypes = ['Fixed','Venue','Surprise','Ishmael’s'];
+  vm.storyTypes = ['Fixed','Venue','Surprise','Ishmael’s', 'Post Roll'];
   vm.phoneStatus = ['active','inactive','retired','fixable'];
   vm.venues = [];
   vm.phones = [];
