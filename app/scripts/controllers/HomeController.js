@@ -13,4 +13,13 @@ function homeController(trace,$location,AuthFactory){
       $location.path('/dashboard');
     });
   };
+
+  vm.showPasswordForm = function(){
+    vm.forgotPassword = !vm.forgotPassword;
+  };
+
+  vm.sendPasswordLink = function(credentials){
+    AuthFactory.sendPasswordLink(credentials);
+  };
+
 };
