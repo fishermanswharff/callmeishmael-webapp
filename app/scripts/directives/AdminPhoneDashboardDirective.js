@@ -1,8 +1,8 @@
 'use strict';
-angular.module('MainDirective').directive('cmiPhoneDashboard',['PhoneFactory','trace',function(PhoneFactory,trace){
+angular.module('MainDirective').directive('cmiAdminPhoneDashboard',['PhoneFactory','trace',function(PhoneFactory,trace){
   return {
     restrict: 'E',
-    templateUrl: 'views/phone-dashboard.html',
+    templateUrl: 'views/admin-phone-dashboard.html',
     controller: 'DashboardController',
     controllerAs: 'dashboardController',
     bindToController: true,

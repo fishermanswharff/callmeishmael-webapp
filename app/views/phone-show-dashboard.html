@@ -1,28 +1,5 @@
 <section class="main-content">
 
-  <!-- list of all the venues a user belongs to -->
-  <div class="data-container">
-    <h2>Venues that you belong to:</h2>
-    <ul>
-      <li ng-repeat='venue in venueController.userVenues'><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
-      </li>
-    </ul>
-  </div>
-
-  <!-- container for single venue view -->
-  <div class="data-container" ng-if="venueController.venue.id">
-    <h2>{{venueController.venue.name}} Venue Stats:</h2>
-    <ul>
-      <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
-    </ul>
-    <!--
-    <h3>Venue users:</h3>
-    <ul ng-repeat="user in venueController.venue.users">
-      <li><strong>{{user.firstname}} {{user.lastname}}</strong> | <strong>role:</strong> {{user.role}}</li>
-    </ul>
-    -->
-  </div>
-  <!-- container for single venue phones -->
   <div class="data-container" ng-repeat="phone in venueController.venuePhones track by $index">
     <div class="phone-view">
       <h2>Phone {{$index + 1}} at {{venueController.venue.name}}</h2>
@@ -94,5 +71,34 @@
       </form>
     </div>
   </div>
+
+  <!-- list of all the venues a user belongs to -->
+  <!--
+  <div class="data-container">
+    <h2>Venues that you belong to:</h2>
+    <ul>
+      <li ng-repeat='venue in venueController.userVenues'><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
+      </li>
+    </ul>
+  </div>
+  -->
+
+  <!-- container for single venue view -->
+  <div class="data-container" ng-if="venueController.venue.id">
+    <!--
+    <h2>{{venueController.venue.name}} Venue Stats:</h2>
+    <ul>
+      <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
+    </ul> -->
+
+    <!--
+    <h3>Venue users:</h3>
+    <ul ng-repeat="user in venueController.venue.users">
+      <li><strong>{{user.firstname}} {{user.lastname}}</strong> | <strong>role:</strong> {{user.role}}</li>
+    </ul>
+    -->
+  </div>
+  <!-- container for single venue phones -->
+
 </section>
 

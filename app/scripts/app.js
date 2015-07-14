@@ -49,9 +49,9 @@ angular.module('phoneApp', [
   });
 
   if(AuthFactory.isAuthenticated() && AuthFactory.currentUser().role == 'venue_admin'){
-    $location.path('/venues')
     if($location.path() === '/dashboard'){
-      $location.path('/venues');
+      $location.path('/phones');
     }
+    $location.path('/phones')
   }
 });

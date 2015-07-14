@@ -30,17 +30,14 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
     .when('/story-stats',{
       templateUrl: 'views/story.html'
     })
-    .when('/post-roll-stats',{
-      templateUrl: 'views/post-roll.html'
-    })
     .when('/fixed',{
       templateUrl: 'views/fixed.html'
     })
     .when('/add-new',{
       templateUrl: 'views/add-new.html'
     })
-    .when('/venues',{
-      templateUrl: 'views/venue-show.html',
+    .when('/phones',{
+      templateUrl: 'views/phone-show.html',
     })
     .when('/venues/:venueId',{
       templateUrl: 'views/venue-show.html',
@@ -56,6 +53,6 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       controllerAs: 'loginController'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/phones'
     });
 }]);
