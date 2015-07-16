@@ -13,3 +13,36 @@ p, ul li, ul li a, a {
 section.main {
   @extend .container;
 }
+
+div#global-container {
+  height: 100%;
+  width: 100%;
+
+  div.ajax-preloader-container {
+    display: none;
+
+    &.active {
+      background-color: rgba(0,0,0,.8);
+      display: block;
+      height: 100vh;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100vw;
+    }
+
+    div.ajax-spinner {
+      width: 124px;
+      height: 124px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      @include transform(translateY(-50%));
+
+      i.fa {
+        color: $white;
+        font-size: 5em;
+      }
+    }
+  }
+}
