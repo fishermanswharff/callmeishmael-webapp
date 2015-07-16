@@ -1,4 +1,4 @@
 'use strict';
 angular.module('phoneApp')
   .constant('_', window._)
-  .constant('ServerUrl', 'http://localhost:3333');
+  .constant('ServerUrl', 'http://callmeishmael-api.herokuapp.com');
