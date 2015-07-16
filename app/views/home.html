@@ -17,14 +17,14 @@
       </div>
     </form>
 
-    <form class="login-form" name="resetPasswordForm" ng-submit="loginController.sendPasswordLink(loginController.credentials)" ng-show="loginController.forgotPassword" novalidate>
+    <form class="login-form" name="resetPasswordForm" ng-show="loginController.forgotPassword" novalidate>
       <p>Enter your email address and we will send you a link to reset your password</p>
       <div class="form-group">
         <label id="email-label" for="email">Email</label>
         <input id="email" type="text" name="email" ng-model="loginController.credentials.email" required>
       </div>
       <div class="form-group">
-        <input type="submit" class="btn" value="Send Reset Link" ng-disabled="resetPasswordForm.$invalid"/>
+        <button type="submit" class="btn" value="Send Reset Link" ng-disabled="resetPasswordForm.$invalid" ng-click="loginController.sendPasswordLink(loginController.credentials)"><span><i class='fa'></i></span>Send Reset Email</button>
         <span><a ng-click="loginController.showPasswordForm()" href="javascript:void(0)">Cancel</a></span>
       </div>
     </form>

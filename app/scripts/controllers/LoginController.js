@@ -1,5 +1,5 @@
 'use strict';
-function loginController($location,AuthFactory,trace){
+function loginController($rootScope,$location,AuthFactory,trace){
   var vm = this;
 
   vm.login = function(credentials){
@@ -29,7 +29,16 @@ function loginController($location,AuthFactory,trace){
   };
 
   vm.sendPasswordLink = function(credentials){
-    AuthFactory.sendPasswordLink(credentials);
+    $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-cog fa-spin');
+    AuthFactory.sendPasswordLink(credentials).then(function(response){
+      if(response.status == 200){
+        $rootScope.alert = 'Your email has been sent. If you did not receive it please check your spam box.';
+        $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-check').removeClass('fa-cog fa-spin');
+      } else {
+        $rootScope.alert = 'We do not have a record of your email address.';
+        $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-times').removeClass('fa-cog fa-spin');
+      }
+    });
   };
 
   vm.resetPassword = function(credentials){
@@ -49,4 +58,5 @@ function loginController($location,AuthFactory,trace){
 
 }
 angular.module('MainController').controller('LoginController',loginController);
-loginController.$inject = ['$location','AuthFactory','trace'];
+loginController.$inject = ['$rootScope','$location','AuthFactory','trace'];
+
