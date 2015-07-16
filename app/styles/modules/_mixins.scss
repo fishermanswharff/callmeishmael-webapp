@@ -19,7 +19,7 @@
   float: right;
 }
 
-@mixin transition($prop, $duration: 0.2s, $timing: ease, $delay: 0) {
+@mixin transition($prop, $duration: 0.2s, $timing: ease, $delay: 0s) {
   -webkit-transition: $prop $duration $timing $delay;
   -moz-transition: $prop $duration $timing $delay;
   -o-transition: $prop $duration $timing $delay;

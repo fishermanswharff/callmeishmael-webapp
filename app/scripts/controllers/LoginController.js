@@ -3,6 +3,7 @@ function loginController($location,AuthFactory,trace){
   var vm = this;
 
   vm.login = function(credentials){
+    $(loginForm).find('button[type=submit] i.fa').addClass('fa-cog fa-spin');
     AuthFactory.login(credentials).then(function(response){
       $location.path('/dashboard');
     });

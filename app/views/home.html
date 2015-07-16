@@ -1,30 +1,31 @@
 <div class="parallax-container">
   <a ng-if="currentUser" ng-href="#/dashboard" class="btn call-to-action">Dashboard</a>
-  <div class="login-form-container" ng-if="!currentUser">
-    <form class='login-form' id='loginForm' name='loginForm' ng-submit='homeController.login(homeController.credentials)' ng-hide="homeController.forgotPassword" novalidate>
+  <div ng-controller="LoginController as loginController" class="login-form-container" ng-if="!currentUser">
+    <form class='login-form' id='loginForm' name='loginForm' ng-hide="loginController.forgotPassword" novalidate>
       <div class="form-group">
         <label for='email-credentials' id='email-label'>Email
-          <input id='email-credentials' name='email-credentials' type='email' ng-model='homeController.credentials.email' required>
+          <input id='email-credentials' name='email-credentials' type='email' ng-model='loginController.credentials.email' required>
         </label>
       </div>
       <div class="form-group">
         <label for='password-credentials'>Password
-          <input id='password-credentials' name='password-credentials' type='password' ng-model='homeController.credentials.password' required>
+          <input id='password-credentials' name='password-credentials' type='password' ng-model='loginController.credentials.password' required>
         </label>
       </div>
       <div class="form-group">
-        <input class='btn' type='submit' ng-disabled='loginForm.$invalid' value='Login'><span><a ng-click="homeController.showPasswordForm()" ng-hide="homeController.forgotPassword" href="javascript:void(0)">Did you forget your password?</a></span>
+        <button class='btn' type='submit' ng-disabled='loginForm.$invalid' ng-click="loginController.login(loginController.credentials)"><span><i class="fa"></i></span>Login</button><span><a ng-click="loginController.showPasswordForm()" ng-hide="loginController.forgotPassword" href="javascript:void(0)">Did you forget your password?</a></span>
       </div>
     </form>
-    <form class="login-form" name="resetPasswordForm" ng-submit="homeController.sendPasswordLink(homeController.credentials)" ng-show="homeController.forgotPassword" novalidate>
+
+    <form class="login-form" name="resetPasswordForm" ng-submit="loginController.sendPasswordLink(loginController.credentials)" ng-show="loginController.forgotPassword" novalidate>
       <p>Enter your email address and we will send you a link to reset your password</p>
       <div class="form-group">
         <label id="email-label" for="email">Email</label>
-        <input id="email" type="text" name="email" ng-model="homeController.credentials.email" required>
+        <input id="email" type="text" name="email" ng-model="loginController.credentials.email" required>
       </div>
       <div class="form-group">
         <input type="submit" class="btn" value="Send Reset Link" ng-disabled="resetPasswordForm.$invalid"/>
-        <span><a ng-click="homeController.showPasswordForm()" href="javascript:void(0)">Cancel</a></span>
+        <span><a ng-click="loginController.showPasswordForm()" href="javascript:void(0)">Cancel</a></span>
       </div>
     </form>
   </div>

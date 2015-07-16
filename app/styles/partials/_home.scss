@@ -50,25 +50,9 @@
     @include flex-justify(center);
     @include flex-align-items(baseline);
     @include flex-align-content(flex-start);
-
+    // todo: media queries to increase the size on small screens
     width: 25%;
     margin: 0 auto;
-
-    .form-group {
-      width: 100%;
-
-      label {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      input,
-      input[type="submit"].btn {
-        @include transition(all,.25s,ease,0);
-        width: 100%;
-      }
-    }
   }
 
   ul {
@@ -204,6 +188,4 @@
     box-shadow: 0px 0px 100px #000 inset;
     z-index: $z-parallax-shadow;
   }
-
-
 }
