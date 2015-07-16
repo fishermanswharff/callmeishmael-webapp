@@ -1,0 +1,62 @@
+<section class="main-content"> <div class="data-container" ng-repeat="phone in venueController.venuePhones track by $index"> <div class="phone-view container clearfix"> <h2>Ahoy! This is phone #{{$index + 1}} at {{venueController.venue.name}}</h2> <div class="grid_4"> <img class="cmi-phone" src="images/cmi-phone.882c985c.png"> </div> <div class="grid_12"> <ul> <li><strong>Phone ID:</strong> {{phone.unique_identifier}}</li> <li><strong>Phone Status:</strong> {{phone.status}}</li> <li><strong>Date Created:</strong> {{phone.created_at}}</li> </ul> </div> <!--
+      <table>
+        <thead>
+          <th>Phone ID</th>
+          <th>Phone Status</th>
+          <th>Name</th>
+          <th># Stories</th>
+          <th>Date Created</th>
+          <th># Days Active</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{phone.unique_identifier}}</td>
+            <td>{{phone.status}}</td>
+            <td>{{phone.venue.name}}</td>
+            <td>{{phone.stories.length}}</td>
+            <td>{{phone.created_at}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>--> </div> <div class="phone-story-view container clearfix"> <h3>Your Phone is currently hosting these stories:</h3> <div class="grid_16"> <table> <thead> <th>Id <th>Assignment <th>Title <th>Added to phone <th># Listens <!-- <th></th> -->  <tbody> <tr ng-repeat="(key,value) in phone.buttons | orderBy: '-id':reverse=true"> <td>{{value.story_id}} <td>{{key}} <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a> <td>{{value.created_at}} <td>{{story.listens || 0}} <!-- <td><a ng-hide="key === '*' || key === '#' || key === '0' || key === 'PR'" href="javascript:void(0)" ng-click="venueController.editButton(key,value,phone.id)">Edit</a></td> -->   </table> </div> </div> <div class="container"> <h2>Would you like to change the stories on your phone?</h2> <p>You may assign any story from Ishmael’s Library or your Venue Library to numbers 1-9 on your phone. Simply edit the “Story ID” cell that corresponds to the button number that you’re trying to change. Don’t forget to save your changes.</p> <h3>IMPORTANT: Your changes won’t be immediately reflected to your phone.</h3> <p>You may make and save changes at any time. However, your saved changes will not “go live” until 10:00am each day. For clarity, if you were to make and save changes at 9:55am, then they would be published to your phone at 10:00am. However, if you were to make and save changes at 10:01am, then your changes would not be published to your phone until 10:00am the next day.</p> </div> <!--
+    <div class="phone-button-assignment" ng-show="venueController.buttonToEdit">
+      <h3>Assign a new story to this phone:</h3>
+      <p>The current story at the button assignment you choose will be replaced by this story. This action is not undoable.</p>
+      <p>Total # of stories: {{venueController.stories.length}}</p>
+      <form name="newButtonAssign" id='newButtonAssign' ng-submit="venueController.submit({button: venueController.buttonToEdit})" novalidate>
+        <div class="form-group">
+          <label>Search stories by title or author last name
+          <input name="storyTitleSearch" id="storyTitleSearch" type="text" ng-model="search" value="search"/>
+          </label>
+        </div>
+        <div class="form-group" ng-repeat="story in venueController.stories | storyFilter:search:venueController.stories | limitTo:12">
+          <label>
+            <input type='checkbox' ng-true-value="{{story.id}}" ng-false-value="''" ng-model="venueController.buttonToEdit.story_id">
+            {{story.title}} by {{story.author_last}}
+          </label>
+        </div>
+        <p ng-show="(venueController.stories | storyFilter:search:venueController.stories).length == 0">No story selected.</p>
+        <p>You're changing button {{ venueController.buttonToEdit.assignment }} on the phone.</p>
+        <div class="form-group">
+          <input class="btn" type="submit" value="Assign button to phone" ng-disabled="newButtonAssign.$invalid">
+        </div>
+      </form>
+    </div>
+    --> </div> <!-- list of all the venues a user belongs to --> <!--
+  <div class="data-container">
+    <h2>Venues that you belong to:</h2>
+    <ul>
+      <li ng-repeat='venue in venueController.userVenues'><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a>
+      </li>
+    </ul>
+  </div>
+  --> <!-- container for single venue view --> <div class="data-container" ng-if="venueController.venue.id"> <!--
+    <h2>{{venueController.venue.name}} Venue Stats:</h2>
+    <ul>
+      <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
+    </ul> --> <!--
+    <h3>Venue users:</h3>
+    <ul ng-repeat="user in venueController.venue.users">
+      <li><strong>{{user.firstname}} {{user.lastname}}</strong> | <strong>role:</strong> {{user.role}}</li>
+    </ul>
+    --> </div> <!-- container for single venue phones --> </section>
