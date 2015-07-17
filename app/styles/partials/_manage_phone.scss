@@ -2,15 +2,26 @@
   ul {
     @include defaults();
     list-style: none;
+    margin-top: 2em;
 
     li {
+      border-bottom: 1px dotted $black-20;
+      margin: 0 0 1em;
+
+      div {
+        margin: 0 0 .5em;
+
+        span.button-assignment {
+          font-weight: $body-bold;
+        }
+      }
 
       ul {
         @include defaults();
         list-style: none;
 
         li {
-
+          border-bottom: none;
         }
       }
     }

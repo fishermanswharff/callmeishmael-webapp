@@ -31,14 +31,15 @@ $white: #ffffff;
 ***************TYPOGRAPHY*****************
 ——————————————————————————————————————————*/
 
-$header-font: "Times New Roman", Times, serif;
-$body-font: Georgia, Times, serif;
+$header-font: 'chaparral-pro','Times New Roman', Times, serif;
+$body-font: 'chaparral-pro','Times New Roman', Times, serif;
 $mono-spaced-font: "ubuntu-mono",monospace;
 
 $header-light: 300;
 $header-heavy: 800;
 
 $body-light: 300;
+$body-regular: 400;
 $body-bold: 700;
 
 $base-font-size: 14px;
