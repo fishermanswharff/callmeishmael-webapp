@@ -25,7 +25,7 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/venue.html'
     })
     .when('/phone-stats',{
-      templateUrl: 'views/phone.html'
+      templateUrl: 'views/admin-phone.html'
     })
     .when('/story-stats',{
       templateUrl: 'views/story.html'
@@ -38,6 +38,11 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
     })
     .when('/phones',{
       templateUrl: 'views/phone-show.html',
+    })
+    .when('/manage-phone',{
+      templateUrl: 'views/manage-phone.html',
+      controller: 'PhoneController',
+      controllerAs: 'phoneController'
     })
     .when('/venues/:venueId',{
       templateUrl: 'views/venue-show.html',

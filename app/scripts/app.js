@@ -52,6 +52,12 @@ angular.module('phoneApp', [
     if($location.path() === '/dashboard'){
       $location.path('/phones');
     }
-    $location.path('/phones')
+    // $location.path('/phones')
   }
+}).config(function($sceDelegateProvider){
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    // Allow loading from our assets domain.  Notice the difference between * and **.
+    'https://s3-us-west-2.amazonaws.com/**'
+  ]);
 });

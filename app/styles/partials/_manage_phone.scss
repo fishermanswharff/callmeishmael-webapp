@@ -1,0 +1,19 @@
+.manage-phone-dashboard {
+  ul {
+    @include defaults();
+    list-style: none;
+
+    li {
+
+      ul {
+        @include defaults();
+        list-style: none;
+
+        li {
+
+        }
+      }
+    }
+
+  }
+}
