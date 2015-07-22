@@ -8,6 +8,7 @@ function phoneController($rootScope,AuthFactory,PhoneFactory,VenueFactory,$sceDe
 
   PhoneFactory.fetch($rootScope.currentUser.venues[0].id).then(function(response){
     angular.copy(response[0], vm.currentPhone);
+    trace(vm.currentPhone);
   });
 
   angular.forEach($rootScope.currentUser.venues, function(value,index,array){

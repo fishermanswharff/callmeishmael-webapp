@@ -26,5 +26,84 @@
       }
     }
 
+
+  }
+
+  .dial-container {
+    display: inline-block;
+    float: left;
+    margin: 4em 0;
+    width: 50%;
+
+
+    .dial-list {
+      @include defaults();
+      position: relative;
+      width: 24em;
+      height: 24em;
+      padding: 2.8em;
+      border-radius: 50%;
+      margin: 1.75em auto 0;
+
+      li {
+        @include defaults();
+        border: none;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 4em;
+        height: 4em;
+        margin: -2em;
+
+        text-align: center;
+        line-height: 4em;
+
+        &.deg-0 { transform: rotate(-27deg) translate(12em) rotate(27deg); }
+        &.deg-1 { transform: rotate(0deg) translate(12em) rotate(0deg); }
+        &.deg-2 { transform: rotate(27deg) translate(12em) rotate(-27deg); }
+        &.deg-3 { transform: rotate(54deg) translate(12em) rotate(-54deg); }
+        &.deg-4 { transform: rotate(81deg) translate(12em) rotate(-81deg); }
+        &.deg-5 { transform: rotate(108deg) translate(12em) rotate(-108deg); }
+        &.deg-6 { transform: rotate(135deg) translate(12em) rotate(-135deg); }
+        &.deg-7 { transform: rotate(162deg) translate(12em) rotate(-162deg); }
+        &.deg-8 { transform: rotate(189deg) translate(12em) rotate(-189deg); }
+        &.deg-9 { transform: rotate(216deg) translate(12em) rotate(-216deg); }
+        &.deg-10 { transform: rotate(243deg) translate(12em) rotate(-243deg); }
+        &.deg-11 { transform: rotate(270deg) translate(12em) rotate(-270deg); }
+        &.deg-12 { transform: rotate(-54deg) translate(12em) rotate(54deg); }
+
+        span.button-assignment {
+          display: block;
+          background: $button-beige;
+          border-radius: 50%;
+          border: 1px solid $black;
+          width: 4em;
+          height: 4em;
+        }
+
+        div.button-story {
+          display: none;
+
+          &.active {
+            display: block;
+            position: absolute;
+            top: -30%;
+            left: 30%;
+
+            background: rgba(0, 0, 0, 0.8) none repeat scroll 0% 0%;
+            border: 2px solid black;
+            box-shadow: 0px 0px 5px 1px black;
+            color: white;
+
+            line-height: normal;
+            padding: 0.5em 1em;
+            text-align: left;
+
+            z-index: $z-dial-button;
+          }
+        }
+      }
+    }
   }
 }
