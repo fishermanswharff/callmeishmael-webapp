@@ -8,6 +8,9 @@
       border-bottom: 1px dotted $black-20;
       margin: 0 0 1em;
 
+      .button-assignment,
+      .button-story-title {  }
+
       div {
         margin: 0 0 .5em;
 
@@ -25,8 +28,18 @@
         }
       }
     }
+  }
 
-
+  .audio {
+    button.play {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: none;
+      background: $white;
+      width: 42px;
+      height: 42px;
+    }
   }
 
   .dial-container {

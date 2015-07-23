@@ -55,7 +55,7 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
       assignment: object.button.assignment,
       phone_id: object.button.phone_id,
       story_id: object.button.story_id
-    }
+    };
     return $q(function(resolve,reject){
       $http.patch(ServerUrl + '/buttons/'+object.button.button_id,{button: button}).success(function(response){
         $rootScope.alert = 'Your button was successfully changed';

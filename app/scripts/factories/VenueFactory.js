@@ -47,7 +47,7 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
         reject(data);
       });
     });
-  }
+  };
 
   var _convertToArray = function(object){
     var array = [];
