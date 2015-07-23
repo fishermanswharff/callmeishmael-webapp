@@ -7,8 +7,7 @@ angular.module('MainDirective').directive('cmiDialListitem', ['trace','$compile'
     },
     compile: function(){
       return function($scope,elem,attrs){
-        var buttonDetails, audio; 
-
+        var buttonDetails, audio;
         $scope.$watch('button', function(newValue,oldValue){
           if(Object.keys(newValue).length === 0){}
           buttonDetails = elem.find('.button-story');
