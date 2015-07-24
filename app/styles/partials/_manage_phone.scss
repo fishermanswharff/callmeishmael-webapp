@@ -4,41 +4,35 @@
     list-style: none;
     margin-top: 2em;
 
+    &.current-phone-list > li {
+      box-shadow: 0 0 1px $black;
+      margin: 1em 0;
+      padding: 1em;
+    }
+
     li {
       border-bottom: 1px dotted $black-20;
-      margin: 0 0 1em;
 
       .button-assignment,
-      .button-story-title {  }
+      .button-story-title {}
 
-      div {
-        margin: 0 0 .5em;
+      div.phone-button-object {
+        margin-bottom: 1em;
 
         span.button-assignment {
+          background: $button-beige;
+          border: 1px solid $black;
+          border-radius: 50%;
+          display: block;
+          float: left;
           font-weight: $body-bold;
+          height: 4em;
+          line-height: 4em;
+          margin: 0 1em 0 0;
+          text-align: center;
+          width: 4em;
         }
       }
-
-      ul {
-        @include defaults();
-        list-style: none;
-
-        li {
-          border-bottom: none;
-        }
-      }
-    }
-  }
-
-  .audio {
-    button.play {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      border: none;
-      background: $white;
-      width: 42px;
-      height: 42px;
     }
   }
 
@@ -120,3 +114,66 @@
     }
   }
 }
+
+
+button.play,
+button.pause {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 32px;
+  height: 32px;
+}
+
+
+div.button-controls {
+  bottom: -1em;
+  margin: -1em;
+  position: relative;
+  text-align: right;
+
+  a.clear-button-link {
+    @include transition(all,.25s,ease,0s);
+    background-color: $black-10;
+    bottom: 0px;
+    color: $black-30;
+    display: inline-block;
+    font-size: .8em;
+    padding: 1em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:after {
+      content: 'X';
+      display: inline-block;
+      visibility: hidden;
+      opacity: 0;
+      line-height: 0;
+      font-size: 0;
+    }
+
+    &:hover {
+      background-color: $black-50;
+      color: $white;
+
+      &:after {
+        line-height: 1;
+        font-size: 1em;
+        font-weight: $body-bold;
+        visibility: visible;
+        opacity: 1;
+        padding: 0 1em;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
