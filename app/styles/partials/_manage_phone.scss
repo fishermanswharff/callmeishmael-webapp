@@ -158,6 +158,7 @@ div.button-controls {
     &:hover {
       background-color: $black-50;
       color: $white;
+      font-weight: $body-bold;
 
       &:after {
         line-height: 1;
@@ -165,7 +166,7 @@ div.button-controls {
         font-weight: $body-bold;
         visibility: visible;
         opacity: 1;
-        padding: 0 1em;
+        padding: 0 0 0 1em;
       }
     }
   }

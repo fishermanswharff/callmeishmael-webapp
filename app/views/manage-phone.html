@@ -4,8 +4,8 @@
   </aside>
   <section class='main-content container'>
     <div class='data-container manage-phone-dashboard'>
-      <div class='current-phone-list-container grid_8'>
-        <h1>Stories on your phone right now:</h1>
+      <div class='current-phone-list-container grid_4'>
+        <h1>Update the stories on your phone here:</h1>
         <ul class='current-phone-list'>
           <li ng-repeat='obj in phoneController.currentPhone.buttons track by $index' class='phone-button-assignment deg-{{$index}}'>
             <div class='phone-button-object' ng-repeat='(key, value) in obj' cmi-dial-listitem button='value'>
@@ -23,8 +23,8 @@
           </li>
         </ul>
       </div>
-      <div class='grid_8'>
-        <div ng-repeat='venue in phoneController.venues'>
+      <div>
+        <div ng-repeat='venue in phoneController.venues' ng-if='venue.stories.length > 0'>
           <h2>Stories unique to venue {{venue.name}}</h2>
           <ul>
             <li ng-repeat='story in venue.stories'>
@@ -36,7 +36,7 @@
               </div>
           </ul>
         </div>
-        <div>
+        <div class='grid_6'>
           <h2>Ishmael’s Stories</h2>
           <ul>
             <li ng-repeat='story in phoneController.ishmaelStories'>
