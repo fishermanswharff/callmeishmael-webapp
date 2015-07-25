@@ -4,7 +4,7 @@
   </aside>
   <section class='main-content container'>
     <div class='data-container manage-phone-dashboard'>
-      <div class='current-phone-list-container grid_4'>
+      <div class='current-phone-list-container grid_5'>
         <h1>Update the stories on your phone here:</h1>
         <ul class='current-phone-list'>
           <li ng-repeat='obj in phoneController.currentPhone.buttons track by $index' class='phone-button-assignment deg-{{$index}}'>
@@ -23,31 +23,29 @@
           </li>
         </ul>
       </div>
-      <div>
-        <div ng-repeat='venue in phoneController.venues' ng-if='venue.stories.length > 0'>
-          <h2>Stories unique to venue {{venue.name}}</h2>
-          <ul>
-            <li ng-repeat='story in venue.stories'>
-              <div>
-                <p>
-                  <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
-                  <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
-                </p>
-              </div>
-          </ul>
-        </div>
-        <div class='grid_6'>
-          <h2>Ishmael’s Stories</h2>
-          <ul>
-            <li ng-repeat='story in phoneController.ishmaelStories'>
-              <div>
-                <p>
-                  <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
-                  <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
-                </p>
-              </div>
-          </ul>
-        </div>
+      <div  class='grid_6' ng-repeat='venue in phoneController.venues' ng-if='venue.stories.length > 0'>
+        <h2>Stories unique to venue {{venue.name}}</h2>
+        <ul>
+          <li ng-repeat='story in venue.stories'>
+            <div>
+              <p>
+                <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
+                <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
+              </p>
+            </div>
+        </ul>
+      </div>
+      <div class='grid_6'>
+        <h2>Ishmael’s Stories</h2>
+        <ul>
+          <li ng-repeat='story in phoneController.ishmaelStories'>
+            <div>
+              <p>
+                <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
+                <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
+              </p>
+            </div>
+        </ul>
       </div>
     </div>
   </section>
