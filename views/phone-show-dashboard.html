@@ -19,7 +19,45 @@
           </tr>
         </tbody>
       </table>
-      --> </div> <div class="phone-story-view container clearfix"> <h3>Your Phone is currently hosting these stories:</h3> <div class="grid_16"> <table> <thead> <th>Id <th>Assignment <th>Title <th>Added to phone <th># Listens <!-- <th></th> -->  <tbody> <tr ng-repeat="(key,value) in phone.buttons | orderBy: '-id':reverse=true"> <td>{{value.story_id}} <td>{{key}} <td><a ng-href="{{value.url}}" target="_blank">{{value.title}}</a> <td>{{value.created_at}} <td>{{story.listens || 0}} <!-- <td><a ng-hide="key === '*' || key === '#' || key === '0' || key === 'PR'" href="javascript:void(0)" ng-click="venueController.editButton(key,value,phone.id)">Edit</a></td> -->   </table> </div> </div> <div class="container"> <h2>Would you like to change the stories on your phone?</h2> <p>You may assign any story from Ishmael’s Library or your Venue Library to numbers 1-9 on your phone. Simply edit the “Story ID” cell that corresponds to the button number that you’re trying to change. Don’t forget to save your changes.</p> <h3>IMPORTANT: Your changes won’t be immediately reflected to your phone.</h3> <p>You may make and save changes at any time. However, your saved changes will not “go live” until 10:00am each day. For clarity, if you were to make and save changes at 9:55am, then they would be published to your phone at 10:00am. However, if you were to make and save changes at 10:01am, then your changes would not be published to your phone until 10:00am the next day.</p> </div> <!--
+      --> </div> <div class="phone-story-view container clearfix"> <h3>Your Phone is currently hosting these stories:</h3> <div class="grid_16"> <h1>Stories on your phone right now:</h1> <!-- <ul class='current-phone-list'>
+          <li ng-repeat="obj in phone.buttons track by $index" class="deg-{{$index}}">
+            <div ng-repeat='(key, value) in obj' cmi-dial-listitem>
+              <span class='button-assignment'><strong>Button: </strong>{{key}}</span>&nbsp;<span class='button-story-title'>{{value.title}}</span>
+              <div class='button-story'>
+                <audio ng-src="{{value.url}}" controls>
+                  <p>Your browser does not support the <code>audio</code> element </p>
+                </audio>
+              </div>
+            </div>
+          </li>
+        </ul> --> <table> <thead> <th>Id <th>Assignment <th>Title <th>Listen <th>Added to phone <th># Listens  <tbody ng-repeat="obj in phone.buttons track by $index"> <tr ng-repeat="(key,value) in obj"> <td>{{value.story_id}} <td>{{key}} <td>{{value.title}} <td> <audio controls> <source ng-src="{{value.url}}"> </audio>  <td>{{value.created_at}} <td>{{value.listens}}   </table> <!--
+        <table>
+          <thead>
+            <th>Id</th>
+            <th>Assignment</th>
+            <th>Title</th>
+            <th>Listen</th>
+            <th>Added to phone</th>
+            <th># Listens</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="button in phone.buttons" >
+              <td>{{value.story_id}}</td>
+              <td>{{key}}</td>
+              <td>{{value.title}}</td>
+              <td>
+                <audio ng-src="{{value.url}}">
+                  <p>Your browser does not support audio.</p>
+                </audio>
+              <td>{{value.created_at}}</td>
+              <td></td>
+              <td>{{.listens || 0}}</td>
+              <td><a ng-hide="key === '*' || key === '#' || key === '0' || key === 'PR'" href="javascript:void(0)" ng-click="venueController.editButton(key,value,phone.id)">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+        --> </div> </div> <!--
     <div class="phone-button-assignment" ng-show="venueController.buttonToEdit">
       <h3>Assign a new story to this phone:</h3>
       <p>The current story at the button assignment you choose will be replaced by this story. This action is not undoable.</p>
@@ -51,13 +89,15 @@
       </li>
     </ul>
   </div>
-  --> <!-- container for single venue view --> <div class="data-container" ng-if="venueController.venue.id"> <!--
+  --> <!-- container for single venue view --> <!--
+  <div class="data-container" ng-if="venueController.venue.id">
     <h2>{{venueController.venue.name}} Venue Stats:</h2>
     <ul>
       <li ng-repeat="(key,value) in venueController.venue" ng-if="key != 'users'"><strong>{{key}}:</strong> {{value}}</li>
-    </ul> --> <!--
+    </ul>
     <h3>Venue users:</h3>
     <ul ng-repeat="user in venueController.venue.users">
       <li><strong>{{user.firstname}} {{user.lastname}}</strong> | <strong>role:</strong> {{user.role}}</li>
     </ul>
-    --> </div> <!-- container for single venue phones --> </section>
+  </div>
+  --> <!-- container for single venue phones --> <div class="container"> <h2>Would you like to change the stories on your phone?</h2> <p>You may assign any story from Ishmael’s Library or your Venue Library to numbers 1-9 on your phone. Simply edit the “Story ID” cell that corresponds to the button number that you’re trying to change. Don’t forget to save your changes.</p> <h3>IMPORTANT: Your changes won’t be immediately reflected to your phone.</h3> <p>You may make and save changes at any time. However, your saved changes will not “go live” until 10:00am each day. For clarity, if you were to make and save changes at 9:55am, then they would be published to your phone at 10:00am. However, if you were to make and save changes at 10:01am, then your changes would not be published to your phone until 10:00am the next day.</p> </div> </section>
