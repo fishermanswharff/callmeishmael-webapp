@@ -4,11 +4,11 @@
   </aside>
   <section class='main-content container'>
     <div class='data-container manage-phone-dashboard'>
-      <div class='current-phone-list-container grid_5'>
-        <h1>Update the stories on your phone here:</h1>
+      <div class='current-phone-list-container grid_6'>
+        <h1>Drag new stories to your phone here:</h1>
         <ul class='current-phone-list'>
-          <li ng-repeat='obj in phoneController.currentPhone.buttons track by $index' class='phone-button-assignment deg-{{$index}}'>
-            <div class='phone-button-object' ng-repeat='(key, value) in obj' cmi-dial-listitem button='value'>
+          <li ng-repeat='obj in phoneController.currentPhone.buttons track by $index' class='phone-button-assignment deg-{{$index}}' cmi-droppable>
+            <div class='phone-button-object' ng-repeat='(key, value) in obj' cmi-dial-listitem button='value' ng-class="{ nonEditable: phoneController.isFixed(key) }">
               <span class='button-assignment'>{{key}}</span>
               <div class='button-story'>
                 <span class='button-story-title'>{{value.title || 'Nothing Assigned'}}</span>
@@ -17,16 +17,32 @@
                 </div>
               </div>
               <div class='button-controls' ng-hide="key === '*' || key === '#' || key === '0' || key === 'PR'">
+                <a class='droppable-label'>Drop A New Story here</a>
                 <a href='javascript:void(0)' ng-click='phoneController.clearButton(this,$parent.$index,key,value)' class='clear-button-link'>Clear</a>
               </div>
             </div>
           </li>
         </ul>
       </div>
-      <div  class='grid_6' ng-repeat='venue in phoneController.venues' ng-if='venue.stories.length > 0'>
+      <div class='grid_10'>
+        <h2>Available Stories:</h2>
+        <ul>
+          <li class='cmi-draggable' ng-repeat='story in phoneController.availableStories track by $index' cmi-draggable data-index="{{$index}}">
+            <div>
+              <p>
+                <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
+                <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- move all the stories into an array -->
+      <!-- <div  class='grid_4' ng-repeat='venue in phoneController.venues' ng-if='venue.stories.length > 0'>
         <h2>Stories unique to venue {{venue.name}}</h2>
         <ul>
-          <li ng-repeat='story in venue.stories'>
+          <li class='cmi-draggable' ng-repeat='story in venue.stories' cmi-draggable>
             <div>
               <p>
                 <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
@@ -35,10 +51,10 @@
             </div>
         </ul>
       </div>
-      <div class='grid_6'>
+      <div class='grid_4'>
         <h2>Ishmael’s Stories</h2>
         <ul>
-          <li ng-repeat='story in phoneController.ishmaelStories'>
+          <li class='cmi-draggable' ng-repeat='story in phoneController.ishmaelStories' cmi-draggable>
             <div>
               <p>
                 <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
@@ -46,7 +62,7 @@
               </p>
             </div>
         </ul>
-      </div>
+      </div> -->
     </div>
   </section>
 </div>
