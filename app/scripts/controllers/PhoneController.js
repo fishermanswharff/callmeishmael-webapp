@@ -11,18 +11,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   // take the first venue for the user for now
   PhoneFactory.fetch($rootScope.currentUser.venues[0].id).then(function(response){
     angular.copy(response[0], vm.currentPhone);
-  });
-
-  StoryFactory.fetch().then(function(response){
-    var stories = _filterIshmaelStories(response);
-    angular.forEach(stories,function(value){vm.availableStories.push(value);});
-  });
-
-  angular.forEach($rootScope.currentUser.venues, function(value,index,array){
-    VenueFactory.fetchOne(value.id).then(function(response){
-      vm.venues.push(response);
-      _pushToAvailable(response.stories);
-    });
+    _getStories();
   });
 
   vm.clearButton = function(obj,index,key,value){
@@ -34,7 +23,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   };
 
   $scope.$on('droppedElement',function(e,args){
-    var drag = args.dragObj, drop = args.dropObj;
+    var drag = args.dragObj, drop = args.dropObj, prevStoryId;;
     var buttonToEdit = vm.currentPhone.buttons.filter(function(value,index,array){
       for(var obj in value){
         if(obj === Object.keys(drop)[0]){
@@ -42,14 +31,14 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
         }
       }
     })[0];
-    var prevStoryId;
+
     for(var i in buttonToEdit){
       prevStoryId = buttonToEdit[i].story_id;
       buttonToEdit[i].title = drag.title;
       buttonToEdit[i].url = drag.url;
       buttonToEdit[i].story_id = drag.id;
     }
-    $scope.$apply();
+
     StoryFactory.fetchOne(prevStoryId).then(function(response){
       vm.availableStories.push(response);
     });
@@ -59,14 +48,36 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
 
   // PRIVATE METHODS
 
-  var _pushToAvailable = function(array){
-    angular.forEach(array,function(value,index,array){
-      vm.availableStories.push(value);
+  var _getStories = function(){
+    StoryFactory.fetch().then(function(response){
+      _pushToAvailable(_filterIshmaelStories(response));
     });
   };
 
-  var _pullFromAvailable = function(obj){
+  var _collectUserVenues = function(){
+    angular.forEach($rootScope.currentUser.venues, function(value,index,array){
+      VenueFactory.fetchOne(value.id).then(function(response){
+        vm.venues.push(response);
+        _pushToAvailable(response.stories);
+      });
+    });
+  };
 
+  var _pushToAvailable = function(array){
+    angular.forEach(array,function(value,index,array){
+      if(!(_onPhone(value.id))){
+        vm.availableStories.push(value);
+      }
+    });
+  };
+
+  var _onPhone = function(id){
+    var array = vm.currentPhone.buttons.filter(function(value,index,array){
+      var prop = Object.getOwnPropertyNames(value)[0];
+      var storyId = value[prop].story_id.toString();
+      return storyId === id.toString();
+    });
+    return array.length > 0;
   };
 
   var _filterIshmaelStories = function(array){
@@ -76,4 +87,8 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       }
     });
   };
+
+
+  _collectUserVenues();
+
 };

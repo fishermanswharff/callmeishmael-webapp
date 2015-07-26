@@ -32,37 +32,12 @@
               <p>
                 <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
                 <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
+                <span class='story-type'>Type: {{story.story_type}} story</span>
               </p>
             </div>
           </li>
         </ul>
       </div>
-
-      <!-- move all the stories into an array -->
-      <!-- <div  class='grid_4' ng-repeat='venue in phoneController.venues' ng-if='venue.stories.length > 0'>
-        <h2>Stories unique to venue {{venue.name}}</h2>
-        <ul>
-          <li class='cmi-draggable' ng-repeat='story in venue.stories' cmi-draggable>
-            <div>
-              <p>
-                <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
-                <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
-              </p>
-            </div>
-        </ul>
-      </div>
-      <div class='grid_4'>
-        <h2>Ishmael’s Stories</h2>
-        <ul>
-          <li class='cmi-draggable' ng-repeat='story in phoneController.ishmaelStories' cmi-draggable>
-            <div>
-              <p>
-                <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
-                <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
-              </p>
-            </div>
-        </ul>
-      </div> -->
     </div>
   </section>
 </div>
