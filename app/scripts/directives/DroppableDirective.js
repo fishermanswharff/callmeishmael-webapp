@@ -9,7 +9,6 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
       $(elem).droppable({
         drop: function(event,ui) {
           var newStory,
-              dragIndex = angular.element(ui.draggable).data('index'),
               dragId = angular.element(ui.draggable).data('uid'),
               dragEl = angular.element(ui.draggable).parent(),
               dropEl = angular.element(this),
@@ -37,10 +36,13 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
             }
           })[0];
 
+          trace('newStory from DroppableDirective: ', newStory);
+
           $rootScope.$broadcast('droppedElement', {
             dragObj: newStory,
             dropObj: $scope.button
           });
+
           $scope.$apply();
         },
         hoverClass: 'cmi-droppable-hover',

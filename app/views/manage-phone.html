@@ -49,7 +49,7 @@
           </label>
         </div>
         <ul>
-          <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search track by $index" cmi-draggable data-index="{{$index}}" data-uid="{{story.id}}">
+          <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search" cmi-draggable story='story' data-uid="{{story.id}}" >
             <div class='cmi-draggable-info'>
               <p>
                 <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
