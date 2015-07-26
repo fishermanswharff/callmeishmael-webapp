@@ -51,7 +51,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
 
     // TODO: persist the button data to the server
     PhoneFactory.assignButton(buttonToEdit).then(function(response){
-      trace(response);
+      // $('.alert').addClass('success').find('p').prepend('<i class="fa fa-check">');
     });
   });
 

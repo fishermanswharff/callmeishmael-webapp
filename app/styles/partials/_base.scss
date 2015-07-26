@@ -48,3 +48,33 @@ div#global-container {
     }
   }
 }
+
+.alert {
+  background-color: $black-80;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,.5);
+  color: $black-10;
+  left: 0;
+  margin: 2em;
+  max-width: 25%;
+  padding: 2em;
+  position: fixed;
+  top: 0;
+  z-index: $z-alert-box;
+
+  &.success {
+    background-color: green;
+    color: $white;
+  }
+
+  &.error {
+    background-color: red;
+    color: $white;
+  }
+
+  p {
+    font-size: 1.3em;
+    // font-weight: $body-bold;
+  }
+}
+

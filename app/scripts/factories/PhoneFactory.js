@@ -58,7 +58,7 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
     }
     return $q(function(resolve,reject){
       $http.patch(ServerUrl + '/buttons/'+buttonId,{button:{ story_id: storyId }}).success(function(response){
-        $rootScope.alert = 'Your button was successfully changed!!!';
+        $rootScope.alert = 'Your button was successfully changed. Changes to your phone will take effect tomorrow.';
         resolve(response);
       }).error(function(data,status,headers,config){
         $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;
