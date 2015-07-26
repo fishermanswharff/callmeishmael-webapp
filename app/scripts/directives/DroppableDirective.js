@@ -24,7 +24,7 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
             height: targetH,
             top: top,
             left: left,
-          }, 500, function(){
+          }, 100, function(){
             $(this).fadeOut(400, function(){
               $(this).remove();
             });
@@ -35,8 +35,6 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
               return value;
             }
           })[0];
-
-          trace('newStory from DroppableDirective: ', newStory);
 
           $rootScope.$broadcast('droppedElement', {
             dragObj: newStory,

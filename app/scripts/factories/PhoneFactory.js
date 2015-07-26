@@ -51,14 +51,14 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
   };
 
   var assignButton = function(object){
-    var button = {
-      assignment: object.button.assignment,
-      phone_id: object.button.phone_id,
-      story_id: object.button.story_id
-    };
+    var buttonId, storyId;
+    for(var i in object){
+      buttonId = object[i].button_id.toString();
+      storyId = object[i].story_id.toString();
+    }
     return $q(function(resolve,reject){
-      $http.patch(ServerUrl + '/buttons/'+object.button.button_id,{button: button}).success(function(response){
-        $rootScope.alert = 'Your button was successfully changed';
+      $http.patch(ServerUrl + '/buttons/'+buttonId,{button:{ story_id: storyId }}).success(function(response){
+        $rootScope.alert = 'Your button was successfully changed!!!';
         resolve(response);
       }).error(function(data,status,headers,config){
         $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;

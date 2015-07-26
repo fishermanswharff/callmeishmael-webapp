@@ -26,24 +26,17 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     return key === '*' || key === '#' || key === '0' || key === 'PR';
   };
 
-  $rootScope.$on('droppedElement',function(e,args){
-    var drag = args.dragObj, drop = args.dropObj, prevStoryId, buttonToEdit, indexToRemove, objToRemove;
+  $scope.$on('droppedElement',function(e,args){
 
-    angular.forEach(vm.availableStories, function(value,index){
-      if(value.id === drag.id){
-        var removed = vm.availableStories.splice(index, 1);
-        trace('removed:', removed);
-      }
-    });
+    var drag = args.dragObj, drop = args.dropObj, prevStoryId, buttonToEdit;
 
-    buttonToEdit = vm.currentPhone.buttons.filter(function(value,index,array){
-      for(var obj in value){
-        if(obj === Object.keys(drop)[0]){
-          return value;
-        }
-      }
-    })[0];
+    // get the button that out of the currentPhone.buttons array, referenced by key
+    buttonToEdit = _getButtonToEdit(drop);
 
+    // remove the dragged item out of available stories
+    _spliceStoryFromAvailable(drag);
+
+    // reassign the new button properties, keep the story_id that is being replaced
     for(var i in buttonToEdit){
       prevStoryId = buttonToEdit[i].story_id;
       buttonToEdit[i].title = drag.title;
@@ -51,12 +44,15 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       buttonToEdit[i].story_id = drag.id;
     }
 
+    // if there was a story_id, go get it from the server
     if(typeof prevStoryId !== 'undefined'){
       $scope.$apply(_getStory(prevStoryId));
     }
 
     // TODO: persist the button data to the server
-    // PhoneFactory.assign({button: { assignment: Object.keys(buttonToEdit)[0], story_id: drag.id, phone_id: vm.currentPhone.id }})
+    PhoneFactory.assignButton(buttonToEdit).then(function(response){
+      trace(response);
+    });
   });
 
   // PRIVATE METHODS
@@ -70,7 +66,6 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   var _getStory = function(id){
     StoryFactory.fetchOne(id).then(function(response){
       vm.availableStories.push(response);
-      trace('avail stories: ',vm.availableStories, 'response:', response);
     });
   };
 
@@ -104,6 +99,24 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     return array.filter(function(value){
       if(value.story_type === 'ishmaels'){
         return value;
+      }
+    });
+  };
+
+  var _getButtonToEdit = function(obj){
+    return vm.currentPhone.buttons.filter(function(value,index,array){
+      for(var i in value){
+        if(i === Object.keys(obj)[0]){
+          return value;
+        }
+      }
+    })[0];
+  };
+
+  var _spliceStoryFromAvailable = function(obj){
+    angular.forEach(vm.availableStories, function(value,index){
+      if(value.id === obj.id){
+        vm.availableStories.splice(index, 1);
       }
     });
   };
