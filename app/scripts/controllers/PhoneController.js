@@ -19,7 +19,10 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     if(typeof obj.value.story_id !== 'undefined'){
       _getStory(obj.value.story_id);
     }
-    vm.currentPhone.buttons[index][obj.key] = {};
+    obj.value.story_id = '';
+    obj.value.title = '';
+    obj.value.created_at = '';
+    obj.value.url = '';
   };
 
   vm.isFixed = function(key){
@@ -27,16 +30,10 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   };
 
   $scope.$on('droppedElement',function(e,args){
-
     var drag = args.dragObj, drop = args.dropObj, prevStoryId, buttonToEdit;
-
-    // get the button that out of the currentPhone.buttons array, referenced by key
     buttonToEdit = _getButtonToEdit(drop);
-
-    // remove the dragged item out of available stories
     _spliceStoryFromAvailable(drag);
 
-    // reassign the new button properties, keep the story_id that is being replaced
     for(var i in buttonToEdit){
       prevStoryId = buttonToEdit[i].story_id;
       buttonToEdit[i].title = drag.title;
@@ -44,12 +41,10 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       buttonToEdit[i].story_id = drag.id;
     }
 
-    // if there was a story_id, go get it from the server
     if(typeof prevStoryId !== 'undefined'){
       $scope.$apply(_getStory(prevStoryId));
     }
 
-    // TODO: persist the button data to the server
     PhoneFactory.assignButton(buttonToEdit).then(function(response){
       // $('.alert').addClass('success').find('p').prepend('<i class="fa fa-check">');
     });

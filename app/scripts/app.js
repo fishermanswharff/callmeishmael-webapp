@@ -53,6 +53,7 @@ angular.module('phoneApp', [
       $location.path('/phones');
     }
   }
+
 }).config(function($sceDelegateProvider){
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',

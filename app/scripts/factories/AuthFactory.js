@@ -16,22 +16,22 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
   };
 
   var login = function(credentials){
-    return $http.post(ServerUrl + '/login',credentials).success(function(response){
+    return $http.post(ServerUrl + '/login',credentials).success(function(response, status, headers, config){
       _storeSession(response);
       $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
-      $rootScope.alert = null;
+      trace(status);
+      $rootScope.$broadcast('alert', { alert: 'Log in successful.', status: status });
     }).error(function(data,status,headers,config){
-      trace(data,status,headers,config);
-      $rootScope.alert = 'Username and Password combination is invalid. Please try again.';
+      $rootScope.$broadcast('alert', { alert: 'Your email and/or password are incorrect.', status: status });
     });
   };
 
   var logout = function(){
-    return $http.get(ServerUrl + '/logout').success(function(response){
+    return $http.get(ServerUrl + '/logout').success(function(response, status, headers, config){
       trace(response);
       $window.localStorage.removeItem('cmi-user');
       $rootScope.currentUser = null;
-      $rootScope.alert = 'You have successfully logged out';
+      $rootScope.$broadcast('alert', { alert: 'You have successfully logged out.', status: status });
     });
   };
 
@@ -40,20 +40,21 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
   };
 
   var postNewUser = function(user){
-    return $http.post(ServerUrl + '/users',{user: user}).success(function(response){
+    return $http.post(ServerUrl + '/users',{user: user}).success(function(response, status, headers, config){
       trace(response);
+      $rootScope.$broadcast('alert', { alert: 'New user successfully created.', status: status });
     }).error(function(data, status, headers, config){
+      $rootScope.$broadcast('alert', { alert: 'New user successfully created.', status: status });
       trace(data,status,headers,config,'you are so stupid, you are doing it wrong');
     });
   };
 
   var updateUser = function(user){
-    return $http.patch(ServerUrl + '/admin/users/' + user.id, {user: user}).success(function(response){
+    return $http.patch(ServerUrl + '/admin/users/' + user.id, {user: user}).success(function(response, status, headers, config){
       $rootScope.confirmed = true;
-      trace('success on updateUser: ',response);
+      $rootScope.$broadcast('alert', { alert: 'User updated successfully.', status: status });
     }).error(function(data,status,headers,config){
-      trace(data,status,headers,config);
-      $rootScope.alert = 'Your password did NOT save successfully, please try again';
+      $rootScope.$broadcast('alert', { alert: 'User was not updated successfully.', status: status });
     });
   };
 
@@ -66,10 +67,12 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
   };
 
   var submitNewPassword = function(user){
-    return $http.patch(ServerUrl + '/admin/users/'+user.id, {user: user}).success(function(response){
+    return $http.patch(ServerUrl + '/admin/users/'+user.id, {user: user}).success(function(response, status, headers, config){
       trace(response);
+      $rootScope.$broadcast('alert', { alert: 'Your password was successfully changed.', status: status });
     }).error(function(data,status,headers,config){
-      trace(data,status,headers,config);
+      trace('error changing new password: ',data,status,headers,config);
+      $rootScope.$broadcast('alert', { alert: 'Your password was not successfully changed.', status: status });
     });
   };
 

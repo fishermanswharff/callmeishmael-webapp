@@ -5,8 +5,10 @@
     <title>Call Me Ishmael Phone Portal</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
     <script src="//use.typekit.net/zun2ynd.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -20,12 +22,12 @@
 
   </head>
   <body ng-app="phoneApp">
-    <!--[if lt IE 7]>
+    <!--[if lt IE 9]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <navbar></navbar>
-    <div class="alert" ng-if="alert"><p>{{alert}}</p></div>
+    <cmi-alert></cmi-alert>
     <section class="main">
       <ng-view></ng-view>
     </section>
@@ -43,6 +45,7 @@
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!--
     <script>
       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -51,7 +54,7 @@
       ga('create', 'UA-XXXXX-X');
       ga('send', 'pageview');
     </script>
-
+    -->
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -109,6 +112,7 @@
     <script src="scripts/directives/AudioPlayerDirective.js"></script>
     <script src="scripts/directives/DraggableDirective.js"></script>
     <script src="scripts/directives/DroppableDirective.js"></script>
+    <script src="scripts/directives/AlertDirective.js"></script>
     <!-- controllers -->
     <script src="scripts/controllers/AboutController.js"></script>
     <script src="scripts/controllers/NavbarController.js"></script>

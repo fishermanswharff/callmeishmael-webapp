@@ -28,11 +28,11 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   var post = function(object){
     object.story.story_type = _normalize(object.story.story_type);
     return $q(function(resolve,reject){
-      $http.post(ServerUrl + '/stories', object).success(function(response){
-        $rootScope.alert = 'Your story was successfully created';
+      $http.post(ServerUrl + '/stories', object).success(function(response, status, headers, config){
+        $rootScope.$broadcast('alert', { alert: 'The story was created successfully.', status: status });
         resolve(response);
       }).error(function(data, status, headers, config){
-        trace(data,status,headers,config);
+        $rootScope.$broadcast('alert', { alert: 'There was an error and the story was not created successfully.', status: status });
         reject(data, status, headers, config);
       });
     });
@@ -40,7 +40,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
 
   var destroy = function(object){
     return $q(function(resolve,reject){
-      $http.delete(ServerUrl + '/stories/'+object.story.id).success(function(response){
+      $http.delete(ServerUrl + '/stories/'+object.story.id).success(function(response, status, headers, config){
         $rootScope.alert = 'Your venue was successfully deleted';
         resolve(response);
       }).error(function(data,status,headers,config){
@@ -61,3 +61,4 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
     destroy: destroy
   };
 }]);
+
