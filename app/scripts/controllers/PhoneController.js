@@ -24,7 +24,8 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   };
 
   $scope.$on('droppedElement',function(e,args){
-    var drag = args.dragObj, drop = args.dropObj, prevStoryId;;
+    var drag = args.dragObj, drop = args.dropObj, prevStoryId;
+    trace(drag,drop,prevStoryId);
     var buttonToEdit = vm.currentPhone.buttons.filter(function(value,index,array){
       for(var obj in value){
         if(obj === Object.keys(drop)[0]){

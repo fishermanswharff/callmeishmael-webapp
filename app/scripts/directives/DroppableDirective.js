@@ -29,7 +29,7 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
             dragObj: $scope.$parent.phoneController.availableStories[dragIndex],
             dropObj: $scope.obj
           });
-          $scope.$apply();
+          // $scope.$apply();
         },
         hoverClass: 'cmi-droppable-hover',
       });
