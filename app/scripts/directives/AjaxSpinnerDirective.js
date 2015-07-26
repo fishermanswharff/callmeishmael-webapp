@@ -8,7 +8,13 @@ angular.module('MainDirective').directive('ajaxSpinner',['trace','$http',functio
       };
 
       $scope.$watch($scope.isLoading,function(v){
-        v ? element.addClass('active').find('i.fa').addClass('fa-cog fa-spin') : element.removeClass('active').find('i.fa').removeClass('fa-cog fa-spin');
+        if(v){
+          element.addClass('active').find('i.fa').addClass('fa-cog fa-spin');
+          $('html, body').addClass('ajax-progress');
+        } else {
+          element.removeClass('active').find('i.fa').removeClass('fa-cog fa-spin');
+          $('html, body').removeClass('ajax-progress');
+        }
       });
     }
   };

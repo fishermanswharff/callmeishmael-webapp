@@ -2,6 +2,19 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-y: auto;
+  height: auto;
+
+  &.ajax-progress {
+    overflow-y: hidden;
+    height: 100%;
+  }
+}
+
+
+
 h1,h2,h3,h4,h5,h6 {
   font-family: $header-font;
   font-weight: $body-bold;
@@ -28,7 +41,7 @@ div#global-container {
       display: block;
       height: 100vh;
       left: 0;
-      position: absolute;
+      position: fixed;
       top: 0;
       width: 100vw;
     }
