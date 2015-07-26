@@ -55,6 +55,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       $scope.$apply(_getStory(prevStoryId));
     }
 
+    // TODO: persist the button data to the server
     // PhoneFactory.assign({button: { assignment: Object.keys(buttonToEdit)[0], story_id: drag.id, phone_id: vm.currentPhone.id }})
   });
 
