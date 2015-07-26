@@ -2,10 +2,15 @@
 angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',function($rootScope,trace){
   return {
     restrict: 'EA',
+    scope: {
+      button: '='
+    },
     link: function($scope,elem,attrs){
       $(elem).droppable({
         drop: function(event,ui) {
-          var dragIndex = angular.element(ui.draggable).data('index'),
+          var newStory,
+              dragIndex = angular.element(ui.draggable).data('index'),
+              dragId = angular.element(ui.draggable).data('uid'),
               dragEl = angular.element(ui.draggable).parent(),
               dropEl = angular.element(this),
               targetX = $(ui.draggable).offset().left - $(this).offset().left,
@@ -25,11 +30,18 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
               $(this).remove();
             });
           });
+
+          newStory = $scope.$parent.phoneController.availableStories.filter(function(value,index,array){
+            if(value.id === dragId){
+              return value
+            }
+          })[0];
+
           $rootScope.$broadcast('droppedElement', {
-            dragObj: $scope.$parent.phoneController.availableStories[dragIndex],
-            dropObj: $scope.obj
+            dragObj: newStory,
+            dropObj: $scope.button
           });
-          // $scope.$apply();
+          $scope.$apply();
         },
         hoverClass: 'cmi-droppable-hover',
       });
