@@ -12,6 +12,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   PhoneFactory.fetch($rootScope.currentUser.venues[0].id).then(function(response){
     angular.copy(response[0], vm.currentPhone);
     _getStories();
+    _collectUserVenues();
   });
 
   vm.clearButton = function(obj,index,key,value){
@@ -87,8 +88,5 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       }
     });
   };
-
-
-  _collectUserVenues();
 
 };
