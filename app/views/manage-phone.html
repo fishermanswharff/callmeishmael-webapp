@@ -26,13 +26,35 @@
       </div>
       <div class='grid_10'>
         <h2>Available Stories:</h2>
+        <div class="form-group">
+          <label for='search-by-title'>Search by title:
+            <input id='search-by-title' type='text' ng-model='search.title' placeholder='Search by title'>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for='search-by-author-last'>Search by author last name:
+            <input id='search-by-author-last' type='text' ng-model='search.author_last' placeholder='Search by author last name'>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for='venue-story-checkbox'>
+            <input id='venue-story-checkbox' type="checkbox" ng-model="search.story_type" ng-true-value="'venue'" ng-false-value="''">
+            Your Venue Stories
+          </label>
+        </div>
+        <div class="form-group">
+          <label for='ishmael-story-checkbox'>
+            <input id='ishmael-story-checkbox' type="checkbox" ng-model="search.story_type" ng-true-value="'ishmaels'" ng-false-value="''">
+            Ishmaels Stories
+          </label>
+        </div>
         <ul>
-          <li class='cmi-draggable' ng-repeat='story in phoneController.availableStories track by $index' cmi-draggable data-index="{{$index}}">
-            <div>
+          <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search | orderBy:'-id' track by $index" cmi-draggable data-index="{{$index}}">
+            <div class='cmi-draggable-info'>
               <p>
                 <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
                 <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
-                <span class='story-type'>Type: {{story.story_type}} story</span>
+                <span class='story-type'>Type: <strong>{{story.story_type}}</strong></span>
               </p>
             </div>
           </li>

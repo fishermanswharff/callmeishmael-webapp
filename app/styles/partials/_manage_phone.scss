@@ -55,13 +55,24 @@
 
       &.cmi-draggable {
         background-color: $white;
+        padding: 0;
 
         &.ui-draggable-dragging {
           box-shadow: 0 0 2px 1px rgba(0,0,0,.5);
         }
 
-        &:hover {
-          background-color: $black-10;
+        .cmi-draggable-info {
+          @include transition(all,.25s,ease,0);
+          padding: .5em;
+
+          &:hover {
+            background-color: $black-10;
+          }
+
+          .story-type {
+            float: right;
+            padding: 0.5em;
+          }
         }
       }
 
