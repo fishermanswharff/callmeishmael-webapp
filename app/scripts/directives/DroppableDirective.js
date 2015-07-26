@@ -44,6 +44,8 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
           $scope.$apply();
         },
         hoverClass: 'cmi-droppable-hover',
+        disabled: '.nonEditable',
+        revert: 'invalid',
       });
     },
   };

@@ -25,8 +25,10 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     obj.value.url = '';
   };
 
-  vm.isFixed = function(key){
-    return key === '*' || key === '#' || key === '0' || key === 'PR';
+  vm.isFixed = function(object){
+    for(var i in object){
+      return i === '*' || i === '#' || i === '0' || i === 'PR';
+    }
   };
 
   $scope.$on('droppedElement',function(e,args){

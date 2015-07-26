@@ -39,16 +39,6 @@
           text-align: center;
           width: 4em;
         }
-
-        &.nonEditable {
-          color: $black-30;
-          cursor: disabled;
-
-          span.button-assignment {
-            background-color: $black-10;
-            border: 0;
-          }
-        }
       }
 
       .audio { display: inline; }
@@ -82,6 +72,18 @@
 
         &.cmi-droppable-hover {
           background-color: $black-10;
+        }
+      }
+
+      &.nonEditable {
+        color: $black-30;
+        cursor: disabled;
+
+        .phone-button-object {
+          span.button-assignment {
+            background-color: $black-10;
+            border: 0;
+          }
         }
       }
     }
