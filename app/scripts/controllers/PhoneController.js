@@ -45,9 +45,8 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     }
 
     if(typeof prevStoryId !== 'undefined'){
-      _getStory(prevStoryId);
+      $scope.$apply(_getStory(prevStoryId));
     }
-
     // PhoneFactory.assign({button: { assignment: Object.keys(buttonToEdit)[0], story_id: drag.id, phone_id: vm.currentPhone.id }})
   });
 
@@ -98,5 +97,5 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       }
     });
   };
+}
 
-};

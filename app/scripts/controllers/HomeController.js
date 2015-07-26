@@ -7,19 +7,4 @@ function homeController(trace,$location,AuthFactory){
 
   var scene = document.getElementById('scene');
   var parallax = new Parallax(scene);
-
-  vm.login = function(credentials){
-    AuthFactory.login(credentials).then(function(response){
-      $location.path('/dashboard');
-    });
-  };
-
-  vm.showPasswordForm = function(){
-    vm.forgotPassword = !vm.forgotPassword;
-  };
-
-  vm.sendPasswordLink = function(credentials){
-    AuthFactory.sendPasswordLink(credentials);
-  };
-
 };
