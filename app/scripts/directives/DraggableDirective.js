@@ -5,7 +5,7 @@ angular.module('MainDirective').directive('cmiDraggable',['$rootScope','trace',f
     compile: function(){
       return function($scope,elem,attrs){
         $(elem).draggable({
-          cursor: "pointer",
+          cursor: 'pointer',
           revert: 'invalid',
           drag: function(e,ui){},
           start: function(e,ui){},

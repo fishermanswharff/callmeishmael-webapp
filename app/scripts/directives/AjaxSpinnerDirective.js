@@ -11,5 +11,5 @@ angular.module('MainDirective').directive('ajaxSpinner',['trace','$http',functio
         v ? element.addClass('active').find('i.fa').addClass('fa-cog fa-spin') : element.removeClass('active').find('i.fa').removeClass('fa-cog fa-spin');
       });
     }
-  }
+  };
 }]);

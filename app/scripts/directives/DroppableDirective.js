@@ -33,7 +33,7 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
 
           newStory = $scope.$parent.phoneController.availableStories.filter(function(value,index,array){
             if(value.id === dragId){
-              return value
+              return value;
             }
           })[0];
 

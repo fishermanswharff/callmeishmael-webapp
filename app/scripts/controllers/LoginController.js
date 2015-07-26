@@ -31,7 +31,7 @@ function loginController($rootScope,$location,AuthFactory,trace){
   vm.sendPasswordLink = function(credentials){
     $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-cog fa-spin');
     AuthFactory.sendPasswordLink(credentials).then(function(response){
-      if(response.status == 200){
+      if(response.status === 200){
         $rootScope.alert = 'Your email has been sent. If you did not receive it please check your spam box.';
         $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-check').removeClass('fa-cog fa-spin');
       } else {

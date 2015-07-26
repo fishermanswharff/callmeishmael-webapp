@@ -16,6 +16,9 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   });
 
   vm.clearButton = function(obj,index,key,value){
+    if(typeof obj.value.story_id !== 'undefined'){
+      _getStory(obj.value.story_id);
+    }
     vm.currentPhone.buttons[index][obj.key] = {};
   };
 
@@ -24,9 +27,9 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   };
 
   $scope.$on('droppedElement',function(e,args){
-    var drag = args.dragObj, drop = args.dropObj, prevStoryId;
+    var drag = args.dragObj, drop = args.dropObj, prevStoryId, buttonToEdit;
 
-    var buttonToEdit = vm.currentPhone.buttons.filter(function(value,index,array){
+    buttonToEdit = vm.currentPhone.buttons.filter(function(value,index,array){
       for(var obj in value){
         if(obj === Object.keys(drop)[0]){
           return value;
@@ -41,9 +44,9 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       buttonToEdit[i].story_id = drag.id;
     }
 
-    StoryFactory.fetchOne(prevStoryId).then(function(response){
-      vm.availableStories.push(response);
-    });
+    if(typeof prevStoryId !== 'undefined'){
+      _getStory(prevStoryId);
+    }
 
     // PhoneFactory.assign({button: { assignment: Object.keys(buttonToEdit)[0], story_id: drag.id, phone_id: vm.currentPhone.id }})
   });
@@ -53,6 +56,12 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   var _getStories = function(){
     StoryFactory.fetch().then(function(response){
       _pushToAvailable(_filterIshmaelStories(response));
+    });
+  };
+
+  var _getStory = function(id){
+    StoryFactory.fetchOne(id).then(function(response){
+      vm.availableStories.push(response);
     });
   };
 

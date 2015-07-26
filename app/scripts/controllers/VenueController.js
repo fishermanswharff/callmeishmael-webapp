@@ -59,8 +59,8 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
   } else {
     var venuesWithPhones = vm.userVenues.filter(function(value){ if(value.number_phones !== null) return value; });
     vm.getVenue(venuesWithPhones[0].id);
-  };
+  }
 
   vm.getStories();
 
-};
+}

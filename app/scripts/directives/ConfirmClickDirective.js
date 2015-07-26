@@ -13,7 +13,7 @@ angular.module('MainDirective').directive('ngConfirmClick',['trace','$window',fu
         if($window.confirm(msg)){
           $scope.$eval(clickAction);
         }
-      })
+      });
     }
-  }
+  };
 }]);
