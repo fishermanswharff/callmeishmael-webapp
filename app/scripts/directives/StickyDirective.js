@@ -10,10 +10,12 @@ angular.module('MainDirective').directive('sticky', ['$rootScope','$window','tra
             distance = (elementOffset - scrollTop),
             parentDistance = (parentOffset - scrollTop),
             initialWidth = element.width();
+
         if(distance <= 0){
           $(element).addClass('sticky');
           element.width(initialWidth);
         }
+
         if(parentDistance > 0) {
           $(element).removeClass('sticky');
           element.width('');

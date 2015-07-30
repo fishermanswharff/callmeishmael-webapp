@@ -46,7 +46,7 @@
             Ishmaels Stories
           </label>
         </div>
-        <ul class='row clearfix'>
+        <ul class='row clearfix' paginate>
           <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search" cmi-draggable story='story' data-uid="{{story.id}}" >
             <div class='cmi-draggable-info'>
               <p>
