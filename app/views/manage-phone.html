@@ -3,7 +3,7 @@
     <sidenav></sidenav>
   </aside>
   <section class='main-content container'>
-    <div class='data-container manage-phone-dashboard'>
+    <div class='data-container manage-phone-dashboard clearfix'>
       <div class='current-phone-list-container grid_6'>
         <h1>Drag new stories to your phone here:</h1>
         <ul class='current-phone-list'>
@@ -24,31 +24,29 @@
           </li>
         </ul>
       </div>
-      <div class='grid_10'>
+      <div class='grid_10 available-stories-container' sticky>
         <h2>Available Stories:</h2>
         <div class="form-group">
-          <label for='search-by-title'>Search by title:
+          <label for='search-by-title'>
             <input id='search-by-title' type='text' ng-model='search.title' placeholder='Search by title'>
           </label>
         </div>
         <div class="form-group">
-          <label for='search-by-author-last'>Search by author last name:
+          <label for='search-by-author-last'>
             <input id='search-by-author-last' type='text' ng-model='search.author_last' placeholder='Search by author last name'>
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group blocked">
           <label for='venue-story-checkbox'>
             <input id='venue-story-checkbox' type="checkbox" ng-model="search.story_type" ng-true-value="'venue'" ng-false-value="''">
             Your Venue Stories
           </label>
-        </div>
-        <div class="form-group">
           <label for='ishmael-story-checkbox'>
             <input id='ishmael-story-checkbox' type="checkbox" ng-model="search.story_type" ng-true-value="'ishmaels'" ng-false-value="''">
             Ishmaels Stories
           </label>
         </div>
-        <ul>
+        <ul class='row clearfix'>
           <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search" cmi-draggable story='story' data-uid="{{story.id}}" >
             <div class='cmi-draggable-info'>
               <p>
