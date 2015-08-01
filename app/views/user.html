@@ -87,7 +87,7 @@
         <li>Your phone number is : <strong>{{userController.currentUser.phonenumber}}</strong></li>
         <li>Your account status: <strong>{{userController.currentUser.active === true ? 'Active' : 'Inactive'}}</strong></li>
         <li>Your account is <strong>{{userController.currentUser.confirmed === true ? 'confirmed' : 'unconfirmed'}}</strong>.
-          <button class='button' ng-if='userController.currentUser.confirmed === false' ng-click=''>Confirm your account</button>
+          <button class='button' ng-if='userController.currentUser.confirmed === false' ng-click='userController.updateUser({confirmed: true})'>Confirm your account</button>
         </li>
         <li>Your account was created on <strong>{{userController.currentUser.created_at}}</strong></li>
         <li ng-if="userController.currentUser.main_store_contact === true">You are the main contact at your store.</li>

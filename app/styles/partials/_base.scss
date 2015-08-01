@@ -34,7 +34,7 @@ div#global-container {
     display: none;
 
     &.active {
-      background-color: rgba(0,0,0,.8);
+      background-color: rgba(255,255,255,.9);
       display: block;
       height: 100vh;
       left: 0;
@@ -52,7 +52,7 @@ div#global-container {
       @include transform(translateY(-50%));
 
       i.fa {
-        color: $white;
+        color: $black;
         font-size: 5em;
       }
     }
