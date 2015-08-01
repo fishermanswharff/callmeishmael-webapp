@@ -28,13 +28,7 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/admin-phone.html'
     })
     .when('/story-stats',{
-      templateUrl: 'views/story.html'
-    })
-    .when('/fixed',{
-      templateUrl: 'views/fixed.html'
-    })
-    .when('/add-new',{
-      templateUrl: 'views/add-new.html'
+      templateUrl: 'views/stories.html'
     })
     .when('/phones',{
       templateUrl: 'views/phone-show.html',

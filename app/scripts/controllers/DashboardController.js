@@ -15,7 +15,6 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
 
   var fetchStories = function(){
     StoryFactory.fetch().then(function(response){ angular.copy(response,vm.stories); trace(vm.stories); });
-
   };
 
   var fetchPhones = function(){

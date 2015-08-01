@@ -6,7 +6,7 @@
       <label>Search by Venue</label>
       <input type='text' ng-model="search.venue.name" placeholder="Search by venue name">
     </div>
-    <div class="form-group">
+    <div class="form-group checkbox-group">
       <label>
         <input type="checkbox" ng-model="search.status" ng-true-value="'active'" ng-false-value="''">Active Phones
       </label>
@@ -45,5 +45,38 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="data-container phone-form grid_8" ng-controller='FormsController as formsController'>
+    <h3>Add a New Phone</h3>
+    <form name='phoneForm' id='phoneForm' ng-submit='formsController.submit({phone: formsController.phone})' novalidate>
+      <div class="form-group">
+        <label for='phoneWifiSSID'>Wifi SSID
+          <input type='text' name='phoneWifiSSID' id='phoneWifiSSID' ng-model='formsController.phone.wifiSSID' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='phoneWifiPassword'>Wifi Password
+          <input type='text' name='phoneWifiPassword' id='phoneWifiPassword' ng-model='formsController.phone.wifiPassword' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Phone Status:
+          <select id='phoneStatusSelect' class='select phone-status-list' ng-model='formsController.phone.status' required>
+            <option value=''>-- choose status --</option>
+            <option ng-repeat='status in formsController.phoneStatus' ng-model='formsController.phone.status'>{{status}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Choose Venue
+          <select id='venueForPhoneList' class='select venue-phone-list' ng-model='formController.phone.venueId' ng-options='venue.id as venue.name for venue in formsController.venues' required>
+            <option value="">-- choose venue --</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <input class='btn' type='submit' value='Add Phone' ng-disabled='phoneForm.$invalid'>
+      </div>
+    </form>
   </div>
 </section>

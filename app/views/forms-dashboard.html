@@ -1,6 +1,7 @@
 <section class="main-content">
   <header><h1>Add All of the Things To Ishmael’s Library</h1></header>
   <p>Use this area to add various assets to the CMI Phone network.</p>
+  <!-- story form -->
   <div class="data-container story-form">
     <h3>Add a New Story to Ishmael’s Library:</h3>
     <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit({story: formsController.story})" novalidate>
@@ -37,6 +38,8 @@
       </div>
     </form>
   </div>
+
+  <!-- phone form -->
   <div class="data-container phone-form">
     <h3>Add a New Phone</h3>
     <form name='phoneForm' id='phoneForm' ng-submit='formsController.submit({phone: formsController.phone})' novalidate>
@@ -70,6 +73,8 @@
       </div>
     </form>
   </div>
+
+  <!-- venue form -->
   <div class="data-container venue-form">
     <h3>Add a New Venue</h3>
     <form name='venueForm' id='venueForm' ng-submit='formsController.submit({venue: formsController.venue})' novalidate>

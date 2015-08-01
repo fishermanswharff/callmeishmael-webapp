@@ -6,7 +6,14 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(
     controller: 'DashboardController',
     controllerAs: 'dashboardController',
     bindToController: true,
-    scope: '=',
-    link: function($scope,element,attrs){}
+    link: function($scope,element,attrs){
+
+
+
+      var typeSelect = angular.element.find('#storyStatusSelect')[0];
+      $(typeSelect).on('change',function(){
+        if(this.value === 'Venue') 
+      });
+    }
   };
 }]);

@@ -7,6 +7,11 @@ input, select, textarea, button {
   font-family: $header-font;
 }
 
+select {
+  display: block;
+  width: 100%;
+}
+
 input + label {
   font-family: $body-font;
 }
@@ -16,6 +21,12 @@ label {
   font-family: $body-font;
   padding: 0;
   width: 100%;
+}
+
+.checkbox-group {
+  label {
+    display: inline;
+  }
 }
 
 input {
