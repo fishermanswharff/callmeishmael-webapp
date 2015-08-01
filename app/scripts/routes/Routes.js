@@ -52,6 +52,11 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       controller: 'LoginController',
       controllerAs: 'loginController'
     })
+    .when('/your-account', {
+      templateUrl: 'views/user.html',
+      controller: 'UserController',
+      controllerAs: 'userController'
+    })
     .when('/passwordreset', {
       templateUrl: 'views/resetpassword.html',
       controller: 'LoginController',

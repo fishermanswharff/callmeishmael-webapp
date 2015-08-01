@@ -67,7 +67,7 @@ div#global-container {
   right: 0;
   margin: 2em;
   max-width: 33%;
-  padding: 2em 4em 2em 2em;
+  padding: 2em 3em 2em 5em;
   position: fixed;
   top: 0;
   z-index: $z-alert-box;
@@ -80,11 +80,11 @@ div#global-container {
   }
 
   .status-bar {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
     height: 100%;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     width: 3em;
 
@@ -106,28 +106,35 @@ div#global-container {
       }
     }
 
-    span.dismiss {
-      @include transition(all,.25s,ease,0s);
-      border: 2px solid $black-10;
-      background-color: $white;
-      border-top-right-radius: 4px;
-      cursor: pointer;
+    span.icon {
       display: block;
-      font-size: 1.4em;
-      line-height: 2em;
-      margin: 0;
-      padding: 0;
       text-align: center;
-
-      &:hover {
-        background-color: $black-10;
-      }
+      top: 50%;
+      transform: translateY(-50%);
+      position: relative;
     }
   }
 
   p {
     font-size: 1.3em;
-    // font-weight: $body-bold;
+
+    span.dismiss {
+      @include transition(all,.25s,ease,0s);
+      cursor: pointer;
+      display: block;
+      font-size: 1.4em;
+      margin: 0;
+      padding: .5em;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:hover {
+        color: $black-60;
+      }
+    }
   }
 }
 

@@ -2,9 +2,6 @@
 angular.module('MainDirective').directive('cmiDraggable',['$rootScope','trace',function($rootScope,trace){
   return {
     restrict: 'EA',
-    scope: {
-      story: '='
-    },
     compile: function(){
       return function($scope,elem,attrs){
         $(elem).draggable({
@@ -14,6 +11,9 @@ angular.module('MainDirective').directive('cmiDraggable',['$rootScope','trace',f
           start: function(e,ui){},
           stop: function(e,ui){},
         });
+        if($scope.$last){
+          $scope.$emit('onRepeatDone',{ e: elem, a: attrs});
+        }
       };
     },
   };

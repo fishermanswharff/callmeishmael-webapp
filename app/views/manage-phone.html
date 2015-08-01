@@ -24,7 +24,8 @@
           </li>
         </ul>
       </div>
-      <div class='grid_10 available-stories-container' sticky>
+      <!-- add directive 'sticky' to this to make it stick to the top -->
+      <div class='grid_10 available-stories-container'>
         <h2>Available Stories:</h2>
         <div class="form-group">
           <label for='search-by-title'>
@@ -46,7 +47,8 @@
             Ishmaels Stories
           </label>
         </div>
-        <ul class='row clearfix' paginate>
+        <!-- paginate max-items='5' on the list -->
+        <ul class='row clearfix'>
           <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search" cmi-draggable story='story' data-uid="{{story.id}}" >
             <div class='cmi-draggable-info'>
               <p>
@@ -56,6 +58,7 @@
               </p>
             </div>
           </li>
+          <ul class='pagination'></ul>
         </ul>
       </div>
     </div>

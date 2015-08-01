@@ -19,7 +19,6 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     return $http.post(ServerUrl + '/login',credentials).success(function(response, status, headers, config){
       _storeSession(response);
       $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
-      trace(status);
       $rootScope.$broadcast('alert', { alert: 'Log in successful.', status: status });
     }).error(function(data,status,headers,config){
       $rootScope.$broadcast('alert', { alert: 'Your email and/or password are incorrect.', status: status });
@@ -41,20 +40,19 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
 
   var postNewUser = function(user){
     return $http.post(ServerUrl + '/users',{user: user}).success(function(response, status, headers, config){
-      trace(response);
       $rootScope.$broadcast('alert', { alert: 'New user successfully created.', status: status });
     }).error(function(data, status, headers, config){
-      $rootScope.$broadcast('alert', { alert: 'New user successfully created.', status: status });
-      trace(data,status,headers,config,'you are so stupid, you are doing it wrong');
+      $rootScope.$broadcast('alert', { alert: 'There was a problem with your request: ' + data, status: status });
     });
   };
 
   var updateUser = function(user){
     return $http.patch(ServerUrl + '/admin/users/' + user.id, {user: user}).success(function(response, status, headers, config){
       $rootScope.confirmed = true;
-      $rootScope.$broadcast('alert', { alert: 'User updated successfully.', status: status });
+      $rootScope.$broadcast('alert', { alert: 'User: ' + response.firstname + ' ' + response.lastname  + ' updated successfully.', status: status });
+      _storeSession(response);
     }).error(function(data,status,headers,config){
-      $rootScope.$broadcast('alert', { alert: 'User was not updated successfully.', status: status });
+      $rootScope.$broadcast('alert', { alert: 'There was a problem and the user was not updated successfully: ' + data, status: status });
     });
   };
 
@@ -91,6 +89,6 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     updateUser: updateUser,
     currentUser: currentUser,
     sendPasswordLink: sendPasswordLink,
-    submitNewPassword: submitNewPassword
+    submitNewPassword: submitNewPassword,
   };
 }]);

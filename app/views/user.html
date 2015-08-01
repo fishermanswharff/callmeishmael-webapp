@@ -1,0 +1,104 @@
+<div class='user'>
+  <aside class='aside-nav'>
+    <sidenav></sidenav>
+  </aside>
+  <section class='main-content container'>
+    <div class='grid_16'>
+      <h1>Hi, {{userController.currentUser.firstname}} {{userController.currentUser.lastname}}.</h1>
+      <p class='lead'>Change your account information here. Your account was last updated on {{userController.currentUser.updated_at}}</p>
+    </div>
+    <div class='grid_6'>
+      <!-- change username -->
+      <form name='userAliasForm' id='userAliasForm' ng-submit='userController.updateUser(userController.user)' novalidate>
+        <h3>Change your username:</h3>
+        <div class="form-group">
+          <label for='username'>
+            <input type='text' id='username' name='username' ng-model='userController.user.username' placeholder='{{userController.currentUser.username}}' required>
+          </label>
+        </div>
+        <div class="form-group">
+          <input class='btn' type='submit' value='Change Username' ng-disabled='userAliasForm.$invalid'>
+        </div>
+      </form>
+      <!-- change password -->
+      <form name='userPasswordForm' id='userPasswordForm' ng-submit='userController.updateUser(userController.user)' novalidate>
+        <h3>Change your password:</h3>
+        <div class="form-group">
+          <label for='password'>
+            <input type='password' id='password' name='password' ng-model='userController.user.password' placeholder='Enter a new password' required>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for='passwordConfirmation'>
+            <input type='password' id='passwordConfirmation' name='passwordConfirmation' ng-model='userController.user.password_confirmation' placeholder='Re enter your password' required>
+          </label>
+        </div>
+        <div class="form-group">
+          <input class='btn' type='submit' value='Change password' ng-disabled='userPasswordForm.$invalid'>
+        </div>
+      </form>
+      <!-- change names -->
+      <form name='userNameForm' id='userNameForm' ng-submit='userController.updateUser(userController.user)' novalidate>
+        <h3>Change your name:</h3>
+        <div class="form-group">
+          <label for='firstname'>
+            <input type='text' id='firstname' name='firstname' ng-model='userController.user.firstname' placeholder='{{userController.currentUser.firstname}}'>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for='lastname'>
+            <input type='text' id='lastname' name='lastname' ng-model='userController.user.lastname' placeholder='{{userController.currentUser.lastname}}'>
+          </label>
+        </div>
+        <div class="form-group">
+          <input class='btn' type='submit' value='Change Name' ng-disabled='userNameForm.$invalid'>
+        </div>
+      </form>
+      <!-- change email -->
+      <form name='userEmailForm' id='userEmailForm' ng-submit='userController.updateUser(userController.user)' novalidate>
+        <h3>Change your email address:</h3>
+        <div class="form-group">
+          <label for='email'>
+            <input type='text' id='email' name='email' ng-model='userController.user.email' placeholder='{{userController.currentUser.email}}' required>
+          </label>
+        </div>
+        <div class="form-group">
+          <input class='btn' type='submit' value='Change Email' ng-disabled='userEmailForm.$invalid'>
+        </div>
+      </form>
+      <!-- change phonenumber -->
+      <form name='userPhoneForm' id='userPhoneForm' ng-submit='userController.updateUser(userController.user)' novalidate>
+        <h3>Change your phone number:.</h3>
+        <div class="form-group">
+          <label for='phonenumber'>
+            <input type='tel' id='phonenumber' name='phonenumber' ng-model='userController.user.phonenumber' placeholder='{{userController.currentUser.phonenumber}}' required>
+          </label>
+        </div>
+        <div class="form-group">
+          <input class='btn' type='submit' value='Change Phone' ng-disabled='userPhoneForm.$invalid'>
+        </div>
+      </form>
+
+    </div>
+    <div class='grid_10'>
+      <ul class='user-details'>
+        <li>Your username: <strong>{{userController.currentUser.username}}</strong></li>
+        <li>Your email address: <strong>{{userController.currentUser.email}}</strong></li>
+        <li>Your phone number is : <strong>{{userController.currentUser.phonenumber}}</strong></li>
+        <li>Your account status: <strong>{{userController.currentUser.active === true ? 'Active' : 'Inactive'}}</strong></li>
+        <li>Your account is <strong>{{userController.currentUser.confirmed === true ? 'confirmed' : 'unconfirmed'}}</strong>.
+          <button class='button' ng-if='userController.currentUser.confirmed === false' ng-click=''>Confirm your account</button>
+        </li>
+        <li>Your account was created on <strong>{{userController.currentUser.created_at}}</strong></li>
+        <li ng-if="userController.currentUser.main_store_contact === true">You are the main contact at your store.</li>
+        <li>You are associated with:
+          <span class='user-venue-detail' ng-repeat='venue in userController.currentUser.venues'><strong>{{venue.name}}</strong> which has <strong>{{venue.number_phones}}</strong> phone{{venue.number_phones > 1 ? 's' : ''}}, <strong>{{venue.total_stories > 0 ? venue.total_stories : 0}} stor{{venue.total_stories === '1' ? 'y' : 'ies'}}</strong>, and which status is: <strong>{{venue.status}}</strong>{{userController.currentUser.venues.length > 1 ? ', ' : ''}}</span></li>
+      </ul>
+
+    </div>
+  </section>
+</div>
+
+
+
+
