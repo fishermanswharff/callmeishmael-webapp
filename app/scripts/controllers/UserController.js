@@ -1,4 +1,4 @@
-'use strict',
+'use strict';
 angular.module('MainController').controller('UserController',userController);
 userController.$inject = ['$rootScope','$scope','AuthFactory','trace'];
 function userController($rootScope,$scope,AuthFactory,trace){

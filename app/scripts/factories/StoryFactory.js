@@ -1,5 +1,5 @@
 'use strict';
-angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScope','ServerUrl','$q','$http',function(trace,$window,$rootScope,ServerUrl,$q,$http){
+angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScope','ServerUrl','$q','$http','AWSFactory','AmazonBucket',function(trace,$window,$rootScope,ServerUrl,$q,$http,AWSFactory,AmazonBucket){
 
   var stories = [];
 
@@ -25,8 +25,9 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
     });
   };
 
-  var post = function(object){
+  var post = function(object,files){
     object.story.story_type = _normalize(object.story.story_type);
+    object.story.url = AmazonBucket + files[0].name;
     return $q(function(resolve,reject){
       $http.post(ServerUrl + '/stories', object).success(function(response, status, headers, config){
         $rootScope.$broadcast('alert', { alert: 'The story was created successfully.', status: status });

@@ -11,11 +11,6 @@
           <input type='text' id='storyTitle' name='storyUrl' ng-model='formsController.story.title' required>
         </label>
       </div>
-      <!-- <div class="form-group">
-        <label for='storyUrl'>Story Url
-          <input type='url' id='storyUrl' name='storyUrl' ng-model='formsController.story.url' required>
-        </label>
-      </div> -->
       <div class="form-group">
         <label for='storyAuthorFirst'>Author’s First Name
           <input type='text' id='storyAuthorFirst' name='storyAuthorFirst' ng-model='formsController.story.author_first' required>
@@ -26,15 +21,9 @@
           <input type='text' name='storyAuthorLast' id='storyAuthorLast' ng-model='formsController.story.author_last' required>
         </label>
       </div>
-      <div class="form-group" id='audio-file-upload'>
-        <input type="hidden" name="key" value="key">
-        <input type="hidden" name="AWSAccessKeyId" value="access_key">
-        <input type="hidden" name="acl" value="public-read">
-        <input type="hidden" name="policy" value="policy">
-        <input type="hidden" name="signature" value="signature">
-        <input type="hidden" name="Content-Type" value="audio/ogg">
+      <div class="form-group" id='audioFileUpload'>
         <label>Audio file:</label>
-        <input name='file' type='file'>
+        <input name='file' type='file' required>
       </div>
       <div class="form-group">
         <label>Story Status
@@ -44,11 +33,11 @@
           </select>
         </label>
       </div>
-      <div class='form-group' id='venueStoryField'>
+      <div class='form-group' id='storyVenueField'>
         <label>Attach song to a venue:
           <select id='storyVenueSelect' class='select' ng-model='formsController.story_venue'>
-          <option value=''>-- choose venue --</option>
-          <option ng-repeat='venue in formsController.venues'>{{venue.name}}</option>
+            <option value=''>-- choose venue --</option>
+            <option ng-repeat='venue in formsController.venues' value='{{venue.id}}'>{{venue.name}}</option>
           </select>
         </label>
       </div>
@@ -85,6 +74,7 @@
         <th>Type</th>
         <th>Title</th>
         <th>Author’s Last Name</th>
+        <th>Listen</th>
         <th># Placements</th>
         <th># Listens</th>
         <th>Avg. % Listened</th>
@@ -96,6 +86,7 @@
           <td>{{story.story_type}}</td>
           <td>{{story.title}}</td>
           <td>{{story.author_last}}</td>
+          <td><cmi-audio-player url="{{story.url}}"></cmi-audio-player></td>
           <td>{{story.placements || 0}}</td>
           <td>{{story.listens || 0}}</td>
           <td></td>
