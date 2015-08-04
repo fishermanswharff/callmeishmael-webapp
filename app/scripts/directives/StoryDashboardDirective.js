@@ -12,13 +12,13 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(
 
       $(typeSelect).on('change',function(){
         if(this.value === 'Venue') {
+          trace(this.value);
           $(venueSelect).addClass('show');
         } else {
-          $(venueSelect).removeClass('show');
+          trace(this.value);
+          $(venueSelect).removeClass('show').val('');
         }
       });
-
-
     }
   };
 }]);
