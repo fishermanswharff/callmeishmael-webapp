@@ -37,6 +37,18 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     });
   };
 
+  var addStoryToVenue = function(venueId, storyId){
+    var venue = { venue: { story_ids: [storyId] } };
+    return $q(function(resolve,reject){
+      $http.patch(ServerUrl + '/venues/' + venueId, venue).success(function(response, status, headers, config){
+        $rootScope.$broadcast('alert', { alert: 'The story was added successfully', status: status });
+        resolve(response,status,headers,config);
+      }).error(function(response, status, headers, config){
+        reject(response, status, headers, config);
+      });
+    });
+  };
+
   var destroy = function(object){
     return $q(function(resolve,reject){
       $http.delete(ServerUrl+'/venues/'+object.venue.id).success(function(response){
@@ -64,6 +76,7 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     fetchOne: fetchOne,
     venues: venues,
     post: post,
+    addStoryToVenue: addStoryToVenue,
     destroy: destroy
   };
 }]);

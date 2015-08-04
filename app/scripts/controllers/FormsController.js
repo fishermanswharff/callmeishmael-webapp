@@ -16,11 +16,19 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   vm.phone = {},
   vm.venue = {};
 
-  VenueFactory.fetch().then(function(response){
-    for(var i = 0; i < response.length; i++){
-      if(response[i].status == 'active') vm.venues.push(response[i]);
-    }
-  });
+  var fetchVenues = function(){
+    VenueFactory.fetch().then(function(response){
+      for(var i = 0; i < response.length; i++){
+        if(response[i].status == 'active') vm.venues.push(response[i]);
+      }
+    });
+  };
+
+  var fetchStories = function(){
+    StoryFactory.fetch().then(function(response){
+      angular.copy(response,vm.stories);
+    });
+  };
 
   AuthFactory.fetchUsers().then(function(response){
     angular.copy(response,vm.users);
@@ -30,16 +38,11 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     angular.copy(response,vm.phones);
   });
 
-  StoryFactory.fetch().then(function(response){
-    angular.copy(response,vm.stories);
-  });
-
   vm.submit = function(object){
     for(var item in object){
       switch(item) {
         case 'story':
           storySubmitHandler(object);
-          vm.story = {};
           break;
         case 'phone':
           PhoneFactory.post(object).then(function(response){
@@ -62,28 +65,33 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   };
 
   var storySubmitHandler = function(object){
+    if(object.story.story_type === 'Venue' && object.story.venue_id === undefined){
+      $rootScope.$broadcast('alert', {alert: 'Please choose a venue for the story', status: 400});
+      return;
+    }
     var files = _getFiles();
     AWSFactory.sendToAmazon(files[0]).then(function(response){
+      var location;
       $rootScope.$watch('awsResponse',function(newValue,oldValue){
         if(newValue && newValue.status === 204){
-          $q.all(upsertStory(object,files)).then(function(responses){
-            trace(responses);
+          location = newValue.headers().location;
+          $q.all(upsertStory(object,location)).then(function(responses){
+            if(object.story.venue_id){
+              var story = responses[0];
+              VenueFactory.addStoryToVenue(object.story.venue_id, story.id);
+            }
+            vm.story = {};
+            $(storyForm).find('input[type=file]').val(null);
+            fetchStories();
           });
         }
       });
     });
-    // posts the story to rails first. not ideal, want to post to amazon first
-    // and only if successful post to rails with the url
-    /*StoryFactory.post(object,files).then(function(response){
-      $q.all(_upsertFiles(files)).then(function(responses){
-        trace(responses);
-      });
-    });*/
   };
 
-  var upsertStory = function(object,files){
+  var upsertStory = function(object,url){
     var promises = [];
-    promises.push(StoryFactory.post(object,files));
+    promises.push(StoryFactory.post(object,url));
     return promises;
   };
 
@@ -97,7 +105,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
 
   var _getFiles = function(){
     var promises = [];
-    var $fileInputs = $(storyForm).find('input[type=file]')
+    var $fileInputs = $(storyForm).find('input[type=file]');
     for (var i = 0, length = $fileInputs.length; i < length; i++) {
       var file = $fileInputs[i].files[0];
       if(file) {
@@ -106,6 +114,9 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     }
     return promises;
   };
+
+  fetchVenues();
+  fetchStories();
 }
 
 

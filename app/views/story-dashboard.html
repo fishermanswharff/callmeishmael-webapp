@@ -35,7 +35,7 @@
       </div>
       <div class='form-group' id='storyVenueField'>
         <label>Attach song to a venue:
-          <select id='storyVenueSelect' class='select' ng-model='formsController.story_venue'>
+          <select id='storyVenueSelect' class='select' ng-model='formsController.story.venue_id'>
             <option value=''>-- choose venue --</option>
             <option ng-repeat='venue in formsController.venues' value='{{venue.id}}'>{{venue.name}}</option>
           </select>
@@ -70,7 +70,6 @@
     </div>
     <table>
       <thead>
-        <th>Id</th>
         <th>Type</th>
         <th>Title</th>
         <th>Author’s Last Name</th>
@@ -82,7 +81,6 @@
       </thead>
       <tbody>
         <tr ng-repeat="story in dashboardController.stories | filter:search | orderBy: '-id':reverse=true" >
-          <td>{{story.id}}</td>
           <td>{{story.story_type}}</td>
           <td>{{story.title}}</td>
           <td>{{story.author_last}}</td>

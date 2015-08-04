@@ -25,9 +25,9 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
     });
   };
 
-  var post = function(object,files){
+  var post = function(object,url){
     object.story.story_type = _normalize(object.story.story_type);
-    object.story.url = AmazonBucket + files[0].name;
+    object.story.url = url;
     return $q(function(resolve,reject){
       $http.post(ServerUrl + '/stories', object).success(function(response, status, headers, config){
         $rootScope.$broadcast('alert', { alert: 'The story was created successfully.', status: status });

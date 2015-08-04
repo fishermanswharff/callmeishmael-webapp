@@ -5,7 +5,6 @@ angular.module('phoneApp').factory('AWSFactory',['$http','$q','$rootScope','Serv
     var paramString = '?filename=' + file.name + '&filetype=' + file.type;
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/amazon/sign_key' + paramString).success(function(response, status, headers, config){
-        trace('from fetchKey: ',response);
         return resolve(response);
       }).error(function(response, status, headers, config){
         return reject(response,status,headers.config);
@@ -18,9 +17,12 @@ angular.module('phoneApp').factory('AWSFactory',['$http','$q','$rootScope','Serv
       $http.post(AmazonBucket, buildFormData(file,response),{
         transformRequest: angular.identity,
         headers: { 'Content-Type': undefined, 'Authorization': '' }
-      }).then(function(response){
-        $rootScope.awsResponse = response;
-        return response;
+      }).success(function(response, status, headers, config){
+        $rootScope.awsResponse = { response: response, status: status, headers: headers, config: config };
+        return { response: response, status: status, headers: headers, config: config };
+      }).error(function(response, status, headers, config){
+        $rootScope.alert('alert',{ alert: '', status: status });
+        return { response: response, status: status, headers: headers, config: config };
       });
     })
   };

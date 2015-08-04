@@ -17,6 +17,8 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(
           $(venueSelect).removeClass('show');
         }
       });
+
+
     }
   };
 }]);
