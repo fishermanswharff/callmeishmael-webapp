@@ -17,8 +17,9 @@ angular.module('phoneApp', [
   'ngRoute',
   'ngSanitize',
   'ngTouch',
+  '720kb.datepicker',
   'MainDirective',
-  'MainController'
+  'MainController',
 ]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,StoryFactory,trace){
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){
