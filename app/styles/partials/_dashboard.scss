@@ -35,3 +35,74 @@ table {
     text-align: left;
   }
 }
+
+#story-list-filter {
+
+  &.sticky {
+    background-color: rgb(238, 238, 238);
+    box-shadow: 0px 10px 10px -10px black;
+    padding: 0.5em;
+    z-index: $z-alert-box;
+  }
+}
+
+ul.story-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li.story {
+    @include transition(all, .25s, ease, 0s);
+    border-top: 2px dotted $black-50;
+    margin: 0 0 .5em;
+    padding: .5em;
+    position: relative;
+
+    &:nth-child(1) {
+      border-top: 0;
+    }
+
+    &:hover {
+      @include transform(scale(1.03));
+      background-color: $black-10;
+      border-top: 1px solid $black-10;
+      box-shadow: 0 0 4px 0px rgba(0,0,0,.5);
+    }
+
+    h2.story-title {
+      margin: 0;
+
+      span {
+        font-size: .7em;
+        font-weight: $body-light;
+      }
+    }
+
+    p {
+      span.story-detail {
+        display: block;
+        font-size: $large-font-size;
+        line-height: 2;
+      }
+    }
+
+    div.story-crud-actions {
+      bottom: 0;
+      padding-right: .5em;
+      position: absolute;
+      right: 0;
+
+      a {
+        background-color: $black-10;
+        color: $black-30;
+        display: inline-block;
+        width: auto;
+
+        &:hover {
+          background-color: $black-30;
+          color: $black;
+        }
+      }
+    }
+  }
+}

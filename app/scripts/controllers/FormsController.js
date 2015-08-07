@@ -115,6 +115,28 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     return promises;
   };
 
+  
+
+  vm.deleteObject = function(object){
+    trace(object);
+    for(var item in object){
+      switch(item){
+        case 'story':
+          StoryFactory.destroy(object).then(function(response){ fetchStories(); });
+          break;
+        case 'venue':
+          VenueFactory.destroy(object).then(function(response){ fetchVenues(); });
+          break;
+        case 'phone':
+          debugger;
+          PhoneFactory.destroy(object).then(function(response){ fetchPhones(); });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   fetchVenues();
   fetchStories();
 }

@@ -46,11 +46,17 @@ input[type=tel] {
   width: 100%;
 }
 
+.form-group input[type=submit],
+.form-group button[type=submit] {
+  width: 100%;
+}
+
+a,
 form button,
-input[type='submit'] {
+input[type='submit'],
+button {
   @include transition(all,.25s,ease,0s);
   display: block;
-  width: 100%;
 
   &.btn {
     @include button(mix($black,$black-80,15%), $white, 4px);
@@ -61,6 +67,10 @@ input[type='submit'] {
         @include button(mix($black-20,$black-10,85%), $black, 4px);
         font-weight: bold;
       }
+    }
+
+    &.inline {
+      display: inline;
     }
   }
   &[disabled="disabled"] {

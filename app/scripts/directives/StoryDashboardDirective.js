@@ -9,6 +9,7 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(
     link: function($scope,element,attrs){
       var $typeSelect = $('#storyStatusSelect'),
           $venueSelect = $('#storyVenueField');
+
       $venueSelect.hide();
       $typeSelect.on('change',function(e){
         if($(this).val().toString().replace(/\s/, '') === 'Venue') {

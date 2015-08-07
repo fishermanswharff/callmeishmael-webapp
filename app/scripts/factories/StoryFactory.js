@@ -42,7 +42,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   var destroy = function(object){
     return $q(function(resolve,reject){
       $http.delete(ServerUrl + '/stories/'+object.story.id).success(function(response, status, headers, config){
-        $rootScope.alert = 'Your venue was successfully deleted';
+        $rootScope.$broadcast('alert',{ alert: 'Story' + object.title + 'was successfully deleted', status: status});
         resolve(response);
       }).error(function(data,status,headers,config){
         reject({data: data, status: status, headers: headers, config: config});
