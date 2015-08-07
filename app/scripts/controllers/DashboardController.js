@@ -4,22 +4,13 @@ dashboardController.$inject = ['trace','VenueFactory','PhoneFactory','StoryFacto
 
 function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyTypes){
   var vm = this;
-  vm.venues = [];
   vm.phones = [];
   vm.stories = [];
   vm.storyTypes = storyTypes();
 
-  var fetchVenues = function(){
-    VenueFactory.fetch().then(function(response){ angular.copy(response,vm.venues); });
-  };
-
-  var fetchStories = function(){
-    StoryFactory.fetch().then(function(response){ angular.copy(response,vm.stories); trace(vm.stories); });
-  };
-
-  var fetchPhones = function(){
-    PhoneFactory.get().then(function(response){ angular.copy(response,vm.phones); });
-  };
+  vm.venues = VenueFactory.venues;
+  vm.phones = PhoneFactory.phones;
+  vm.stories = StoryFactory.stories;
 
   vm.activeVenues = function(){
     var active = [];
@@ -56,8 +47,4 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
       }
     }
   };
-
-  fetchVenues();
-  fetchStories();
-  fetchPhones();
 }

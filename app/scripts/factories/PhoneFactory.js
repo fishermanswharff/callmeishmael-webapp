@@ -7,8 +7,8 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/venues/' + venueId + '/phones').success(function(data, status, headers, config){
         resolve(data);
-        angular.copy(data, phones);
       }).error(function(data,status,headers,config){
+        reject(data, status, headers, config);
         trace(data, status, headers, config, 'phone request failed.');
       });
     });
@@ -17,6 +17,7 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
   var get = function(){
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/phones').success(function(data, status, headers, config){
+        angular.copy(data, phones);
         resolve(data);
       })
       .error(function(data,status,headers,config){

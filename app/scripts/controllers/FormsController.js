@@ -6,37 +6,15 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   var vm = this;
   vm.storyTypes = ['Fixed','Venue','Surprise','Ishmael’s', 'Post Roll'];
   vm.phoneStatus = ['active','inactive','retired','fixable'];
-  vm.venues = [];
-  vm.phones = [];
-  vm.stories = [];
-  vm.users = [];
+  vm.venues = VenueFactory.venues;
+  vm.phones = PhoneFactory.phones;
+  vm.stories = StoryFactory.stories;
+  vm.users = AuthFactory.users;
 
   vm.story = {},
   vm.venueStory = {},
   vm.phone = {},
   vm.venue = {};
-
-  var fetchVenues = function(){
-    VenueFactory.fetch().then(function(response){
-      for(var i = 0; i < response.length; i++){
-        if(response[i].status == 'active') vm.venues.push(response[i]);
-      }
-    });
-  };
-
-  var fetchStories = function(){
-    StoryFactory.fetch().then(function(response){
-      angular.copy(response,vm.stories);
-    });
-  };
-
-  AuthFactory.fetchUsers().then(function(response){
-    angular.copy(response,vm.users);
-  });
-
-  PhoneFactory.get().then(function(response){
-    angular.copy(response,vm.phones);
-  });
 
   vm.submit = function(object){
     for(var item in object){
@@ -115,8 +93,6 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     return promises;
   };
 
-  
-
   vm.deleteObject = function(object){
     trace(object);
     for(var item in object){
@@ -136,9 +112,4 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
       }
     }
   };
-
-  fetchVenues();
-  fetchStories();
 }
-
-
