@@ -1,5 +1,5 @@
 'use strict';
-angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(trace){
+angular.module('MainDirective').directive('cmiStoryDashboard',['trace','$rootScope',function(trace,$rootScope){
   return {
     restrict: 'E',
     templateUrl: 'views/story-dashboard.html',
@@ -18,6 +18,11 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace',function(
           $venueSelect.hide().val('');
         }
       });
+
+      $scope.editStory = function(object){
+        trace(object);
+        $rootScope.$broadcast('editStory', { story: object });
+      };
     }
   };
 }]);

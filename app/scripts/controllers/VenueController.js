@@ -6,7 +6,7 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
   vm.venue = {};
   vm.userVenues = AuthFactory.currentUser().venues;
   vm.venuePhones = [];
-  vm.stories = [];
+  vm.stories = StoryFactory.stories;
   vm.buttonAssignments = ['1','2','3','4','5','6','7','8','9'];
 
   vm.getVenue = function(venueId){
@@ -20,12 +20,6 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
     PhoneFactory.fetch(id).then(function(response){
       angular.copy(response,vm.venuePhones);
       // trace(vm.venuePhones);
-    });
-  };
-
-  vm.getStories = function(){
-    StoryFactory.fetch().then(function(response){
-      angular.copy(response,vm.stories);
     });
   };
 
@@ -60,7 +54,5 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
     var venuesWithPhones = vm.userVenues.filter(function(value){ if(value.number_phones !== null) return value; });
     vm.getVenue(venuesWithPhones[0].id);
   }
-
-  vm.getStories();
 
 }

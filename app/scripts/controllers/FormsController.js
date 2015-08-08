@@ -1,7 +1,7 @@
 'use strict';
 angular.module('MainController').controller('FormsController',formsController);
-formsController.$inject = ['trace','$q','AuthFactory','PhoneFactory','StoryFactory','VenueFactory','AWSFactory','$rootScope'];
-function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFactory,AWSFactory,$rootScope){
+formsController.$inject = ['trace','$q','AuthFactory','PhoneFactory','StoryFactory','VenueFactory','AWSFactory','$rootScope','$scope'];
+function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFactory,AWSFactory,$rootScope,$scope){
 
   var vm = this;
   vm.storyTypes = ['Fixed','Venue','Surprise','Ishmael’s', 'Post Roll'];
@@ -11,10 +11,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   vm.stories = StoryFactory.stories;
   vm.users = AuthFactory.users;
 
-  vm.story = {},
-  vm.venueStory = {},
-  vm.phone = {},
-  vm.venue = {};
+  vm.story = {}, vm.venueStory = {}, vm.phone = {}, vm.venue = {};
 
   vm.submit = function(object){
     for(var item in object){
@@ -112,4 +109,8 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
       }
     }
   };
+
+  $rootScope.$on('editStory', function(e, args){
+    vm.story = args.story;
+  });
 }

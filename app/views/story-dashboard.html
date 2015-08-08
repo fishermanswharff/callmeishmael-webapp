@@ -41,7 +41,7 @@
           <span class='story-detail'>Listen to the audio: <cmi-audio-player url="{{story.url}}"></cmi-audio-player></span>
         </p>
         <div class='story-crud-actions' ng-controller='FormsController as formsController'>
-          <a href='javascript:void(0)' class='btn inline edit' ng-click='formsController.editStory(story)'>Edit</a>
+          <a href='javascript:void(0)' class='btn inline edit' ng-click='editStory(story)'>Edit</a>
           <a href="javascript:void(0)" confirmed-click-action="formsController.deleteObject({story: story})" ng-confirm-click='Are you sure you want to delete this story: {{story.title}}' class='btn inline delete'>Delete</a>
         </div>
       </li>
@@ -81,7 +81,9 @@
   </div>
   <div class="data-container story-form grid_8" ng-controller='FormsController as formsController' sticky>
     <h2>Add or Edit a Story to Ishmael’s Library:</h2>
+
     <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit({story: formsController.story})" enctype="multipart/form-data" novalidate>
+      <input type='hidden' id='storyId' value='{{formsController.story.id}}' ng-model='formsController.story.id'>
       <div class="form-group">
         <label for='storyTitle'>Literary Title
           <input type='text' id='storyTitle' name='storyUrl' ng-model='formsController.story.title' required>
@@ -134,7 +136,7 @@
         <input name='file' type='file' required>
       </div>
       <div class="form-group">
-        <input class='btn' type='submit' value='Add Story' ng-disabled='storyForm.$invalid'>
+        <input class='btn' type='submit' value="Add Story" ng-disabled='storyForm.$invalid' ng-if='formsController.story.id !== null'>
       </div>
     </form>
   </div>
