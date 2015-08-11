@@ -5,6 +5,7 @@
     <li ng-class="{ active: sidenavController.isActive('/phone-stats') }"><a href="#/phone-stats">Phone Stats</a></li>
     <li ng-class="{ active: sidenavController.isActive('/story-stats') }"><a href="#/story-stats">Story Management</a></li>
     <li ng-class="{ active: sidenavController.isActive('/your-account')}"><a href='#/your-account'>Your Account</a></li>
+    <li ng-class="{ active: sidenavController.isActive('/user-stats')}"><a href="#/user-stats"></a></li>
   </ul>
   <ul class="side venue-links" ng-if="currentUser.role === 'venue_admin'">
     <li ng-class="{ active: sidenavController.isActive('/phones')}"><a href="#/phones">Your Phone</a></li>

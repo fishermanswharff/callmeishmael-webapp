@@ -6,10 +6,6 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       controller: 'HomeController',
       controllerAs: 'homeController'
     })
-    .when('/about', {
-      templateUrl: 'views/about.html',
-      controller: 'AboutCtrl'
-    })
     .when('/confirm', {
       templateUrl: 'views/confirm-account.html'
     })
