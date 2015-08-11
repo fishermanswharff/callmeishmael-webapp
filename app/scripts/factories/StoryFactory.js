@@ -54,7 +54,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   var destroy = function(object){
     return $q(function(resolve,reject){
       $http.delete(ServerUrl + '/stories/'+object.story.id).success(function(response, status, headers, config){
-        $rootScope.$broadcast('alert',{ alert: 'Story' + object.title + 'was successfully deleted', status: status});
+        $rootScope.$broadcast('alert',{ alert: 'Story ' + object.story.title + ' was successfully deleted', status: status});
         resolve(response);
       }).error(function(data,status,headers,config){
         reject({data: data, status: status, headers: headers, config: config});
