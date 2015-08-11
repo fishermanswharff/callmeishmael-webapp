@@ -45,23 +45,36 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
       return;
     }
     var files = _getFiles();
-    AWSFactory.sendToAmazon(files[0]).then(function(response){
-      var location;
-      $rootScope.$watch('awsResponse',function(newValue,oldValue){
-        if(newValue && newValue.status === 204){
-          location = newValue.headers().location;
-          $q.all(upsertStory(object,location)).then(function(responses){
-            if(object.story.venue_id){
-              var story = responses[0];
-              VenueFactory.addStoryToVenue(object.story.venue_id, story.id);
-            }
-            vm.story = {};
-            $(storyForm).find('input[type=file]').val(null);
-            fetchStories();
-          });
-        }
+    if(files.length > 0){
+      AWSFactory.sendToAmazon(files[0]).then(function(response){
+        var location;
+        $rootScope.$watch('awsResponse',function(newValue,oldValue){
+          if(newValue && newValue.status === 204){
+            location = newValue.headers().location;
+            $q.all(upsertStory(object,location)).then(function(responses){
+              if(object.story.venue_id){
+                var story = responses[0];
+                VenueFactory.addStoryToVenue(object.story.venue_id, story.id);
+              }
+              vm.story = {};
+              $(storyForm).find('input[type=file]').val(null);
+              StoryFactory.fetch();
+            });
+          }
+        });
       });
-    });
+    } else {
+      $q.all(upsertStory(object)).then(function(responses){
+        if(object.story.venue_id){
+          var story = responses[0];
+          VenueFactory.addStoryToVenue(object.story.venue_id, story.id);
+        }
+        vm.story = {};
+        $(storyForm).find('input[type=file]').val(null);
+        StoryFactory.fetch();
+      });
+    }
+
   };
 
   var upsertStory = function(object,url){
@@ -95,14 +108,13 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     for(var item in object){
       switch(item){
         case 'story':
-          StoryFactory.destroy(object).then(function(response){ fetchStories(); });
+          StoryFactory.destroy(object).then(function(response){ StoryFactory.fetch(); });
           break;
         case 'venue':
-          VenueFactory.destroy(object).then(function(response){ fetchVenues(); });
+          VenueFactory.destroy(object).then(function(response){ VenueFactory.fetch(); });
           break;
         case 'phone':
-          debugger;
-          PhoneFactory.destroy(object).then(function(response){ fetchPhones(); });
+          PhoneFactory.destroy(object).then(function(response){ PhoneFactory.get(); });
           break;
         default:
           break;
@@ -110,7 +122,20 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     }
   };
 
-  $rootScope.$on('editStory', function(e, args){
+  vm.normalizeStoryTitle = function(string){
+    return StoryFactory.normalize(string);
+  };
+
+  vm.clearForm = function(){
+    vm.story = {};
+    vm.isEditing = !vm.isEditing;
+  };
+
+  var setCurrentStory = function(e, args){
     vm.story = args.story;
-  });
+    vm.isEditing = !!vm.story.id;
+  };
+
+  $rootScope.$on('editStory', setCurrentStory);
 }
+

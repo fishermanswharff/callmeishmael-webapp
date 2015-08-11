@@ -12,7 +12,7 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace','$rootSco
 
       $venueSelect.hide();
       $typeSelect.on('change',function(e){
-        if($(this).val().toString().replace(/\s/, '') === 'Venue') {
+        if(this.value.replace(/\s/, '') === 'venue') {
           $venueSelect.show();
         } else {
           $venueSelect.hide().val('');
@@ -20,7 +20,6 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace','$rootSco
       });
 
       $scope.editStory = function(object){
-        trace(object);
         $rootScope.$broadcast('editStory', { story: object });
       };
     }

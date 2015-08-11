@@ -80,8 +80,8 @@
     -->
   </div>
   <div class="data-container story-form grid_8" ng-controller='FormsController as formsController' sticky>
-    <h2>Add or Edit a Story to Ishmael’s Library:</h2>
-
+    <h2 ng-hide='formsController.isEditing'>Add a Story to Ishmael’s Library:</h2>
+    <h2 ng-show='formsController.isEditing'>You're currently editing {{formsController.story.title}}</h2>
     <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit({story: formsController.story})" enctype="multipart/form-data" novalidate>
       <input type='hidden' id='storyId' value='{{formsController.story.id}}' ng-model='formsController.story.id'>
       <div class="form-group">
@@ -100,6 +100,12 @@
         </label>
       </div>
       <div class="form-group">
+        <label for='storyCallDate'>Call Date</label>
+        <datepicker date-format='fullDate'>
+          <input ng-model="formsController.story.call_date" type="text" id='storyCallDate' name='storyCallDate'/>
+        </datepicker>
+      </div>
+      <div class="form-group">
         <label for='storyCallLength'>Audio Length (in time)
           <input type='text' id='storyCallLength' name='storyCallLength' ng-model='formsController.story.call_length'>
         </label>
@@ -110,20 +116,14 @@
         </label>
       </div>
       <div class="form-group">
-        <label for='storyCallDate'>Call Date</label>
-        <datepicker date-format='fullDate'>
-          <input ng-model="formsController.story.call_date" type="text" id='storyCallDate' name='storyCallDate'/>
-        </datepicker>
-      </div>
-      <div class="form-group">
         <label>Story Status
           <select id='storyStatusSelect' class='select story-status-list' ng-model='formsController.story.story_type' required>
             <option value=''>-- choose status --</option>
-            <option ng-repeat='status in formsController.storyTypes'>{{status}}</option>
+            <option ng-repeat='status in formsController.storyTypes' value="{{formsController.normalizeStoryTitle(status)}}">{{status}}</option>
           </select>
         </label>
       </div>
-      <div class='form-group' id='storyVenueField'>
+      <div class='form-group' id='storyVenueField' ng-hide='formsController.story.story_type !== "venue"'>
         <label>Attach song to a venue:
           <select id='storyVenueSelect' class='select' ng-model='formsController.story.venue_id'>
             <option value=''>-- choose venue --</option>
@@ -136,7 +136,8 @@
         <input name='file' type='file' required>
       </div>
       <div class="form-group">
-        <input class='btn' type='submit' value="Add Story" ng-disabled='storyForm.$invalid' ng-if='formsController.story.id !== null'>
+        <input class='btn' type='submit' value="{{formsController.isEditing ? 'Submit Changes' : 'Add Story'}}" ng-disabled='storyForm.$invalid'>
+        <a class='btn' href='javascript:void(0)' ng-click='formsController.clearForm()'>Reset form</a>
       </div>
     </form>
   </div>

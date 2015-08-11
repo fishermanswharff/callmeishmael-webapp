@@ -26,17 +26,29 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   };
 
   var post = function(object,url){
-    object.story.story_type = _normalize(object.story.story_type);
-    object.story.url = url;
-    return $q(function(resolve,reject){
-      $http.post(ServerUrl + '/stories', object).success(function(response, status, headers, config){
-        $rootScope.$broadcast('alert', { alert: 'The story was created successfully.', status: status });
-        resolve(response);
-      }).error(function(data, status, headers, config){
-        $rootScope.$broadcast('alert', { alert: 'There was an error and the story was not created successfully.', status: status });
-        reject(data, status, headers, config);
+    object.story.story_type = normalize(object.story.story_type);
+    if(url) object.story.url = url;
+    if(object.story.id){
+      return $q(function(resolve, reject){
+        $http.put(ServerUrl + '/stories/' + object.story.id, object).success(function(response,status,headers,config){
+          $rootScope.$broadcast('alert',{ alert: 'The story ' + response.title + ' was updated successfully', status: status });
+          resolve(response,status,headers,config);
+        }).error(function(response,status,headers,config){
+          $rootScope.$broadcast('alert',{ alert: 'The story ' + object.title + ' failed to update.', status: status });
+          reject(response,status,headers,config);
+        });
       });
-    });
+    } else {
+      return $q(function(resolve,reject){
+        $http.post(ServerUrl + '/stories', object).success(function(response, status, headers, config){
+          $rootScope.$broadcast('alert', { alert: 'The story was created successfully.', status: status });
+          resolve(response);
+        }).error(function(data, status, headers, config){
+          $rootScope.$broadcast('alert', { alert: 'There was an error and the story was not created successfully.', status: status });
+          reject(data, status, headers, config);
+        });
+      });
+    }
   };
 
   var destroy = function(object){
@@ -50,7 +62,8 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
     });
   };
 
-  var _normalize = function(data){
+  var normalize = function(data){
+    if(!data) return;
     return data.toLowerCase().replace(/[\-\s\—\–\”’“‘\',;]/, '');
   };
 
@@ -59,7 +72,8 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
     fetchOne: fetchOne,
     stories: stories,
     post: post,
-    destroy: destroy
+    destroy: destroy,
+    normalize: normalize
   };
 }]);
 
