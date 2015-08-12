@@ -42,7 +42,7 @@
         </div>
         <div class="form-group" ng-if='formsController.newUser.role === "venue_admin"'>
           <label for='userVenue'>Venue:
-            <select id='userVenue' class='select' ng-model='formsController.newUser.venueId'>
+            <select id='userVenue' class='select' ng-model='formsController.newUser.venueId' required="{{formsController.newUser.role === 'venue_admin' ? 'true' : 'false' }}">
               <option value=''>-- choose venue --</option>
               <option ng-repeat='venue in formsController.venues' value='{{venue.id}}'>{{venue.name}}</option>
             </select>
