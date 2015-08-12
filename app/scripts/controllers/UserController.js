@@ -14,6 +14,12 @@ function userController($rootScope,$scope,AuthFactory,trace){
     vm.user = {};
   };
 
+  vm.deleteUser = function(id){
+    AuthFactory.deleteUser(id).then(function(response){
+      AuthFactory.fetchUsers();
+    });
+  };
+
   var getCurrentUser = function(){
     vm.currentUser = AuthFactory.currentUser();
   };

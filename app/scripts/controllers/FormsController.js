@@ -42,9 +42,6 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
           break;
         case 'user':
           userSubmitHandler(object);
-          /*AuthFactory.postNewUser(object).then(function(response){
-            trace(response);
-          });*/
           vm.newUser = {};
           break;
         default:

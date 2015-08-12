@@ -56,6 +56,18 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     });
   };
 
+  var deleteUser = function(id){
+    return $q(function(resolve,reject){
+      $http.delete(ServerUrl + '/admin/users/' + id).success(function(response,status,headers,config){
+        $rootScope.$broadcast('alert', { alert: 'User deleted.', status: status });
+        resolve(response,status,headers,config);
+      }).error(function(response,status,headers,config){
+        $rootScope.$broadcast('alert', { alert: 'Failed to delete user.', status: status });
+        reject(response,status,headers,config);
+      })
+    });
+  }
+
   var currentUser = function(){
     return $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
   };
@@ -87,6 +99,7 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     isAuthenticated: isAuthenticated,
     postNewUser: postNewUser,
     updateUser: updateUser,
+    deleteUser: deleteUser,
     currentUser: currentUser,
     sendPasswordLink: sendPasswordLink,
     submitNewPassword: submitNewPassword,

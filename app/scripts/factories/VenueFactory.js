@@ -39,9 +39,8 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
 
   var patch = function(object, id){
     return $q(function(resolve,reject){
-      debugger;
       $http.put(ServerUrl + '/venues/' + id, object).success(function(response, status, headers, config){
-        $rootScope.$broadcast('alert', {alert: 'Venue ' + object.venue.name + ' updated', status: status})
+        $rootScope.$broadcast('alert', {alert: 'Venue ' + response.name + ' updated', status: status})
         resolve(response,status,headers,config);
       }).error(function(response,status,headers,config){
         $rootScope.$broadcast('alert', {alert: 'Update failed.', status: status});
