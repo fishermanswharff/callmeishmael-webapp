@@ -106,6 +106,41 @@ ul.story-list {
   }
 }
 
+ul.user-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li.user {
+    margin: 1em 0;
+    padding: 1em;
+
+    .user-details {
+
+      h3,
+      p {
+        margin: 0 0 .25em;
+      }
+
+      a.delete {
+        background-color: $black-10;
+        color: $black-30;
+
+        &:hover {
+          background-color: $black-30;
+          color: $black-10;
+        }
+      }
+
+      .user-venues {
+        list-style: disc;
+        margin: 0 0 1em;
+        padding-left: 1.5em;
+      }
+    }
+  }
+}
+
 span.block {
   display: block;
 }

@@ -55,9 +55,9 @@
       </form>
     </div>
     <div class='grid_8 data-container clearfix'>
-      <ul>
-        <li ng-repeat='user in userController.users'>
-          <div class='user'>
+      <ul class='user-list'>
+        <li class='user' ng-repeat='user in userController.users'>
+          <div class='user-details'>
             <h3>{{user.firstname}} {{user.lastname}}</h3>
             <p class='user-details'>
               <span class='block'>Role: {{user.role}}</span>
@@ -67,7 +67,7 @@
               <span class='block'>Main Biz Contact: {{user.main_business_contact}}</span>
               <span class='block'>Account Created on: {{user.created_at}}</span>
               <span class='block'>Belongs to these venues:</span>
-              <ul>
+              <ul class='user-venues'>
                 <li ng-repeat="venue in user.venues">
                   {{venue.name}}
                 </li>
