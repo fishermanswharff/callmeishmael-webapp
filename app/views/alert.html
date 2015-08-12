@@ -1,6 +1,6 @@
-<div class="alert" ng-if='alert' ng-class='{ success: status === 200 || status === 201 || status === 202 || status === 204, error: status === 400 || status === 401 || status === 404 || status === 500 }'>
-  <div class='status-bar' ng-class='{ success: status === 200 || status === 201 || status === 202 || status === 204, error: status === 400 || status === 401 || status === 404 || status === 500 }'>
-    <span class='icon'><i class='fa' ng-class="{ 'fa-check': status === 200 || status === 201 || status === 202 || status === 204, 'fa-times': status === 401 || status === 400 || status === 404 }"></i></span>
+<div class="alert" ng-if='alert' ng-class='{ success: status === 200 || status === 201 || status === 202 || status === 204, error: status === 400 || status === 401 || status === 404 || status === 422 || status === 500 }'>
+  <div class='status-bar' ng-class='{ success: status === 200 || status === 201 || status === 202 || status === 204, error: status === 400 || status === 401 || status === 404 || status === 422 || status === 500 }'>
+    <span class='icon'><i class='fa' ng-class="{ 'fa-check': status === 200 || status === 201 || status === 202 || status === 204, 'fa-times': status === 401 || status === 400 || status === 404 || status === 422 || status === 500 }"></i></span>
   </div>
   <p>
     <span class='message'>{{alert}}</span>

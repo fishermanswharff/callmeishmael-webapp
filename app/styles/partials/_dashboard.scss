@@ -37,7 +37,6 @@ table {
 }
 
 #story-list-filter {
-
   &.sticky {
     background-color: rgb(238, 238, 238);
     box-shadow: 0px 10px 10px -10px black;
@@ -105,4 +104,8 @@ ul.story-list {
       }
     }
   }
+}
+
+span.block {
+  display: block;
 }

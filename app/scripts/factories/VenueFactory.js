@@ -7,9 +7,9 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/venues').success(function(response){
         angular.copy(response, venues);
-        resolve(response);
+        return resolve(response);
       }).error(function(data,status,headers,config){
-        reject(data,status,headers,config);
+        return reject(data,status,headers,config);
       });
     });
   };
@@ -36,6 +36,19 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
       });
     });
   };
+
+  var patch = function(object, id){
+    return $q(function(resolve,reject){
+      debugger;
+      $http.put(ServerUrl + '/venues/' + id, object).success(function(response, status, headers, config){
+        $rootScope.$broadcast('alert', {alert: 'Venue ' + object.venue.name + ' updated', status: status})
+        resolve(response,status,headers,config);
+      }).error(function(response,status,headers,config){
+        $rootScope.$broadcast('alert', {alert: 'Update failed.', status: status});
+        reject(response,status,headers,config);
+      });
+    });
+  }
 
   var addStoryToVenue = function(venueId, storyId){
     var venue = { venue: { story_ids: [storyId] } };
@@ -77,6 +90,7 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     venues: venues,
     post: post,
     addStoryToVenue: addStoryToVenue,
+    patch: patch,
     destroy: destroy
   };
 }]);

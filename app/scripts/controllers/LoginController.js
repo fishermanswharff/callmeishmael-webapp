@@ -20,7 +20,7 @@ function loginController($rootScope,$location,AuthFactory,trace){
     };
     AuthFactory.updateUser(user).then(function(response){
       trace('response from updateUser: ', response);
-      $location.url('/login');
+      $location.url('/');
     });
   };
 
@@ -32,10 +32,10 @@ function loginController($rootScope,$location,AuthFactory,trace){
     $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-cog fa-spin');
     AuthFactory.sendPasswordLink(credentials).then(function(response){
       if(response.status === 200){
-        $rootScope.alert = 'Your email has been sent. If you did not receive it please check your spam box.';
+        $rootScope.$broadcast('alert', { alert: 'Your email has been sent. If you did not receive it please check your spam box.', status: response.status});
         $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-check').removeClass('fa-cog fa-spin');
       } else {
-        $rootScope.alert = 'We do not have a record of your email address.';
+        $rootScope.$broadcast('alert', { alert:'We do not have a record of your email address.', status: response.status });
         $(resetPasswordForm).find('button[type=submit] i.fa').addClass('fa-times').removeClass('fa-cog fa-spin');
       }
     });
@@ -52,7 +52,7 @@ function loginController($rootScope,$location,AuthFactory,trace){
       confirmed: true
     };
     AuthFactory.submitNewPassword(user).then(function(response){
-      $location.url('/login');
+      $location.url('/');
     });
   };
 

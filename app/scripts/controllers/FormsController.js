@@ -3,13 +3,20 @@ angular.module('MainController').controller('FormsController',formsController);
 formsController.$inject = ['trace','$q','AuthFactory','PhoneFactory','StoryFactory','VenueFactory','AWSFactory','$rootScope','$scope'];
 function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFactory,AWSFactory,$rootScope,$scope){
 
+  var activeVenues = function(element,index,array){
+    return element.status === 'active';
+  };
+
   var vm = this;
   vm.storyTypes = ['Fixed','Venue','Surprise','Ishmael’s', 'Post Roll'];
   vm.phoneStatus = ['active','inactive','retired','fixable'];
-  vm.venues = VenueFactory.venues;
   vm.phones = PhoneFactory.phones;
   vm.stories = StoryFactory.stories;
   vm.users = AuthFactory.users;
+
+  VenueFactory.fetch().then(function(response){
+    vm.venues = response.filter(activeVenues);
+  });
 
   vm.story = {}, vm.venueStory = {}, vm.phone = {}, vm.venue = {};
 
@@ -32,6 +39,13 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
           });
           vm.venue = {};
           trace('venue is the object');
+          break;
+        case 'user':
+          userSubmitHandler(object);
+          /*AuthFactory.postNewUser(object).then(function(response){
+            trace(response);
+          });*/
+          vm.newUser = {};
           break;
         default:
           break;
@@ -74,7 +88,21 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
         StoryFactory.fetch();
       });
     }
+  };
 
+  var userSubmitHandler = function(object){
+    if(object.user.venueId){
+      var venueId = object.user.venueId;
+      delete object.user.venueId;
+      object.user.password = 'secret';
+      AuthFactory.postNewUser(object).then(function(response){
+        VenueFactory.patch({ venue: { user_id: response.data.id}}, venueId);
+      });
+    } else {
+      AuthFactory.postNewUser(object).then(function(response){
+        trace(response);
+      });
+    }
   };
 
   var upsertStory = function(object,url){

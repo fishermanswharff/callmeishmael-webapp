@@ -4,6 +4,8 @@ userController.$inject = ['$rootScope','$scope','AuthFactory','trace'];
 function userController($rootScope,$scope,AuthFactory,trace){
   var vm = this;
 
+  vm.users = AuthFactory.users;
+
   vm.updateUser = function(user){
     user.id = vm.currentUser.id;
     AuthFactory.updateUser(user).then(function(response){
@@ -15,5 +17,6 @@ function userController($rootScope,$scope,AuthFactory,trace){
   var getCurrentUser = function(){
     vm.currentUser = AuthFactory.currentUser();
   };
+
   getCurrentUser();
 }
