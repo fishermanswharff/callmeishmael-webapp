@@ -96,6 +96,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
         VenueFactory.patch({ venue: { user_id: response.data.id}}, venueId);
       });
     } else {
+      object.user.password = 'secret';
       AuthFactory.postNewUser(object).then(function(response){
         trace(response);
       });
