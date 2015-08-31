@@ -19,8 +19,8 @@ angular.module('MainDirective').directive('cmiDraggable',['$rootScope','trace',f
           drag: function(e,ui){},
           start: function(e,ui){
             $(this).animate({
-              width: $('.droppable').first().width(),
-              height: $('.droppable').first().height()
+              width: $('.droppable').first().css('width'),
+              height: $('.droppable').first().css('height')
             });
             ui.helper.dropped = false;
           },
