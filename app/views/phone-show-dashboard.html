@@ -8,8 +8,9 @@
       <div class="grid_12">
         <ul>
           <li><strong>Phone ID:</strong> {{phone.unique_identifier}}</li>
-          <li><strong>Phone Status:</strong> {{phone.status}}</li>
-          <li><strong>Date Created:</strong> {{phone.created_at}}</li>
+          <!-- TODO: total listens, stories in venue library -->
+          <li><strong>Total Listens: </strong></li>
+          <li><strong>Stories in Venue Library: </strong>{{phone.venue.total_stories}}</li>
         </ul>
       </div>
     </div>
@@ -19,8 +20,7 @@
         <h1>Stories on your phone right now:</h1>
         <table>
           <thead>
-            <th>Id</th>
-            <th>Assignment</th>
+            <th>Button</th>
             <th>Title</th>
             <th>Listen</th>
             <th>Added to phone</th>
@@ -28,13 +28,11 @@
           </thead>
           <tbody ng-repeat="obj in phone.buttons track by $index">
             <tr ng-repeat="(key,value) in obj">
-              <td>{{value.story_id}}</td>
-              <td>{{key}}</td>
+              <td class='button-assignment'>{{key}}</td>
               <td>{{value.title}}</td>
               <td><cmi-audio-player url="{{value.url}}"></cmi-audio-player></td>
               <td>{{value.created_at}}</td>
               <td>{{value.listens}}</td>
-
             </tr>
           </tbody>
         </table>

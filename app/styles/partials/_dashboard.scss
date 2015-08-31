@@ -19,7 +19,7 @@
 }
 
 table {
-  font-size: .8em;
+  font-size: 1em;
   font-family: $body-font;
   border-spacing: 0.5rem;
   border-collapse: collapse;
@@ -27,12 +27,34 @@ table {
 
   thead {
     font-family: $body-font;
+    background-color: $black-50;
+    color: $white;
+  }
+
+  tr {
+    border-top: 1px dotted $black-10;
+    border-bottom: 1px dotted $black-10;
+
+    &:nth-child(2n + 1){}
   }
 
   td, th {
-    border: 1px solid #999;
     padding: 0.5rem;
     text-align: left;
+
+    &.button-assignment {
+      background: $shitty;
+      border: 1px solid $black;
+      border-radius: 50%;
+      display: block;
+      float: left;
+      font-weight: $body-bold;
+      height: 3em;
+      line-height: 2em;
+      margin: 0 1em 0 0;
+      text-align: center;
+      width: 3em;
+    }
   }
 }
 
