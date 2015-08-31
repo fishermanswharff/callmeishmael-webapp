@@ -31,6 +31,7 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
                   $(this).remove();
                 });
               });
+              ui.helper.dropped = true;
               newStory = $scope.$parent.phoneController.availableStories.filter(function(value,index,array){
                 if(value.id === dragId){
                   return value;

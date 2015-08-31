@@ -229,9 +229,6 @@ div.button-controls {
     text-transform: uppercase;
 
     &:hover {
-      background-color: $black-50;
-      color: $white;
-      font-weight: $body-bold;
 
       &:after {
         line-height: 1;
@@ -253,11 +250,6 @@ div.button-controls {
 
     &.droppable-label {
       border: 0;
-
-      &:hover {
-        background-color: $black-10;
-        color: $black-50;
-      }
     }
   }
 }

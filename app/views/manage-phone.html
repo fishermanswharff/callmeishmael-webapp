@@ -7,7 +7,7 @@
       <div class='current-phone-list-container grid_6'>
         <h1>Drag new stories to your phone here:</h1>
         <ul class='current-phone-list'>
-          <li ng-repeat='obj in phoneController.currentPhone.buttons track by $index' class='phone-button-assignment deg-{{$index}}' cmi-droppable button='obj' ng-class="{ nonEditable: phoneController.isFixed(obj) }">
+          <li ng-repeat='obj in phoneController.currentPhone.buttons track by $index' class='droppable phone-button-assignment deg-{{$index}}' cmi-droppable button='obj' ng-class="{ nonEditable: phoneController.isFixed(obj) }">
             <div class='phone-button-object' ng-repeat='(key, value) in obj' cmi-dial-listitem button='value'>
               <span class='button-assignment'>{{key}}</span>
               <div class='button-story'>
@@ -18,7 +18,6 @@
               </div>
               <div class='button-controls' ng-hide="key === '*' || key === '#' || key === '0' || key === 'PR'">
                 <a class='droppable-label'>Drop A New Story here</a>
-                <a href='javascript:void(0)' ng-click='phoneController.clearButton(this,$parent.$index,key,value)' class='clear-button-link'>Clear</a>
               </div>
             </div>
           </li>
