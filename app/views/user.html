@@ -91,8 +91,6 @@
         </li>
         <li>Your account was created on <strong>{{userController.currentUser.created_at}}</strong></li>
         <li ng-if="userController.currentUser.main_store_contact === true">You are the main contact at your store.</li>
-        <li>You are associated with:
-          <span class='user-venue-detail' ng-repeat='venue in userController.currentUser.venues'><strong>{{venue.name}}</strong> which has <strong>{{venue.number_phones}}</strong> phone{{venue.number_phones > 1 ? 's' : ''}}, <strong>{{venue.total_stories > 0 ? venue.total_stories : 0}} stor{{venue.total_stories === '1' ? 'y' : 'ies'}}</strong>, and which status is: <strong>{{venue.status}}</strong>{{userController.currentUser.venues.length > 1 ? ', ' : ''}}</span></li>
       </ul>
 
     </div>
