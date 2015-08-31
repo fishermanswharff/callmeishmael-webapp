@@ -13,7 +13,7 @@
         </label>
       </div>
       <div class="form-group">
-        <button class='btn' type='submit' ng-disabled='loginForm.$invalid' ng-click="loginController.login(loginController.credentials)"><span><i class="fa"></i></span>Login</button><span><a ng-click="loginController.showPasswordForm()" ng-hide="loginController.forgotPassword" href="javascript:void(0)">Did you forget your password?</a></span>
+        <button class='btn block' type='submit' ng-disabled='loginForm.$invalid' ng-click="loginController.login(loginController.credentials)"><span><i class="fa"></i></span>Login</button><span><a ng-click="loginController.showPasswordForm()" ng-hide="loginController.forgotPassword" href="javascript:void(0)" class='forgot-password-link'>Forgot Password?</a></span>
       </div>
     </form>
 
@@ -28,6 +28,7 @@
         <span><a ng-click="loginController.showPasswordForm()" href="javascript:void(0)">Cancel</a></span>
       </div>
     </form>
+    <img class="logo" src="images/cmi-logo-isolated-large.png">
   </div>
   <ul id="scene" class="scene" data-scalar-y="15" data-scalar-x="25" data-friction-y="0.1" data-friction-x="0.1">
     <li class="layer" data-depth="0.00"></li>
@@ -47,7 +48,6 @@
       <div class="wave plain depth-20"></div>
     </li>
     <li class="layer title" data-depth="0.30">
-      <img class="logo" src="images/cmi-logo-isolated-large.png">
     </li>
     <li class="layer" data-depth="0.40">
       <div class="wave plain depth-40"></div>

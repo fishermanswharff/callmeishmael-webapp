@@ -19,7 +19,6 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     return $http.post(ServerUrl + '/login',credentials).success(function(response, status, headers, config){
       _storeSession(response);
       $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
-      $rootScope.$broadcast('alert', { alert: 'Log in successful.', status: status });
     }).error(function(data,status,headers,config){
       $rootScope.$broadcast('alert', { alert: 'Your email and/or password are incorrect.', status: status });
     });
@@ -27,10 +26,9 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
 
   var logout = function(){
     return $http.get(ServerUrl + '/logout').success(function(response, status, headers, config){
-      trace(response);
       $window.localStorage.removeItem('cmi-user');
       $rootScope.currentUser = null;
-      $rootScope.$broadcast('alert', { alert: 'You have successfully logged out.', status: status });
+      // $rootScope.$broadcast('alert', { alert: 'You have successfully logged out.', status: status });
     });
   };
 

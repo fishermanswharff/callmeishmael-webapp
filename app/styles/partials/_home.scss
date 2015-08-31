@@ -42,6 +42,12 @@
     z-index: $z-parallax-login;
     position: absolute;
     width: 100%;
+
+    img.logo {
+      display: block;
+      margin: 0 auto;
+      max-width: 25%;
+    }
   }
 
   .login-form {
@@ -53,6 +59,11 @@
     // todo: media queries to increase the size on small screens
     width: 25%;
     margin: 0 auto;
+
+    a.forgot-password-link {
+      color: $black-80;
+      text-align: right;
+    }
   }
 
   ul {
