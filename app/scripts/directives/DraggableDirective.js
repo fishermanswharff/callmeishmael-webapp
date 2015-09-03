@@ -8,9 +8,10 @@ angular.module('MainDirective').directive('cmiDraggable',['$rootScope','trace',f
     compile: function(){
       return function($scope,elem,attrs){
 
+        var oWidth, oHeight;
+
         $scope.$on('onRepeatDone',function(e,a){
-          oWidth = $('.cmi-draggable').width();
-          oHeight = $('.cmi-draggable').height();
+          // do something now that repeat is done rendering
         });
 
         $(elem).draggable({
@@ -18,6 +19,8 @@ angular.module('MainDirective').directive('cmiDraggable',['$rootScope','trace',f
           revert: 'invalid',
           drag: function(e,ui){},
           start: function(e,ui){
+            oWidth = $(this).width();
+            oHeight = $(this).height();
             $(this).animate({
               width: $('.droppable').first().css('width'),
               height: $('.droppable').first().css('height')
