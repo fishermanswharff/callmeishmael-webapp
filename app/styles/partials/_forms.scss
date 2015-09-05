@@ -1,6 +1,28 @@
 div.form-group {
-  margin: 10px auto;
+  margin: .5em auto;
   width: 100%;
+
+  &.inline > label, input {
+    display: inline;
+  }
+
+  &.inline {
+    display: inline-block;
+    float: left;
+    width: 50%;
+
+    &:nth-child(odd) {
+      padding-right: .5em;
+    }
+    &:nth-child(even) {
+      padding-left: .5em;
+    }
+
+    &.radio-group {
+      width: auto;
+      padding: 0 .5em;
+    }
+  }
 }
 
 input, select, textarea, button {

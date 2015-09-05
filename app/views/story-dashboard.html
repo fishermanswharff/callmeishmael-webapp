@@ -85,27 +85,27 @@
     <form class='story-form' name='storyForm' id='storyForm' ng-submit="formsController.submit({story: formsController.story})" enctype="multipart/form-data" novalidate>
       <input type='hidden' id='storyId' value='{{formsController.story.id}}' ng-model='formsController.story.id'>
       <div class="form-group">
-        <label for='storyTitle'>Literary Title
+        <label for='storyTitle'>Book Title
           <input type='text' id='storyTitle' name='storyUrl' ng-model='formsController.story.title' required>
         </label>
       </div>
-      <div class="form-group">
-        <label for='storyAuthorFirst'>Author’s First Name
+      <div class="form-group inline">
+        <label for='storyAuthorFirst'>Book Author’s First Name
           <input type='text' id='storyAuthorFirst' name='storyAuthorFirst' ng-model='formsController.story.author_first' required>
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group inline">
         <label for='storyAuthorLast'>Author's Last Name
           <input type='text' name='storyAuthorLast' id='storyAuthorLast' ng-model='formsController.story.author_last' required>
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group inline">
         <label for='storyCallDate'>Call Date</label>
         <datepicker date-format='fullDate'>
           <input ng-model="formsController.story.call_date" type="text" id='storyCallDate' name='storyCallDate'/>
         </datepicker>
       </div>
-      <div class="form-group">
+      <div class="form-group inline">
         <label for='storyCallLength'>Audio Length (in time)
           <input type='text' id='storyCallLength' name='storyCallLength' ng-model='formsController.story.call_length'>
         </label>
@@ -115,15 +115,53 @@
           <input type='text' id='storyCommonTitle' name='storyCommonTitle' ng-model='formsController.story.common_title'>
         </label>
       </div>
-      <div class="form-group">
-        <label>Story Status
+      <div class='clearfix'>
+        <div class='form-group inline radio-group'>
+          <label>Spoiler Alert?</label>
+          <label for='spoilerTrue'><input type='radio' name='spoilerTrue' id='spoilerTrue' value='true' ng-model='formsController.story.spoiler_alert' required> True</label>
+          <label for='spoilerFalse'><input type='radio' name='spoilerFalse' id='spoilerFalse' value='false' ng-model='formsController.story.spoiler_alert' required> False</label>
+        </div>
+        <div class='form-group inline radio-group'>
+          <label>Child Appropriate?</label>
+          <label for='storyChildAppropriateTrue'><input type='radio' name='storyChildAppropriateTrue' id='storyChildAppropriateTrue' value='true' ng-model='formsController.story.child_appropriate' required> True</label>
+          <label for='storyChildAppropriateFalse'><input type='radio' name='storyChildAppropriateFalse' id='storyChildAppropriateFalse' value='false' ng-model='formsController.story.child_appropriate' required> False</label>
+        </div>
+        <div class='form-group inline radio-group'>
+          <label>Explicit Content?</label>
+          <label for='storyExplicitTrue'><input type='radio' name='storyExplicitTrue' id='storyExplicitTrue' value='true' ng-model='formsController.story.explicit' required> True</label>
+          <label for='storyExplicitFalse'><input type='radio' name='storyExplicitFalse' id='storyExplicitFalse' value='false' ng-model='formsController.story.explicit' required> False</label>
+        </div>
+      </div>
+      <div class='form-group inline'>
+        <label>Gender of caller:
+          <select id='storyCallerGender' class='select story-caller-gender' ng-model='formsController.story.gender' required>
+            <option value=''>-- choose gender --</option>
+            <option value='Male'>Male</option>
+            <option value='Female'>Female</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group inline">
+        <label>Rating:
+        <select id='storyRating' ng-model='formsController.story.rating' required>
+          <option value=''>-- choose rating --</option>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option value='5'>5</option>
+        </select>
+        </label>
+      </div>
+      <div class="form-group inline">
+        <label>Story Library
           <select id='storyStatusSelect' class='select story-status-list' ng-model='formsController.story.story_type' required>
             <option value=''>-- choose status --</option>
             <option ng-repeat='status in formsController.storyTypes' value="{{formsController.normalizeStoryTitle(status)}}">{{status}}</option>
           </select>
         </label>
       </div>
-      <div class='form-group' id='storyVenueField' ng-hide='formsController.story.story_type !== "venue"'>
+      <div class='form-group inline' id='storyVenueField' ng-hide='formsController.story.story_type !== "venue"'>
         <label>Attach song to a venue:
           <select id='storyVenueSelect' class='select' ng-model='formsController.story.venue_id'>
             <option value=''>-- choose venue --</option>

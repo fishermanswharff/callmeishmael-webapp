@@ -8,7 +8,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   };
 
   var vm = this;
-  vm.storyTypes = ['Fixed','Venue','Surprise','Ishmael’s', 'Post Roll'];
+  vm.storyTypes = ['Fixed','Venue','Ishmael’s', 'Post Roll'];
   vm.phoneStatus = ['active','inactive','retired','fixable'];
   vm.phones = PhoneFactory.phones;
   vm.stories = StoryFactory.stories;
