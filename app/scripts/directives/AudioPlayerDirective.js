@@ -6,13 +6,12 @@ angular.module('MainDirective').directive('cmiAudioPlayer', ['$rootScope','trace
     scope: {
       url: '@'
     },
-    compile: function(){
-      return function($scope,elem,attrs){
-        var $audio = elem.find('audio');
-        $scope.toggleAudio = function(){
-          $scope.playing === true ? $audio[0].pause() : $audio[0].play();
-          $scope.playing = !$scope.playing;
-        };
+    link: function($scope,elem,attrs){
+      var $audio = elem.find('audio');
+      $scope.playing = false;
+      $scope.toggleAudio = function(){
+        $scope.playing === true ? $audio[0].pause() : $audio[0].play();
+        $scope.playing = !$scope.playing;
       };
     },
   };

@@ -15,16 +15,6 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     _collectUserVenues();
   });
 
-  vm.clearButton = function(obj,index,key,value){
-    if(typeof obj.value.story_id !== 'undefined'){
-      _getStory(obj.value.story_id);
-    }
-    obj.value.story_id = '';
-    obj.value.title = '';
-    obj.value.created_at = '';
-    obj.value.url = '';
-  };
-
   vm.isFixed = function(object){
     for(var i in object){
       return i === '*' || i === '#' || i === '0' || i === 'PR';

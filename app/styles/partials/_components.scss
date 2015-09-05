@@ -1,6 +1,7 @@
 div.cmi-audio-player {
 
-  display: inline-block;
+  display: inline;
+  position: relative;
 
   button.play,
   button.pause {
@@ -12,6 +13,19 @@ div.cmi-audio-player {
     display: inline-block;
     width: 32px;
     height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &.ng-hide {
+      transition: .5s linear all;
+      opacity: 0;
+    }
+
+    &.ng-show {
+      transition: .5s linear all;
+      opacity: 1;
+    }
   }
 }
 
