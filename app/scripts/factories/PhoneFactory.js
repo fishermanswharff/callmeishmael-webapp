@@ -28,7 +28,7 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
 
   var post = function(object){
     return $q(function(resolve, reject){
-      $http.post(ServerUrl + '/venues/' + object.phone.venueId + '/phones',object).success(function(data, status, headers, config){
+      $http.post(ServerUrl + '/venues/' + object.phone.venue_id + '/phones',object).success(function(data, status, headers, config){
         $rootScope.$broadcast('alert', { alert: 'The phone has been created.', status: status });
         resolve(data);
       }).error(function(data,status,headers,config){

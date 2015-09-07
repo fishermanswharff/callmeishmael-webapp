@@ -27,11 +27,11 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
           storySubmitHandler(object);
           break;
         case 'phone':
+          trace('phone:',object);
           PhoneFactory.post(object).then(function(response){
             trace(response);
           });
           vm.phone = {};
-          trace('phone is the object');
           break;
         case 'venue':
           VenueFactory.post(object).then(function(response){

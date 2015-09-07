@@ -41,7 +41,7 @@
           <td>{{phone.stories.length}}</td>
           <td>{{phone.created_at}}</td>
           <td></td>
-          <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({phone: phone})" ng-confirm-click='Are you sure you want to delete this phone: {{phone}}'>Delete</a></td>
+          <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({phone: phone})" ng-confirm-click='Are you sure you want to delete the phone at {{phone.venue.name}}, with status {{phone.status}}?'>Delete</a></td>
         </tr>
       </tbody>
     </table>
@@ -49,16 +49,6 @@
   <div class="data-container phone-form grid_8" ng-controller='FormsController as formsController'>
     <h3>Add a New Phone</h3>
     <form name='phoneForm' id='phoneForm' ng-submit='formsController.submit({phone: formsController.phone})' novalidate>
-      <div class="form-group">
-        <label for='phoneWifiSSID'>Wifi SSID
-          <input type='text' name='phoneWifiSSID' id='phoneWifiSSID' ng-model='formsController.phone.wifiSSID' required>
-        </label>
-      </div>
-      <div class="form-group">
-        <label for='phoneWifiPassword'>Wifi Password
-          <input type='text' name='phoneWifiPassword' id='phoneWifiPassword' ng-model='formsController.phone.wifiPassword' required>
-        </label>
-      </div>
       <div class="form-group">
         <label>Phone Status:
           <select id='phoneStatusSelect' class='select phone-status-list' ng-model='formsController.phone.status' required>
@@ -69,8 +59,10 @@
       </div>
       <div class="form-group">
         <label>Choose Venue
-          <select id='venueForPhoneList' class='select venue-phone-list' ng-model='formController.phone.venueId' ng-options='venue.id as venue.name for venue in formsController.venues' required>
+          <select id='venueForPhoneList' class='select venue-phone-list' ng-model='formsController.phone.venue_id' required>
+            <!-- ng-options='venue.id as venue.name for venue in formsController.venues'  -->
             <option value="">-- choose venue --</option>
+            <option ng-repeat='venue in formsController.venues' value='{{venue.id}}'>{{venue.name}}</option>
           </select>
         </label>
       </div>

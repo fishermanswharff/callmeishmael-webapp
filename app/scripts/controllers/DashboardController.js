@@ -47,4 +47,22 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
       }
     }
   };
+
+  var fetchStories = function(){
+    StoryFactory.fetch().then(function(response){
+      angular.copy(response, vm.stories);
+    });
+  };
+
+  var fetchVenues = function(){
+    VenueFactory.fetch().then(function(response){
+      angular.copy(response, vm.venues);
+    });
+  };
+
+  var fetchPhones = function(){
+    PhoneFactory.get().then(function(response){
+      angular.copy(response, vm.phones);
+    });
+  };
 }
