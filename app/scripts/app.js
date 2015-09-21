@@ -24,7 +24,9 @@ angular.module('phoneApp', [
 
   VenueFactory.fetch();
   PhoneFactory.get();
-  StoryFactory.fetch();
+  StoryFactory.fetch().then(function(response){
+    console.log(response);
+  });
   AuthFactory.fetchUsers();
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){

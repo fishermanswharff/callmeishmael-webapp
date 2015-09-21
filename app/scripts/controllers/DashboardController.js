@@ -6,6 +6,7 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
   var vm = this;
   vm.phones = [];
   vm.stories = [];
+  vm.storyData = StoryFactory.storyData;
   vm.storyTypes = storyTypes();
 
   vm.venues = VenueFactory.venues;
@@ -50,7 +51,7 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
 
   var fetchStories = function(){
     StoryFactory.fetch().then(function(response){
-      angular.copy(response, vm.stories);
+      angular.copy(response.stories, vm.stories);
     });
   };
 

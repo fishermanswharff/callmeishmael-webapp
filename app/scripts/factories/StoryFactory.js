@@ -2,11 +2,17 @@
 angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScope','ServerUrl','$q','$http','AWSFactory','AmazonBucket',function(trace,$window,$rootScope,ServerUrl,$q,$http,AWSFactory,AmazonBucket){
 
   var stories = [];
+  var storyData = {};
 
   var fetch = function(){
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/stories').success(function(response){
-        angular.copy(response, stories);
+        angular.copy(response.stories, stories);
+        for(var i in response){
+          if(response.hasOwnProperty(i) && i !== 'stories'){
+            storyData[i] = response[i];
+          }
+        }
         resolve(response);
       }).error(function(data,status,headers,config){
         trace(data,status,headers,config);
@@ -71,6 +77,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
     fetch: fetch,
     fetchOne: fetchOne,
     stories: stories,
+    storyData: storyData,
     post: post,
     destroy: destroy,
     normalize: normalize

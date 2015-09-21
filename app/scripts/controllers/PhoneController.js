@@ -46,7 +46,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
 
   var _getStories = function(){
     StoryFactory.fetch().then(function(response){
-      _pushToAvailable(_filterIshmaelStories(response));
+      _pushToAvailable(_filterIshmaelStories(response.stories));
     });
   };
 
