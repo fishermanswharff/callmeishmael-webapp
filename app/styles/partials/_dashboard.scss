@@ -99,6 +99,18 @@ ul.story-list {
       }
     }
 
+    ul.story-detail-list {
+
+      @include defaults;
+      list-style: none;
+
+      li {
+        &.divider {
+          margin-top: 1em;
+        }
+      }
+    }
+
     p {
       span.story-detail {
         display: block;

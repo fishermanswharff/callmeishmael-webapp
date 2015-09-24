@@ -31,20 +31,25 @@
     <ul class='story-list'>
       <li ng-repeat="story in dashboardController.stories | filter:search | orderBy: '-id':reverse=true" class='story' data-uuid='{{story.id}}'>
         <h2 class='story-title'>{{story.title}} <span class='story-detail'>by: {{story.author_first}} {{story.author_last}}</span></h2>
-        <p>
-          <span class='story-detail' ng-if='story.call_length'>Audio length: <strong>{{story.call_length}}</strong></span>
-          <span class='story-detail' ng-if='story.common_title'>Audio title: <strong>{{story.common_title}}</strong></span>
-          <span class='story-detail' ng-if='story.call_date'>Audio call date: <strong>{{story.call_date | date:short}}</strong></span>
-          <span class='story-detail' ng-if='story.placements'>This story is on {{story.placements || 0}} Ishmael phone{{story.placements === 1 ? '' : 's'}}.</span>
-          <span class='story-detail' ng-if='story.listens'>This story has been listened to <strong>{{story.listens || 0}}</strong> time{{story.listens === 1 ? '' : 's'}}</span>
-          <span class="story-detail" ng-if='story.story_type'>Type of story: <strong>{{story.story_type}}</strong></span>
-          <span class='story-detail'>Listen to the audio: <cmi-audio-player url="{{story.url}}"></cmi-audio-player></span>
-          <span class='story-detail'>{{story.spoiler_alert ? 'This story is a spoiler alert!' : 'Don’t worry, this won’t ruin the surprise!'}}</span>
-          <span class='story-detail'>This story is {{story.child_appropriate ? '' : 'not '}}child appropriate.</span>
-          <span class='story-detail'>Explicit Content: {{story.explicit}}</span>
-          <span class='story-detail' ng-if='story.gender'>Gender of the caller: {{story.gender}}</span>
-          <span class='story-detail' ng-if='story.rating'>Rating: {{story.rating}} out of 5</span>
-        </p>
+        <ul class='story-detail-list'>
+          <li class='divider'><strong>Story Info</strong></li>
+          <li><span class='story-detail'>Common Title: {{story.common_title}}</span></li>
+          <li><span class="story-detail">Library: {{story.story_type}}</span></li>
+          <li><span class='story-detail'>Time: {{story.call_length}}</span></li>
+          <li><span class='story-detail'>Link to transcript: {{story.transcript_url}}</span></li>
+          <li><span class='story-detail'>CMI UUID: {{story.call_uuid}}</span></li>
+          <li><span class='story-detail'>Call date: {{story.call_date | date:short}}</span></li>
+          <li><span class='story-detail'>Rating: {{story.rating}} out of 5</span></li>
+          <li><span class='story-detail'>Explicit Content: {{story.explicit ? 'Yes' : 'No'}}</span></li>
+          <li><span class='story-detail'>Gender of caller: {{story.gender}}</span></li>
+          <li><span class='story-detail'>Spoiler Alert: {{story.spoiler_alert ? 'Yes' : 'No'}}</span></li>
+          <li><span class='story-detail'>Rated G: {{story.child_appropriate ? 'Yes' : 'No'}}</span></li>
+          <li class='divider'><strong>Story Stats</strong></li>
+          <li><span class='story-detail'>Historical Placements: {{story.placements}}</span></li>
+          <li><span class='story-detail'>Current Placements: {{}}</span></li>
+          <li><span class='story-detail'>Total listens <strong>{{story.listens || 0}}</strong></span></li>
+        </ul>
+        <span class='story-detail'>Listen to the audio: <cmi-audio-player url="{{story.url}}"></cmi-audio-player></span>
         <div class='story-crud-actions' ng-controller='FormsController as formsController'>
           <a href='javascript:void(0)' class='btn inline edit' ng-click='editStory(story)'>Edit</a>
           <a href="javascript:void(0)" confirmed-click-action="formsController.deleteObject({story: story})" ng-confirm-click='Are you sure you want to delete this story: {{story.title}}' class='btn inline delete'>Delete</a>
@@ -83,26 +88,37 @@
           <input type='text' id='storyCallLength' name='storyCallLength' ng-model='formsController.story.call_length'>
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group inline">
         <label for='storyCommonTitle'>Call Title
           <input type='text' id='storyCommonTitle' name='storyCommonTitle' ng-model='formsController.story.common_title'>
         </label>
       </div>
+      <div class="form-group inline">
+        <label>Call ID
+          <input type='number' id='storyCallUUID' name='storyCallUUID' ng-model='formsController.story.call_uuid' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Transcript URL
+          <input type='url' id='storyTranscriptUrl' name='storyTranscriptUrl' ng-model='formsController.story.transcript_url' required>
+        </label>
+      </div>
       <div class='clearfix'>
         <div class='form-group inline radio-group'>
-          <label>Spoiler Alert?</label>
-          <label for='spoilerTrue'><input type='radio' name='spoilerTrue' id='spoilerTrue' value='true' ng-model='formsController.story.spoiler_alert' required> True</label>
-          <label for='spoilerFalse'><input type='radio' name='spoilerFalse' id='spoilerFalse' value='false' ng-model='formsController.story.spoiler_alert' required> False</label>
+          <label for='spoilerTrue'>Spoiler Alert?
+            <input type='checkbox' name='spoilerTrue' id='spoilerTrue' ng-model='formsController.story.spoiler_alert'>
+          </label>
         </div>
         <div class='form-group inline radio-group'>
-          <label>Child Appropriate?</label>
-          <label for='storyChildAppropriateTrue'><input type='radio' name='storyChildAppropriateTrue' id='storyChildAppropriateTrue' value='true' ng-model='formsController.story.child_appropriate' required> True</label>
-          <label for='storyChildAppropriateFalse'><input type='radio' name='storyChildAppropriateFalse' id='storyChildAppropriateFalse' value='false' ng-model='formsController.story.child_appropriate' required> False</label>
+          <label></label>
+          <label for='storyChildAppropriateTrue'>Child Appropriate?
+            <input type='checkbox' name='storyChildAppropriateTrue' id='storyChildAppropriateTrue' ng-model='formsController.story.child_appropriate'>
+          </label>
         </div>
         <div class='form-group inline radio-group'>
-          <label>Explicit Content?</label>
-          <label for='storyExplicitTrue'><input type='radio' name='storyExplicitTrue' id='storyExplicitTrue' value='true' ng-model='formsController.story.explicit' required> True</label>
-          <label for='storyExplicitFalse'><input type='radio' name='storyExplicitFalse' id='storyExplicitFalse' value='false' ng-model='formsController.story.explicit' required> False</label>
+          <label for='storyExplicitTrue'>Explicit Content?
+            <input type='checkbox' name='storyExplicitTrue' id='storyExplicitTrue' ng-model='formsController.story.explicit'>
+          </label>
         </div>
       </div>
       <div class='form-group inline'>

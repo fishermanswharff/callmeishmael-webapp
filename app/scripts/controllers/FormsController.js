@@ -18,7 +18,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     vm.venues = response.filter(activeVenues);
   });
 
-  vm.story = {}, vm.venueStory = {}, vm.phone = {}, vm.venue = {};
+  vm.story = {  explicit: false, child_appropriate: true, spoiler_alert: false }, vm.venueStory = {}, vm.phone = {}, vm.venue = {};
 
   vm.submit = function(object){
     for(var item in object){

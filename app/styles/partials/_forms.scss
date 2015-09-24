@@ -59,11 +59,12 @@ input[type=email],
 input[type=text],
 input[type=password],
 input[type=url],
-input[type=tel] {
+input[type=tel],
+input[type=number] {
   @include input(2px, solid, $black-50, 4px);
   display: block;
   font-size: 1em;
-  height: 40px;
+  height: 30px;
   padding: 5px 8px 6px;
   width: 100%;
 }
