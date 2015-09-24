@@ -13,14 +13,6 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
   vm.phones = PhoneFactory.phones;
   vm.stories = StoryFactory.stories;
 
-  vm.activeVenues = function(){
-    var active = [];
-    vm.venues.map(function(obj,i){
-      if(obj.status === 'active') active.push(obj);
-    });
-    return active.length;
-  };
-
   vm.pausedVenues = function(){
     var paused = [];
     vm.venues.map(function(obj,i){
@@ -30,7 +22,7 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
   };
 
   vm.deleteObject = function(object){
-    trace(object);
+    // trace(object);
     for(var item in object){
       switch(item){
         case 'story':
@@ -47,6 +39,30 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
           break;
       }
     }
+  };
+
+  vm.activeVenues = function(){
+    return vm.venues.filter(isActive).length;
+  };
+
+  vm.pausedVenues = function(){
+    return vm.venues.filter(isPaused).length;
+  };
+
+  vm.cancelledVenues = function(){
+    return vm.venues.filter(isCancelled).length;
+  };
+
+  var isActive = function(value,idx,array){
+    return value.venue_status === 'active';
+  };
+
+  var isPaused = function(value,idx,array){
+    return value.venue_status === 'paused';
+  };
+
+  var isCancelled = function(value,idx,array){
+    return value.venue_status === 'cancelled';
   };
 
   var fetchStories = function(){
@@ -66,4 +82,6 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
       angular.copy(response, vm.phones);
     });
   };
+
+  console.log(vm.venues)
 }

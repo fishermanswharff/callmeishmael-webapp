@@ -36,7 +36,7 @@
           <li><span class='story-detail'>Common Title: {{story.common_title}}</span></li>
           <li><span class="story-detail">Library: {{story.story_type}}</span></li>
           <li><span class='story-detail'>Time: {{story.call_length}}</span></li>
-          <li><span class='story-detail'>Link to transcript: {{story.transcript_url}}</span></li>
+          <li><span class='story-detail'><a href='{{story.transcript_url}}' target='_blank'>Link to transcript</a></span></li>
           <li><span class='story-detail'>CMI UUID: {{story.call_uuid}}</span></li>
           <li><span class='story-detail'>Call date: {{story.call_date | date:short}}</span></li>
           <li><span class='story-detail'>Rating: {{story.rating}} out of 5</span></li>
@@ -110,8 +110,7 @@
           </label>
         </div>
         <div class='form-group inline radio-group'>
-          <label></label>
-          <label for='storyChildAppropriateTrue'>Child Appropriate?
+          <label for='storyChildAppropriateTrue'>Rated G?
             <input type='checkbox' name='storyChildAppropriateTrue' id='storyChildAppropriateTrue' ng-model='formsController.story.child_appropriate'>
           </label>
         </div>
