@@ -4,12 +4,13 @@ formsController.$inject = ['trace','$q','AuthFactory','PhoneFactory','StoryFacto
 function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFactory,AWSFactory,$rootScope,$scope){
 
   var activeVenues = function(element,index,array){
-    return element.status === 'active';
+    return element.venue_status === 'active';
   };
 
   var vm = this;
   vm.storyTypes = ['Fixed','Venue','Ishmael’s', 'Post Roll'];
   vm.phoneStatus = ['active','inactive','retired','fixable'];
+  vm.venueStatus = ['active','paused','cancelled'];
   vm.phones = PhoneFactory.phones;
   vm.stories = StoryFactory.stories;
   vm.users = AuthFactory.users;
@@ -35,10 +36,9 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
           break;
         case 'venue':
           VenueFactory.post(object).then(function(response){
-            trace(response);
+            VenueFactory.fetch();
           });
           vm.venue = {};
-          trace('venue is the object');
           break;
         case 'user':
           userSubmitHandler(object);

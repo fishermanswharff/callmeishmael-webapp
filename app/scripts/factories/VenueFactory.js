@@ -27,11 +27,11 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
   var post = function(object){
     object.venue.user_ids = _convertToArray(object.venue.user_ids);
     return $q(function(resolve,reject){
-      $http.post(ServerUrl + '/venues', object).success(function(response){
-        $rootScope.alert = 'Your venue was successfully created';
+      $http.post(ServerUrl + '/venues', object).success(function(response, status, headers, config){
+        $rootScope.$broadcast('alert', {alert: 'Your venue was successfully created', status: status})
         resolve(response);
       }).error(function(data,status,headers,config){
-        $rootScope.alert = 'Sorry, there was an issue with that request: Status ' + status;
+        $rootScope.$broadcast('alert', {alert: 'Sorry, there was an issue with that request: Status ' + status, status: status});
         reject(data);
       });
     });

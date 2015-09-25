@@ -9,7 +9,7 @@
       <label>Search by name</label>
       <input type='text' ng-model="search.name" placeholder="Search by venue name">
     </div>
-    <div class="form-group">
+    <div class="form-group inline radio-group">
       <label>
         <input type="checkbox" ng-model="search.venue_status" ng-true-value="'active'" ng-false-value="''">Active Venues
       </label>
@@ -29,22 +29,44 @@
           <th>Name:</th>
           <th>Added on:</th>
           <th>Status:</th>
-          <th># Users Associated:</th>
+          <th># Users:</th>
           <th>Total Listens:</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="venue in dashboardController.venues | filter:search.status | filter:search.name | orderBy: '-id':reverse=true">
+        <tr ng-repeat="venue in dashboardController.venues | filter:search.venue_status | filter:search.name | orderBy: '-id':reverse=true">
           <td>{{venue.number_phones}}</td>
           <td><a ng-href="#/venues/{{venue.id}}">{{venue.name}}</a></td>
           <td>{{venue.created_at}}</td>
-          <td>{{venue.status}}</td>
+          <td>{{venue.venue_status}}</td>
           <td>{{venue.users.length}}</td>
           <td>{{venue.total_listens}}</td>
           <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({venue: venue})" ng-confirm-click='Are you sure you want to delete this venue: {{venue.name}}'>Delete</a></td>
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="data-container grid_8" ng-controller='FormsController as formsController'>
+    <h2>Add a new venue:</h2>
+    <form class='venue-form' name='newVenueForm' id='newVenueForm' ng-submit='formsController.submit({venue: formsController.venue})' novalidate>
+      <div class="form-group">
+        <label for='newVenueName'>Venue Name:
+          <input type='text' id='newVenueName' name='newVenueName' ng-model='formsController.venue.name' placeholder='Name of venue…' required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for='newVenueStatus'>Venue Status:
+          <select id='newVenueStatus' name='newVenueStatus' class='select' ng-model='formsController.venue.venue_status' required>
+            <option value=''>-- choose status --</option>
+            <option ng-repeat='option in formsController.venueStatus' value='{{option}}'>{{option}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <input class='btn' type='submit' value='Create Venue' ng-disabled='newVenueForm.$invalid'>
+      </div>
+
+    </form>
   </div>
 </section>
