@@ -7,12 +7,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   var fetch = function(){
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/stories').success(function(response){
-        angular.copy(response.stories, stories);
-        for(var i in response){
-          if(response.hasOwnProperty(i) && i !== 'stories'){
-            storyData[i] = response[i];
-          }
-        }
+        angular.copy(response, stories);
         resolve(response);
       }).error(function(data,status,headers,config){
         trace(data,status,headers,config);
@@ -27,6 +22,17 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
       }).error(function(data, status, headers, config){
         trace(data,status,headers,config);
         reject(data, status, headers, config);
+      });
+    });
+  };
+
+  var fetchData = function(){
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/stories/story_data').success(function(response,status,headers,config){
+        angular.copy(response,storyData);
+        resolve(response,status,headers,config);
+      }).error(function(response,status,headers,config){
+        reject(response,status,headers,config);
       });
     });
   };
@@ -76,6 +82,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   return {
     fetch: fetch,
     fetchOne: fetchOne,
+    fetchData: fetchData,
     stories: stories,
     storyData: storyData,
     post: post,

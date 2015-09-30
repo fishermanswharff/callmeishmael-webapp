@@ -23,6 +23,11 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
     .when('/story-stats',{
       templateUrl: 'views/stories.html'
     })
+    .when('/fixed-stories', {
+      templateUrl: 'views/fixed-stories.html',
+      controller: 'PhoneController',
+      controllerAs: 'phoneController'
+    })
     // user management for admins
     .when('/user-stats', {
       templateUrl: 'views/user-management.html',

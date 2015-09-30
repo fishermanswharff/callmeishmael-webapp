@@ -46,7 +46,7 @@
           <li><span class='story-detail'>Rated G: {{story.child_appropriate ? 'Yes' : 'No'}}</span></li>
           <li class='divider'><strong>Story Stats</strong></li>
           <li><span class='story-detail'>Historical Placements: {{story.placements}}</span></li>
-          <li><span class='story-detail'>Current Placements: {{}}</span></li>
+          <li><span class='story-detail'>Current Placements: {{story.current_placements}}</span></li>
           <li><span class='story-detail'>Total listens <strong>{{story.listens || 0}}</strong></span></li>
         </ul>
         <span class='story-detail'>Listen to the audio: <cmi-audio-player url="{{story.url}}"></cmi-audio-player></span>

@@ -20,11 +20,17 @@ angular.module('phoneApp', [
   '720kb.datepicker',
   'MainDirective',
   'MainController',
-]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,StoryFactory,trace){
+]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,StoryFactory,ButtonFactory,trace){
 
   VenueFactory.fetch();
   PhoneFactory.get();
   StoryFactory.fetch();
+  StoryFactory.fetchData();
+  ButtonFactory.indexStar();
+  ButtonFactory.indexHash();
+  ButtonFactory.indexZero();
+  ButtonFactory.indexPostroll();
+  ButtonFactory.indexFixed();
   AuthFactory.fetchUsers();
 
   if(!AuthFactory.isAuthenticated() && $location.path() === '/confirm'){

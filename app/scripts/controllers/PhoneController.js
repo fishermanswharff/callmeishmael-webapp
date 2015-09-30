@@ -1,14 +1,19 @@
 'use strict';
 angular.module('MainController').controller('PhoneController',phoneController);
-phoneController.$inject = ['$rootScope','$scope','AuthFactory','StoryFactory','PhoneFactory','VenueFactory','$sceDelegate','trace'];
-function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory,VenueFactory,$sceDelegate,trace){
+phoneController.$inject = ['$rootScope','$scope','AuthFactory','StoryFactory','PhoneFactory','VenueFactory','ButtonFactory','$sceDelegate','trace'];
+function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory,VenueFactory,ButtonFactory,$sceDelegate,trace){
   var vm = this;
   vm.currentPhone = {};
   vm.venues = [];
   vm.ishmaelStories = [];
   vm.availableStories = [];
+  vm.starAssignments = ButtonFactory.starStories;
+  vm.zeroAssignments = ButtonFactory.zeroStories;
+  vm.hashAssignments = ButtonFactory.hashStories;
+  vm.postrollAssignments = ButtonFactory.postrollStories;
+  vm.availableStories = [];
+  vm.availableFixedStories = [];
 
-  // take the first venue for the user for now
   PhoneFactory.fetch($rootScope.currentUser.venues[0].id).then(function(response){
     angular.copy(response[0], vm.currentPhone);
     _getStories();
@@ -17,7 +22,9 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
 
   vm.isFixed = function(object){
     for(var i in object){
-      return i === '*' || i === '#' || i === '0' || i === 'PR';
+      if(object.hasOwnProperty(i)) {
+        return i === '*' || i === '#' || i === '0' || i === 'PR';
+      }
     }
   };
 
@@ -26,33 +33,79 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
     buttonToEdit = _getButtonToEdit(drop);
     _spliceStoryFromAvailable(drag);
 
-    for(var i in buttonToEdit){
-      prevStoryId = buttonToEdit[i].story_id;
-      buttonToEdit[i].title = drag.title;
-      buttonToEdit[i].url = drag.url;
-      buttonToEdit[i].story_id = drag.id;
+    if(buttonToEdit.assignment === '*' || buttonToEdit.assignment === '#' || buttonToEdit.assignment === '0' || buttonToEdit.assignment === 'PR'){
+      prevStoryId = buttonToEdit.story.id;
+      buttonToEdit = {
+        button: {
+          story_id: drag.id,
+          assignment: buttonToEdit.assignment
+        }
+      };
+    } else {
+      for(var i in buttonToEdit){
+        prevStoryId = buttonToEdit[i].story_id;
+        buttonToEdit[i].title = drag.title;
+        buttonToEdit[i].url = drag.url;
+        buttonToEdit[i].story_id = drag.id;
+      }
     }
 
     if(typeof prevStoryId !== 'undefined'){
       $scope.$apply(_getStory(prevStoryId));
     }
 
-    PhoneFactory.assignButton(buttonToEdit).then(function(response){
-      // $('.alert').addClass('success').find('p').prepend('<i class="fa fa-check">');
-    });
+    if(typeof buttonToEdit.button !== 'undefined'){
+      ButtonFactory.postFixed(buttonToEdit).then(function(response){
+        var assignment = '';
+        angular.forEach(response, function(value,index){
+          console.log(value.assignment);
+          assignment = value.assignment;
+        });
+        switch(assignment){
+          case '*':
+            ButtonFactory.indexStar();
+            break;
+          case '#':
+            ButtonFactory.indexHash();
+            break;
+          case '0':
+            ButtonFactory.indexZero();
+            break;
+          case 'PR':
+            ButtonFactory.indexPostroll();
+            break;
+          default:
+            break;
+        }
+      });
+    } else {
+      PhoneFactory.assignButton(buttonToEdit).then(function(response){
+        // $('.alert').addClass('success').find('p').prepend('<i class="fa fa-check">');
+      });
+    }
   });
 
   // PRIVATE METHODS
 
   var _getStories = function(){
     StoryFactory.fetch().then(function(response){
-      _pushToAvailable(_filterIshmaelStories(response.stories));
+      _pushToAvailable(_filterIshmaelStories(response));
     });
   };
 
   var _getStory = function(id){
     StoryFactory.fetchOne(id).then(function(response){
       vm.availableStories.push(response);
+    });
+  };
+
+  var _getFixedStories = function(){
+    StoryFactory.fetch().then(function(response){
+      angular.forEach(response,function(value,index){
+        if(value.story_type === 'fixed' || value.story_type === 'postroll'){
+          vm.availableFixedStories.push(value);
+        }
+      });
     });
   };
 
@@ -91,13 +144,17 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   };
 
   var _getButtonToEdit = function(obj){
-    return vm.currentPhone.buttons.filter(function(value,index,array){
-      for(var i in value){
-        if(i === Object.keys(obj)[0]){
-          return value;
+    if(obj.assignment === '*' || obj.assignment === '#' || obj.assignment === '0' || obj.assignment === 'PR'){
+      return obj;
+    } else {
+      return vm.currentPhone.buttons.filter(function(value,index,array){
+        for(var i in value){
+          if(i === Object.keys(obj)[0]){
+            return value;
+          }
         }
-      }
-    })[0];
+      })[0];
+    }
   };
 
   var _spliceStoryFromAvailable = function(obj){
@@ -107,5 +164,8 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
       }
     });
   };
+
+  if($rootScope.currentUser.role === 'admin') _getFixedStories();
 }
+
 
