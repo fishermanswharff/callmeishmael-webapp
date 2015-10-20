@@ -29,6 +29,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
           break;
         case 'phone':
           trace('phone:',object);
+          object.phone.status = object.phone.status.replace(/\s+/g, '');
           PhoneFactory.post(object).then(function(response){
             trace(response);
           });
@@ -49,6 +50,8 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
       }
     }
   };
+
+
 
   var storySubmitHandler = function(object){
     if(object.story.story_type === 'Venue' && object.story.venue_id === undefined){
