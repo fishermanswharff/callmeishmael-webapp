@@ -37,6 +37,13 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
                   return value;
                 }
               })[0];
+              if(newStory === undefined){
+                newStory = $scope.$parent.phoneController.availableFixedStories.filter(function(value,index,array){
+                  if(value.id === dragId){
+                    return value;
+                  }
+                })[0];
+              }
               $rootScope.$broadcast('droppedElement', {
                 dragObj: newStory,
                 dropObj: $scope.button

@@ -11,7 +11,6 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   vm.zeroAssignments = ButtonFactory.zeroStories;
   vm.hashAssignments = ButtonFactory.hashStories;
   vm.postrollAssignments = ButtonFactory.postrollStories;
-  vm.availableStories = [];
   vm.availableFixedStories = [];
 
   PhoneFactory.fetch($rootScope.currentUser.venues[0].id).then(function(response){
@@ -129,8 +128,12 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   var _onPhone = function(id){
     var array = vm.currentPhone.buttons.filter(function(value,index,array){
       var prop = Object.getOwnPropertyNames(value)[0];
-      var storyId = value[prop].story_id.toString();
-      return storyId === id.toString();
+      if(value[prop] === null){
+        return;
+      } else {
+        var storyId = value[prop].story_id.toString();
+        return storyId === id.toString();
+      }
     });
     return array.length > 0;
   };
@@ -158,6 +161,7 @@ function phoneController($rootScope,$scope,AuthFactory,StoryFactory,PhoneFactory
   };
 
   var _spliceStoryFromAvailable = function(obj){
+    if(typeof obj === 'undefined') return;
     angular.forEach(vm.availableStories, function(value,index){
       if(value.id === obj.id){
         vm.availableStories.splice(index, 1);

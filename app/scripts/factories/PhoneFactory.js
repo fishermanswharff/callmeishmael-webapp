@@ -67,12 +67,25 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
     });
   };
 
+  var callThePhone = function(phone){
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/venues/' + phone.venue.id + '/phones/' + phone.id + '/call_the_phone').success(function(data,status,headers,config){
+        $rootScope.$broadcast('alert', { alert: 'Phone was called', status: status });
+        resolve(data);
+      }).error(function(data,status,headers,config){
+        $rootScope.$broadcast('alert', { alert: 'Sorry, there was a problem.', status: status });
+        reject(data,status,headers,config);
+      });
+    });
+  };
+
   return {
     fetch: fetch,
     phones: phones,
     get: get,
     post: post,
     assignButton: assignButton,
-    destroy: destroy
+    destroy: destroy,
+    callThePhone: callThePhone
   };
 }]);

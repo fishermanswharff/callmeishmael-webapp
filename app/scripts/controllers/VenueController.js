@@ -42,6 +42,12 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
     }
   };
 
+  vm.callThePhone = function(phone){
+    PhoneFactory.callThePhone(phone).then(function(response){
+      console.log(response);
+    });
+  };
+
   vm.editButton = function(key,value,phoneId){
     vm.buttonToEdit = value;
     vm.buttonToEdit.assignment = key;
