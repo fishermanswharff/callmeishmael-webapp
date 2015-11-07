@@ -72,5 +72,6 @@ angular.module('phoneApp', [
     // Allow loading from our assets domain. Notice the difference between * and **.
     'https://s3-us-west-2.amazonaws.com/**',
     'https://callmeishmael-files.s3.amazonaws.com/**',
+    'https://54.69.177.30/**'
   ]);
 });
