@@ -32,7 +32,7 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
         $rootScope.$broadcast('alert', { alert: 'The phone has been created.', status: status });
         resolve(data);
       }).error(function(data,status,headers,config){
-        $rootScope.$broadcast('alert', { alert: 'There was an error and the requested action failed.', status: status });
+        $rootScope.$broadcast('alert', { alert: 'There was an error and the requested action failed:' + data.errors.join(), status: status });
         reject(data,status,headers,config);
       });
     });

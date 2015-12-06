@@ -31,7 +31,7 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
         $rootScope.$broadcast('alert', {alert: 'Your venue was successfully created', status: status})
         resolve(response);
       }).error(function(data,status,headers,config){
-        $rootScope.$broadcast('alert', {alert: 'Sorry, there was an issue with that request: Status ' + status, status: status});
+        $rootScope.$broadcast('alert', {alert: 'Sorry, there was an issue with that request: ' + data.errors.join(), status: status});
         reject(data);
       });
     });

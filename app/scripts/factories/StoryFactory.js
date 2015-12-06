@@ -46,7 +46,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
           $rootScope.$broadcast('alert',{ alert: 'The story ' + response.title + ' was updated successfully', status: status });
           resolve(response,status,headers,config);
         }).error(function(response,status,headers,config){
-          $rootScope.$broadcast('alert',{ alert: 'The story ' + object.title + ' failed to update.', status: status });
+          $rootScope.$broadcast('alert',{ alert: 'The story ' + object.title + ' failed to update:'+ response.errors.join(), status: status });
           reject(response,status,headers,config);
         });
       });
@@ -56,7 +56,7 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
           $rootScope.$broadcast('alert', { alert: 'The story was created successfully.', status: status });
           resolve(response);
         }).error(function(data, status, headers, config){
-          $rootScope.$broadcast('alert', { alert: 'There was an error and the story was not created successfully.', status: status });
+          $rootScope.$broadcast('alert', { alert: 'There was an error and the story was not created successfully: ' + data.errors.join(), status: status });
           reject(data, status, headers, config);
         });
       });

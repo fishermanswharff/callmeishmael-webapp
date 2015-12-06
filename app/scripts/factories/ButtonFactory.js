@@ -77,7 +77,7 @@ angular.module('phoneApp').factory('ButtonFactory', ['$rootScope','$http','$q','
         $rootScope.$broadcast('alert', { alert: 'The button was updated successfully.', status: status });
         resolve(data,status,headers,config);
       }).error(function(data,status,headers,config){
-        $rootScope.$broadcast('alert', { alert: 'There was a problem and the button was not updated.', status: status });
+        $rootScope.$broadcast('alert', { alert: 'There was a problem and the button was not updated:' + data.errors.join(), status: status });
         reject(data,status,headers,config);
       });
     });
