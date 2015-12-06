@@ -40,7 +40,8 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     return $http.post(ServerUrl + '/admin/users',object).success(function(response, status, headers, config){
       $rootScope.$broadcast('alert', { alert: 'New user successfully created.', status: status });
     }).error(function(data, status, headers, config){
-      $rootScope.$broadcast('alert', { alert: 'There was a problem with your request: ' + data, status: status });
+      debugger;
+      $rootScope.$broadcast('alert', { alert: 'There was a problem with your request: ' + data.errors.join(), status: status });
     });
   };
 
