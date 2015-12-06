@@ -1,5 +1,5 @@
 'use strict';
 angular.module('phoneApp')
   .constant('_', window._)
-  .constant('ServerUrl', 'http://localhost:3333')
+  .constant('ServerUrl', 'https://54.69.177.30')
   .constant('AmazonBucket','https://callmeishmael-files-v2.s3.amazonaws.com/');
