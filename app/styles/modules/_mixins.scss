@@ -49,6 +49,7 @@
   background: url($url) no-repeat center center;
 }
 
+/*
 @mixin animation($name,$propStart,$valStart,$propEnd,$valEnd){
   @-webkit-keyframes $name {
     0%   { $propStart: $valStart; }
@@ -69,11 +70,12 @@
 }
 
 @mixin implementAnim($name,$timing,$repeat){
-  -webkit-animation: $name $timing $repeat; /* Safari 4+ */
-  -moz-animation:    $name $timing $repeat; /* Fx 5+ */
-  -o-animation:      $name $timing $repeat; /* Opera 12+ */
-  animation:         $name $timing $repeat; /* IE 10+, Fx 29+ */
+  -webkit-animation: $name $timing $repeat;
+  -moz-animation:    $name $timing $repeat;
+  -o-animation:      $name $timing $repeat;
+  animation:         $name $timing $repeat;
 }
+*/
 
 @mixin notification {
   position:absolute;
@@ -232,9 +234,7 @@
 }
 
 @keyframes whale {
-  0% {
-    transform: translate3d(500px,275%,0) rotateZ(60deg);
-  }
+  0% { transform: translate3d(500px,275%,0) rotateZ(60deg); }
 
   50% {
     transform: translate3d(500px,150%,0) rotateZ(45deg);
@@ -244,6 +244,12 @@
     transform: translate3d(500px,275%,0) rotateZ(60deg);
   }
 }
+
+@-webkit-keyframes noAnimation { -webkit-transform: rotateZ(0deg) translate3d(0,0,0) rotateZ(0deg); }
+@-moz-keyframes noAnimation { -moz-transform: rotateZ(0deg) translate3d(0,0,0) rotateZ(0deg); }
+@-ms-keyframes noAnimation { -ms-transform: rotateZ(0deg) translate3d(0,0,0) rotateZ(0deg); }
+@keyframes noAnimation { transform: rotateZ(0deg) translate3d(0,0,0) rotateZ(0deg); }
+
 
 @mixin animation($name,$time: 1s,$delay: .1s,$repeat: infinite, $ease: linear){
   -webkit-animation: $name $time $delay $repeat $ease;
