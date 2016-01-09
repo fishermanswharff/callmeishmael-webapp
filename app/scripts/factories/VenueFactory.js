@@ -53,9 +53,10 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     var venue = { venue: { story_ids: [storyId] } };
     return $q(function(resolve,reject){
       $http.patch(ServerUrl + '/venues/' + venueId, venue).success(function(response, status, headers, config){
-        $rootScope.$broadcast('alert', { alert: 'The story was added successfully', status: status });
+        $rootScope.$broadcast('alert', { alert: 'The story was added successfully to venue' + response.venue.name, status: status });
         resolve(response,status,headers,config);
       }).error(function(response, status, headers, config){
+        $rootScope.$broadcast('alert', { alert: 'The story was not added to the venue', status: status });
         reject(response, status, headers, config);
       });
     });

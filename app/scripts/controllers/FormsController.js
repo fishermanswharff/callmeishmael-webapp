@@ -51,8 +51,6 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     }
   };
 
-
-
   var storySubmitHandler = function(object){
     if(object.story.story_type === 'Venue' && object.story.venue_id === undefined){
       $rootScope.$broadcast('alert', {alert: 'Please choose a venue for the story', status: 400});
@@ -69,6 +67,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
               if(object.story.venue_id){
                 var story = responses[0];
                 VenueFactory.addStoryToVenue(object.story.venue_id, story.id);
+                StoryFactory.fetch();
               }
               vm.story = {};
               $(storyForm).find('input[type=file]').val(null);
@@ -161,6 +160,7 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   };
 
   var setCurrentStory = function(e, args){
+    trace(e,args);
     vm.story = args.story;
     vm.isEditing = !!vm.story.id;
   };

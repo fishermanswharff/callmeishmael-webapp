@@ -35,6 +35,7 @@
           <li class='divider'><strong>Story Info</strong></li>
           <li><span class='story-detail'>Common Title: {{story.common_title}}</span></li>
           <li><span class="story-detail">Library: {{story.story_type}}</span></li>
+          <li ng-repeat='venue in story.venues'><span class='story-detail'>Venue: <strong>{{venue.name}}</strong>
           <li><span class='story-detail'>Time: {{story.call_length}}</span></li>
           <li><span class='story-detail'><a href='{{story.transcript_url}}' target='_blank'>Link to transcript</a></span></li>
           <li><span class='story-detail'>CMI UUID: {{story.call_uuid}}</span></li>

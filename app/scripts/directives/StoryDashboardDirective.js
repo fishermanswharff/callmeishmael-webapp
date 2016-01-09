@@ -20,6 +20,7 @@ angular.module('MainDirective').directive('cmiStoryDashboard',['trace','$rootSco
       });
 
       $scope.editStory = function(object){
+        trace(object);
         $rootScope.$broadcast('editStory', { story: object });
       };
     }
