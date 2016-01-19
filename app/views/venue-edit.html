@@ -1,0 +1,33 @@
+<div class="venue admin-container">
+  <aside class="aside-nav">
+    <sidenav></sidenav>
+  </aside>
+  <div ng-if="currentUser.role === 'admin'">
+
+    <section class="main-content">
+      <header>
+        <h1>Edit Venue</h1>
+      </header>
+
+      <form class='venue-form' name='editVenueForm' id='editVenueForm' ng-submit='venueEditController.save()' novalidate>
+
+        <div class="form-group">
+          <label for="editVenueName">Name</label>
+          <input id="editVenueName" type='text' ng-model="venueEditController.name">
+        </div>
+
+        <div class="form-group" ng-controller="FormsController as formsController">
+          <label for='editVenueStatus'>Status
+            <select id='editVenueStatus' name='editPhoneStatus' class='select' ng-model='venueEditController.venue_status' required>
+              <option ng-repeat='option in formsController.venueStatus' value='{{option}}'>{{option}}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <input class='btn' type='submit' value='Save Changes' ng-disabled='editVenueForm.$invalid'>
+        </div>
+
+      </form>
+  </div>
+</div>

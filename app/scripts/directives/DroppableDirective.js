@@ -55,7 +55,7 @@ angular.module('MainDirective').directive('cmiDroppable',['$rootScope','trace',f
             disabled: $(elem).hasClass('nonEditable')
           });
         }, 1000);
-      }
+      };
     }
   };
 }]);

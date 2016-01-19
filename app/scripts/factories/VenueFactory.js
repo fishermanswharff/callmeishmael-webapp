@@ -28,7 +28,7 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
     object.venue.user_ids = _convertToArray(object.venue.user_ids);
     return $q(function(resolve,reject){
       $http.post(ServerUrl + '/venues', object).success(function(response, status, headers, config){
-        $rootScope.$broadcast('alert', {alert: 'Your venue was successfully created', status: status})
+        $rootScope.$broadcast('alert', {alert: 'Your venue was successfully created', status: status});
         resolve(response);
       }).error(function(data,status,headers,config){
         $rootScope.$broadcast('alert', {alert: 'Sorry, there was an issue with that request: ' + data.errors.join(), status: status});
@@ -40,14 +40,14 @@ angular.module('phoneApp').factory('VenueFactory', ['trace','$window','$rootScop
   var patch = function(object, id){
     return $q(function(resolve,reject){
       $http.put(ServerUrl + '/venues/' + id, object).success(function(response, status, headers, config){
-        $rootScope.$broadcast('alert', {alert: 'Venue ' + response.name + ' updated', status: status})
+        $rootScope.$broadcast('alert', {alert: 'Venue ' + response.name + ' updated', status: status});
         resolve(response,status,headers,config);
       }).error(function(response,status,headers,config){
         $rootScope.$broadcast('alert', {alert: 'Update failed.', status: status});
         reject(response,status,headers,config);
       });
     });
-  }
+  };
 
   var addStoryToVenue = function(venueId, storyId){
     var venue = { venue: { story_ids: [storyId] } };

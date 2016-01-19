@@ -63,10 +63,11 @@
 
           .story-type {
             display: inline-block;
-            padding: 0.5em;
-            position: absolute;
-            top: 0;
-            right: 0;
+            padding: 0 0.5em;
+            float:right;
+            //position: absolute;
+            //top: 0;
+            //right: 0;
           }
         }
       }

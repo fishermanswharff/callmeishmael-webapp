@@ -96,5 +96,5 @@ angular.module('phoneApp').factory('ButtonFactory', ['$rootScope','$http','$q','
     zeroStories: zeroStories,
     postrollStories: postrollStories,
     postFixed: postFixed
-  }
+  };
 }]);

@@ -14,6 +14,17 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
     });
   };
 
+  var fetchOne = function(phoneId) {
+    return $q(function(resolve,reject){
+      $http.get(ServerUrl + '/venues/-/phones/' + phoneId).success(function(data, status, headers, config){
+        resolve(data);
+      }).error(function(data,status,headers,config){
+        reject(data, status, headers, config);
+        trace(data, status, headers, config, 'phone request failed.');
+      });
+    });
+  };
+
   var get = function(){
     return $q(function(resolve,reject){
       $http.get(ServerUrl + '/phones').success(function(data, status, headers, config){
@@ -34,6 +45,18 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
       }).error(function(data,status,headers,config){
         $rootScope.$broadcast('alert', { alert: 'There was an error and the requested action failed:' + data.errors.join(), status: status });
         reject(data,status,headers,config);
+      });
+    });
+  };
+
+  var patch = function(object){
+    return $q(function(resolve,reject){
+      $http.put(ServerUrl + '/venues/' + object.phone.venue.id + '/phones/' + object.phone.id, object).success(function(response, status, headers, config){
+        $rootScope.$broadcast('alert', {alert: 'Phone ' + response.venue.name + ' ' + response.unique_identifier + ' updated', status: status});
+        resolve(response,status,headers,config);
+      }).error(function(response,status,headers,config){
+        $rootScope.$broadcast('alert', {alert: 'Update failed.', status: status});
+        reject(response,status,headers,config);
       });
     });
   };
@@ -81,9 +104,11 @@ angular.module('phoneApp').factory('PhoneFactory', ['trace','$rootScope','$http'
 
   return {
     fetch: fetch,
+    fetchOne: fetchOne,
     phones: phones,
     get: get,
     post: post,
+    patch: patch,
     assignButton: assignButton,
     destroy: destroy,
     callThePhone: callThePhone

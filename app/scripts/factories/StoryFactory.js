@@ -39,7 +39,9 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
 
   var post = function(object,url){
     object.story.story_type = normalize(object.story.story_type);
-    if(url) object.story.url = url;
+    if(url) {
+      object.story.url = url;
+    }
     if(object.story.id){
       return $q(function(resolve, reject){
         $http.put(ServerUrl + '/stories/' + object.story.id, object).success(function(response,status,headers,config){
@@ -75,7 +77,9 @@ angular.module('phoneApp').factory('StoryFactory', ['trace','$window','$rootScop
   };
 
   var normalize = function(data){
-    if(!data) return;
+    if(!data) {
+      return;
+    }
     return data.toLowerCase().replace(/[\-\s\—\–\”’“‘\',;]/, '');
   };
 

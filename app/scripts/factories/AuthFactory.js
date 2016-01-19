@@ -10,7 +10,7 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
         resolve(response);
       }).error(function(data,status,headers,config){
         reject(data);
-        $rootScope.alert = 'Unsuccessful attempt to retreive all users because:' + data + "\n" + status;
+        $rootScope.alert = 'Unsuccessful attempt to retreive all users because:' + data + '\n' + status;
       });
     });
   };
@@ -40,7 +40,6 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
     return $http.post(ServerUrl + '/admin/users',object).success(function(response, status, headers, config){
       $rootScope.$broadcast('alert', { alert: 'New user successfully created.', status: status });
     }).error(function(data, status, headers, config){
-      debugger;
       $rootScope.$broadcast('alert', { alert: 'There was a problem with your request: ' + data.errors.join(), status: status });
     });
   };
@@ -63,12 +62,13 @@ angular.module('phoneApp').factory('AuthFactory',['$location','$rootScope','$htt
       }).error(function(response,status,headers,config){
         $rootScope.$broadcast('alert', { alert: 'Failed to delete user.', status: status });
         reject(response,status,headers,config);
-      })
+      });
     });
-  }
+  };
 
   var currentUser = function(){
-    return $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
+    $rootScope.currentUser = JSON.parse($window.localStorage.getItem('cmi-user'));
+    return $rootScope.currentUser;
   };
 
   var sendPasswordLink = function(credentials){

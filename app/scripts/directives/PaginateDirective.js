@@ -24,12 +24,12 @@ angular.module('MainDirective').directive('paginate',['$rootScope','$window','tr
           if($(element[0].parentElement).height() > winH){
             element.height(winH);
             pageList.addClass('fixed');
-          };
+          }
         }
       });
     },
     controller: function($scope,$element){
       // do stuff
-    },
+    }
   };
 }]);

@@ -1,6 +1,4 @@
 'use strict';
-angular.module('MainController').controller('UserController',userController);
-userController.$inject = ['$rootScope','$scope','AuthFactory','trace'];
 function userController($rootScope,$scope,AuthFactory,trace){
   var vm = this;
 
@@ -26,3 +24,6 @@ function userController($rootScope,$scope,AuthFactory,trace){
 
   getCurrentUser();
 }
+
+angular.module('MainController').controller('UserController',userController);
+userController.$inject = ['$rootScope','$scope','AuthFactory','trace'];

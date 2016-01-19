@@ -12,12 +12,36 @@ angular.module('phoneApp').config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/dashboard.html'
     })
     // venue management for admins
-    .when('/venue-stats',{
+    .when('/venues',{
       templateUrl: 'views/venue.html'
+    })
+    // single-venue editing
+    .when('/venues/:venueId', {
+      templateUrl: 'views/venue-edit.html',
+      controller: 'VenueEditController',
+      controllerAs: 'venueEditController',
+      resolve: {
+        venue: ['$route', 'VenueFactory', function($route, VenueFactory) {
+          var venueId = $route.current.pathParams.venueId;
+          return VenueFactory.fetchOne(venueId);
+        }]
+      }
     })
     // phone management for admins
     .when('/phone-stats',{
       templateUrl: 'views/admin-phone.html'
+    })
+    // single-phone editing for admins
+    .when('/phone-stats/:phoneId',{
+      templateUrl: 'views/admin-phone-edit.html',
+      controller: 'PhoneEditController',
+      controllerAs: 'phoneEditController',
+      resolve: {
+        phone: ['$route', 'PhoneFactory', function($route, PhoneFactory) {
+          var phoneId = $route.current.pathParams.phoneId;
+          return PhoneFactory.fetchOne(phoneId);
+        }]
+      }
     })
     // story management for admins
     .when('/story-stats',{

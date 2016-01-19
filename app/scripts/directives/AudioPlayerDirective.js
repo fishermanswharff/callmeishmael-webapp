@@ -10,9 +10,13 @@ angular.module('MainDirective').directive('cmiAudioPlayer', ['$rootScope','trace
       var $audio = elem.find('audio');
       $scope.playing = false;
       $scope.toggleAudio = function(){
-        $scope.playing === true ? $audio[0].pause() : $audio[0].play();
+        if ($scope.playing === true){
+          $audio[0].pause();
+        } else {
+          $audio[0].play();
+        }
         $scope.playing = !$scope.playing;
       };
-    },
+    }
   };
 }]);

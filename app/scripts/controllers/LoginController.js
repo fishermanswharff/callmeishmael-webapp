@@ -1,4 +1,5 @@
 'use strict';
+var loginForm, resetPasswordForm; // These is defined in the HTML
 function loginController($rootScope,$location,AuthFactory,trace){
   var vm = this;
 
@@ -57,6 +58,7 @@ function loginController($rootScope,$location,AuthFactory,trace){
   };
 
 }
+
 angular.module('MainController').controller('LoginController',loginController);
 loginController.$inject = ['$rootScope','$location','AuthFactory','trace'];
 

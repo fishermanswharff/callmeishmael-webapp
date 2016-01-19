@@ -17,9 +17,11 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
+  "validthis": true,
   "globals": {
     "angular": false,
     "$": false,
-    "_": false
+    "_": false,
+    "Parallax": true
   }
 }

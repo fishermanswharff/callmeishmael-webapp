@@ -1,6 +1,4 @@
 'use strict';
-angular.module('MainController').controller('DashboardController',dashboardController);
-dashboardController.$inject = ['trace','VenueFactory','PhoneFactory','StoryFactory','storyTypes'];
 
 function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyTypes){
   var vm = this;
@@ -13,10 +11,14 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
   vm.phones = PhoneFactory.phones;
   vm.stories = StoryFactory.stories;
 
+  PhoneFactory.get();
+
   vm.pausedVenues = function(){
     var paused = [];
     vm.venues.map(function(obj,i){
-      if(obj.status === 'paused') paused.push(obj);
+      if(obj.status === 'paused') {
+        paused.push(obj);
+      }
     });
     return paused.length;
   };
@@ -32,7 +34,6 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
           VenueFactory.destroy(object).then(function(response){ fetchVenues(); });
           break;
         case 'phone':
-          debugger;
           PhoneFactory.destroy(object).then(function(response){ fetchPhones(); });
           break;
         default:
@@ -51,6 +52,10 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
 
   vm.cancelledVenues = function(){
     return vm.venues.filter(isCancelled).length;
+  };
+
+  vm.daysActive = function(phone) {
+    return phone.status == 'active' ? moment().diff(phone.updated_at, 'days') : '';
   };
 
   var isActive = function(value,idx,array){
@@ -83,5 +88,8 @@ function dashboardController(trace,VenueFactory,PhoneFactory,StoryFactory,storyT
     });
   };
 
-  console.log(vm.venues)
+  console.log(vm.venues);
 }
+
+angular.module('MainController').controller('DashboardController',dashboardController);
+dashboardController.$inject = ['trace','VenueFactory','PhoneFactory','StoryFactory','storyTypes'];

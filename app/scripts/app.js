@@ -19,7 +19,7 @@ angular.module('phoneApp', [
   'ngTouch',
   '720kb.datepicker',
   'MainDirective',
-  'MainController',
+  'MainController'
 ]).run(function($rootScope,$routeParams,$window,$http,$location,AuthFactory,VenueFactory,PhoneFactory,StoryFactory,ButtonFactory,trace){
 
   VenueFactory.fetch();
@@ -56,7 +56,7 @@ angular.module('phoneApp', [
       $location.path('/');
     }
     if(AuthFactory.isAuthenticated() && AuthFactory.currentUser().role === 'venue_admin' && $location.path() === '/dashboard'){
-      $location.path('/venues');
+      $location.path('/phones');
     }
   });
 

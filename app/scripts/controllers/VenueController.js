@@ -1,6 +1,4 @@
 'use strict';
-angular.module('MainController').controller('VenueController',venueController);
-venueController.$inject = ['trace','$rootScope','$location','$routeParams','AuthFactory','VenueFactory','PhoneFactory','StoryFactory'];
 function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,VenueFactory,PhoneFactory,StoryFactory){
   var vm = this;
   vm.venue = {};
@@ -57,8 +55,15 @@ function venueController(trace,$rootScope,$location,$routeParams,AuthFactory,Ven
   if($routeParams.venueId){
     vm.getVenue($routeParams.venueId);
   } else {
-    var venuesWithPhones = vm.userVenues.filter(function(value){ if(value.number_phones !== null) return value; });
+    var venuesWithPhones = vm.userVenues.filter(function(value) {
+      if(value.number_phones !== null) {
+        return value;
+      }
+    });
     vm.getVenue(venuesWithPhones[0].id);
   }
 
 }
+
+angular.module('MainController').controller('VenueController',venueController);
+venueController.$inject = ['trace','$rootScope','$location','$routeParams','AuthFactory','VenueFactory','PhoneFactory','StoryFactory'];

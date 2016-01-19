@@ -21,10 +21,10 @@ angular.module('phoneApp').factory('AWSFactory',['$http','$q','$rootScope','Serv
         $rootScope.awsResponse = { response: response, status: status, headers: headers, config: config };
         return { response: response, status: status, headers: headers, config: config };
       }).error(function(response, status, headers, config){
-        $rootScope.$broadcast('alert',{ alert: 'There was an error: ' + "\nResponse: " + response + "\nStatus: " + status, status: status });
+        $rootScope.$broadcast('alert',{ alert: 'There was an error: ' + '\nResponse: ' + response + '\nStatus: ' + status, status: status });
         return { response: response, status: status, headers: headers, config: config };
       });
-    })
+    });
   };
 
   var buildFormData = function(file,signkey){
@@ -41,5 +41,5 @@ angular.module('phoneApp').factory('AWSFactory',['$http','$q','$rootScope','Serv
 
   return {
     sendToAmazon: sendToAmazon
-  }
+  };
 }]);

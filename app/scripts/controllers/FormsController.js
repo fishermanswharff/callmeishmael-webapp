@@ -1,6 +1,6 @@
 'use strict';
-angular.module('MainController').controller('FormsController',formsController);
-formsController.$inject = ['trace','$q','AuthFactory','PhoneFactory','StoryFactory','VenueFactory','AWSFactory','$rootScope','$scope'];
+var storyForm; // This is defined in the HTML
+
 function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFactory,AWSFactory,$rootScope,$scope){
 
   var activeVenues = function(element,index,array){
@@ -19,7 +19,10 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
     vm.venues = response.filter(activeVenues);
   });
 
-  vm.story = {  explicit: false, child_appropriate: true, spoiler_alert: false }, vm.venueStory = {}, vm.phone = {}, vm.venue = {};
+  vm.story = { explicit: false, child_appropriate: true, spoiler_alert: false };
+  vm.venueStory = {};
+  vm.phone = {};
+  vm.venue = {};
 
   vm.submit = function(object){
     for(var item in object){
@@ -168,3 +171,5 @@ function formsController(trace,$q,AuthFactory,PhoneFactory,StoryFactory,VenueFac
   $rootScope.$on('editStory', setCurrentStory);
 }
 
+angular.module('MainController').controller('FormsController',formsController);
+formsController.$inject = ['trace','$q','AuthFactory','PhoneFactory','StoryFactory','VenueFactory','AWSFactory','$rootScope','$scope'];

@@ -1,0 +1,31 @@
+<div class="phone admin-container">
+  <aside class="aside-nav">
+    <sidenav></sidenav>
+  </aside>
+  <div ng-if="currentUser.role === 'admin'">
+    <section class="main-content">
+      <header>
+        <h1>Edit Phone</h1>
+      </header>
+
+      <p>Id: {{phoneEditController.unique_identifier}}</p>
+      <p>Name: {{phoneEditController.name}}</p>
+
+      <div class="data-container phone-form grid_8" ng-controller='FormsController as formsController'>
+        <form name='phoneForm' id='phoneForm' ng-submit='phoneEditController.save()' novalidate>
+          <div class="form-group">
+            <label>Phone Status:
+              <select id='phoneStatusSelect' class='select phone-status-list' ng-model='phoneEditController.status'
+                      required>
+                <option ng-repeat='status in formsController.phoneStatus' value="{{status}}">{{status}}</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <input class='btn' type='submit' value='Save Changes' ng-disabled='phoneForm.$invalid'>
+          </div>
+        </form>
+      </div>
+  </div>
+

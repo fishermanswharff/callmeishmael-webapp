@@ -26,6 +26,7 @@
       <!-- add directive 'sticky' to this to make it stick to the top -->
       <div class='grid_10 available-stories-container'>
         <h2>Available Stories:</h2>
+        <p>At least three new stories are added each week.</p>
         <div class="form-group">
           <label for='search-by-title'>
             <input id='search-by-title' type='text' ng-model='search.title' placeholder='Search by title'>
@@ -39,11 +40,12 @@
         <div class="form-group blocked">
           <label for='venue-story-checkbox'>
             <input id='venue-story-checkbox' type="checkbox" ng-model="search.story_type" ng-true-value="'venue'" ng-false-value="''">
-            Your Venue Stories
+            Venue Library
           </label>
+          &nbsp;
           <label for='ishmael-story-checkbox'>
             <input id='ishmael-story-checkbox' type="checkbox" ng-model="search.story_type" ng-true-value="'ishmaels'" ng-false-value="''">
-            Ishmaels Stories
+            Ishmael's Library
           </label>
         </div>
         <!-- paginate max-items='5' on the list -->
@@ -51,14 +53,17 @@
           <li class='cmi-draggable' ng-repeat="story in phoneController.availableStories | filter:search" cmi-draggable story='story' data-uid="{{story.id}}" >
             <div class='cmi-draggable-info'>
               <p>
-                <span><strong>{{story.title}}</strong>, <strong>author:</strong> {{story.author_last}}</span>
+                <span class='story-type'>Library: <strong>{{storyTypeName(story.story_type)}}</strong></span>
+                <span><strong>{{story.title}}</strong></span>
                 <cmi-audio-player url="{{story.url}}"></cmi-audio-player>
-                <span class='story-type'>Type: <strong>{{story.story_type}}</strong></span>
+              </p>
+              <p>
+                <span>{{story.author_first}} {{story.author_last}}</span>
               </p>
               <p>
                 <span>Time: {{story.call_length}}</span> |
-                <span>Child Friendly: {{story.child_appropriate}}</span> |
-                <span>Explicit: {{story.explicit}}</span></p>
+                <span>Child Friendly: {{yesNo(story.child_appropriate)}}</span> |
+                <span>Explicit: {{yesNo(story.explicit)}}</span></p>
             </div>
           </li>
           <ul class='pagination'></ul>

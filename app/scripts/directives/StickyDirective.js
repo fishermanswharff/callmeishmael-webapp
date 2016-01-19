@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 angular.module('MainDirective').directive('sticky', ['$rootScope','$window','trace',function($rootScope,$window,trace){
   return {
     restrict: 'EA',
@@ -20,7 +21,7 @@ angular.module('MainDirective').directive('sticky', ['$rootScope','$window','tra
           $(element).removeClass('sticky');
           element.width('');
         }
-      })
-    },
+      });
+    }
   };
 }]);

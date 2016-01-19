@@ -12,15 +12,15 @@
       </label>
       <label>
         <input type="checkbox" ng-model="search.status" ng-true-value="'inactive'" ng-false-value="''">
-        Inactive Venues
+        Inactive Phones
       </label>
       <label>
         <input type="checkbox" ng-model="search.status" ng-true-value="'fixable'" ng-false-value="''">
-        Fixable Venues
+        Fixable Phones
       </label>
       <label>
         <input type="checkbox" ng-model="search.status" ng-true-value="'retired'" ng-false-value="''">
-        Retired Venues
+        Retired Phones
       </label>
     </div>
     <table>
@@ -35,12 +35,12 @@
       </thead>
       <tbody>
         <tr ng-repeat="phone in dashboardController.phones | filter:search">
-          <td>{{phone.unique_identifier}}</td>
+          <td><a ng-href="#/phone-stats/{{phone.id}}">{{phone.unique_identifier}}</td>
           <td>{{phone.status}}</td>
           <td>{{phone.venue.name}}</td>
           <td>{{phone.stories.length}}</td>
           <td>{{phone.created_at}}</td>
-          <td></td>
+          <td>{{dashboardController.daysActive(phone)}}</td>
           <td><a href="javascript:void(0)" confirmed-click-action="dashboardController.deleteObject({phone: phone})" ng-confirm-click='Are you sure you want to delete the phone at {{phone.venue.name}}, with status {{phone.status}}?'>Delete</a></td>
         </tr>
       </tbody>
